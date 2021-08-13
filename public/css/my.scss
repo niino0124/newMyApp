@@ -16,6 +16,7 @@ html {
 }
 p{
    font-size: 1.6rem;
+   margin: 0;
 }
 
 @include mq(sm) {
@@ -420,7 +421,7 @@ select {
 
 .simple-wrap {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     height: inherit;
     align-items: center;
 }
