@@ -17,4 +17,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
+// 追加
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('user.resister_show');
+Route::post('register', 'Auth\RegisterController@post')->name('user.resister_post');
+Route::get('register/confirm', 'Auth\RegisterController@confirm')->name('user.register_confirm');
+Route::post('register/confirm', 'Auth\RegisterController@register')->name('user.resister_resister');
+Route::get('register/complete', 'Auth\RegisterController@complete')->name('user.register_complete');
+
+
+
+
 Route::get('/home', 'HomeController@index')->name('home');
