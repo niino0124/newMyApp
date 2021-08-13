@@ -1,7 +1,47 @@
 @extends('layouts.app')
-
+@section('title', 'ログイン')
 @section('content')
-<div class="container">
+
+<form method="post" action="{{ route('login') }}" class="block-b">
+	@csrf
+<h1>ログイン</h1>
+<div class="element_wrap">
+    <label for="email">メールアドレス(ID)</label>
+    <div class="content-wrap">
+        <input id="email" type="email" class=" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
+        @error('email')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+    </div>
+</div>
+<div class="element_wrap">
+    <label for="password">パスワード</label>
+    <div class="content-wrap">
+            <input id="password" type="password" class=" @error('password') is-invalid @enderror" name="password">
+            @error('password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
+    </div>
+</div>
+{{-- <p class="forget"><a href="">パスワードを忘れた方はこちら</a></p> --}}
+@if (Route::has('password.request'))
+<p class="forget">
+    <a class="" href="{{ route('password.request') }}">
+        パスワードを忘れた方はこちら
+    </a>
+</p>
+@endif
+
+<div class="btn-wrap">
+    <input type="submit" class="btn" value="ログイン" />
+    <a href="/" class="btn btn-back" >トップに戻る</a>
+</div>
+</form>
+{{-- <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -69,5 +109,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
