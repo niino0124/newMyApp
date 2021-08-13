@@ -40,22 +40,14 @@ class RegisterController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+
     public function __construct()
     {
+        // ユーザー登録後、ログインをした状態にして、完了画面を表示するため、completeではguestミドルウェアを無効にする
         $this->middleware('guest',['except' => 'complete']);
     }
 
-    /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -87,7 +79,7 @@ class RegisterController extends Controller
         ]);
     }
 
-       /*
+    /*
      * 入力から確認へ遷移する際の処理
      */
     function post(Request $request)
@@ -124,27 +116,37 @@ class RegisterController extends Controller
             return redirect()->action($this->form_show);
         }
 
-        $this->validator($request->all())->validate();
+        // new Registered($user = $this->create($request->all())) ;
+        // event(new Registered($user = $this->create($request->all())) );
+        $member = new Member();
+        $member->name_sei = $input["name_sei"];
+        $member->name_mei = $input["name_mei"];
+        $member->nickname = $input["nickname"];
+        $member->gender = $input["gender"];
+        $member->password = bcrypt($input["password"]);
+        $member->email = $input["email"];
 
-        event(new Registered($user = $this->create($request->all())));
+        $member->save();
+
 
         //セッションを空にする
         $request->session()->forget("form_input");
 
         // 登録データーでログイン
-        $this->guard()->login($user, true);
+        $this->guard()->login($member, true);
 
-        return $this->registered($request, $user)
-            ?  : redirect($this->redirectPath());
+        // return $this->registered($request, $member)
+        //     ?  : redirect($this->redirectPath());
+        return redirect()->action($this->form_complete);
     }
 
     /*
      * 登録完了後
      */
-    function registered(Request $request, $user)
-    {
-        return redirect()->action($this->form_complete);
-    }
+    // function registered(Request $request, $member)
+    // {
+    //     return redirect()->action($this->form_complete);
+    // }
 
     /**
      * 会員登録入力フォーム出力

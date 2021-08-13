@@ -118,6 +118,10 @@ return [
 // 以下に自分で付け加えることができる
     'attributes' => [
         'password' => 'パスワード',
+        'name_sei' => '氏名（姓）',
+        'name_mei' => '氏名（名）',
+        'nickname' => 'ニックネーム',
+        'gender' => '性別',
     ],
 
 ];
