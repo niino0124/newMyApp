@@ -9,8 +9,10 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 // 追加
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
+// メールを追加
+use App\Mail\CompleteMail;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -118,6 +120,9 @@ class RegisterController extends Controller
 
         // new Registered($user = $this->create($request->all())) ;
         // event(new Registered($user = $this->create($request->all())) );
+       //ここでメールを送信、DBへの登録するなどを行う
+        Mail::to($input["email"])->send(new CompleteMail($input["name_sei"]));
+
         $member = new Member();
         $member->name_sei = $input["name_sei"];
         $member->name_mei = $input["name_mei"];
