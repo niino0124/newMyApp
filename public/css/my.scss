@@ -390,13 +390,16 @@ select {
     flex-direction: column;
     margin-right: 15px;
 }
-
+ul{
+    padding-left: 0;
+}
 .error {
     color: #ff2e5a;
-    font-size: 0.9rem !important;
+    font-size: 1.6rem;
     text-align: left;
     list-style: none;
     display: block;
+
 }
 // 掲示板
 .header {

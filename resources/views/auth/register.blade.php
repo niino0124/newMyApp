@@ -4,6 +4,7 @@
 <form method="post" action="{{ route('register') }}" class="block-b">
     @csrf
 <h1>会員登録画面</h1>
+
 <div class="element_wrap">
     <label>氏名</label>
     <label class="name-label" for="name_sei">姓</label>
@@ -48,18 +49,18 @@
     <div class="content-wrap">
             <div>
                     @foreach(config('master.gender') as $index => $value)
-                    <label>
+                    <label for="gender">
                             <input value='{{ $index }}'
-                            type="radio"  class="@error('gender')is-invalid @enderror" name="gender" @if(old('gender') == $index) checked @endif >
+                            type="radio"  class="@error('gender')is-invalid @enderror" name="gender" @if(old('gender') == $index) checked @endif id="gender">
+                            @error('gender')
+                            <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                             @if($index == "1") 男性 @else 女性 @endif
                     </label>
                     @endforeach
                 </div>
-                @error('gender')
-                <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                </span>
-        @enderror
     </div>
 </div>
 <div class="element_wrap">
@@ -90,6 +91,7 @@
     @enderror
     </div>
 </div>
+
 <div class="btn-wrap">
 
     <input class="btn" type="submit" value="確認画面へ" />
