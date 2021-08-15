@@ -26,6 +26,8 @@ class CreateProductsTable extends Migration
             $table->text('product_content')->comment('商品説明');
             $table->timestamps();
             $table->softDeletes()->comment('削除日時');
+
+            $table->foreign('member_id')->references('id')->on('members');
         });
     }
 
