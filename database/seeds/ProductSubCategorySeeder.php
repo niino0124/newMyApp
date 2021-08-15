@@ -164,5 +164,6 @@ class ProductSubCategorySeeder extends Seeder
             ],
 
         ]);
+
     }
 }

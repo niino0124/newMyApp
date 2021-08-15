@@ -30,7 +30,7 @@ class Member extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function products(){
-        return $this->hasMany('App\Product');
-    }
+    // public function products(){
+    //     return $this->hasMany('App\Product');
+    // }
 }
