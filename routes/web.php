@@ -24,6 +24,9 @@ Route::get('register/confirm', 'Auth\RegisterController@confirm')->name('user.re
 Route::post('register/confirm', 'Auth\RegisterController@register')->name('user.resister_resister');
 Route::get('register/complete', 'Auth\RegisterController@complete')->name('user.register_complete');
 
+// 商品登録
+Route::get('product-register', 'ProductController@showRegistrationForm')->name('product.resister_show');
+
 
 
 

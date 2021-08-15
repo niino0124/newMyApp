@@ -4,17 +4,21 @@
 
 <div class="blue-board ">
     <div class="header">
-        <div class="simple-wrap">
+        <div class="simple-wrap_sb">
             <p>{{ Auth::user()->name_sei }}{{ Auth::user()->name_mei }}様</p>
-
-        <a class="btn-simple" href="{{ route('logout') }}"
-        onclick="event.preventDefault();
-                    document.getElementById('logout-form').submit();">
-        ログアウト
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-        </form>
+<div class="simple-wrap">
+    <a class="btn-simple" href="">
+    新規商品登録
+    </a>
+    <a class="btn-simple" href="{{ route('logout') }}"
+    onclick="event.preventDefault();
+                document.getElementById('logout-form').submit();">
+    ログアウト
+    </a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+    @csrf
+    </form>
+</div>
     </div>
 </div>
     <div class="man-body">
