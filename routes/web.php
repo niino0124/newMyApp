@@ -26,8 +26,12 @@ Route::get('register/complete', 'Auth\RegisterController@complete')->name('user.
 
 
 // 商品登録
-Route::get('product-register', 'ProductController@index')->name('product.resister_show');
-// Route::get('product-register', 'ProductController@showRegistrationForm')->name('product.resister_show');
+// Route::get('product-register', 'ProductController@index')->name('product.resister_show');
+Route::get('product-register', 'ProductController@showRegistrationForm')->name('product.resister_show');
+Route::post('product-register', 'ProductController@validation')->name('product.validation');
+
+Route::get('product-register/confirm', "ProductController@confirm")->name('product.confirm');
+Route::post('product-register/confirm', "ProductController@send")->name('product.send');
 
 
 

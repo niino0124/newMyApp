@@ -232,6 +232,10 @@ input[name="email"] {
     }
 }
 
+input[name=image]{
+height : auto;
+}
+
 select {
     background: white;
     border: 1px black solid;
