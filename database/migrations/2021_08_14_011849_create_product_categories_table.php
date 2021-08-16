@@ -29,6 +29,6 @@ class CreateProductCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_subcategories');
+        Schema::dropIfExists('product_categories');
     }
 }
