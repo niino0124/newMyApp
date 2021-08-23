@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'hankaku' => ':attribute は半角英数字で入力してください',
 
     /*
     |--------------------------------------------------------------------------
@@ -43,7 +44,7 @@ return [
     'file'                 => '※:attributeにはファイルを指定してください。',
     'filled'               => '※:attributeには空でない値を指定してください。',
     'image'                => '※:attributeには画像ファイルを指定してください。',
-    'in'                   => '※:attributeには:valuesのうちいずれかの値を指定してください。',
+    'in'                   => '※:attributeには男性と女性、いずれかの値を指定してください。',
     'in_array'             => '※:attributeが:otherに含まれていません。',
     'integer'              => '※:attributeには整数を指定してください。',
     'ip'                   => '※:attributeには正しい形式のIPアドレスを指定してください。',

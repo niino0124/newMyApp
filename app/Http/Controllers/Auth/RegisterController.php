@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 // メールを追加
 use App\Mail\CompleteMail;
 use Illuminate\Support\Facades\Mail;
+// 半角英数ルールを追加
+use App\Rules\Hankaku;
 
 class RegisterController extends Controller
 {
@@ -53,13 +55,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name_sei' =>'required|max:20|string',
-            'name_mei' =>'required|max:20|string',
-            'nickname' =>'required|max:10|string',
+            'name_sei' =>'required|max:19|string',
+            'name_mei' =>'required|max:19|string',
+            'nickname' =>'required|max:9|string',
             "gender" => "required|integer|in:1,2",
-            "password" => "required|string|min:8|max:20|confirmed",
-            "password_confirmation" => "required|string|min:8|max:20",
-            "email" => "required|unique:members|string|max:200|email",
+            'password' => ['required', 'string', new Hankaku, 'min:8','max:20','confirmed'],
+            "password_confirmation" => ['required', 'string', new Hankaku, 'min:8','max:20'],
+            "email" => "required|unique:members|string|max:199|email",
         ]);
     }
 

@@ -34,4 +34,8 @@ class Member extends Authenticatable
         return $this->hasMany('App\Product');
     }
 
+    public function endEmailVerificationNotification(){
+        $this->notify(new \App\Notifications\CustomResetPassword());
+    }
+
 }
