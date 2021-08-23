@@ -44,13 +44,22 @@ class CustomResetPassword extends Notification
      */
     public function toMail($notifiable)
     {
+        if (static::$toMailCallback) {
+            return call_user_func(static::$toMailCallback, $notifiable, $this->token);
+        }
+
         return (new MailMessage)
                     ->subject($this->title)
                     ->view(
                         'mail.passwordreset',
                         [
-                            'reset_url' => url('password/reset', $this->token),
+                            'reset_url' => url(route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)),
                         ]);
+                    // ->view(
+                    //     'mail.passwordreset',
+                    //     [
+                    //         'reset_url' => url('password/reset', $this->token),
+                    //     ]);
                     // ->line('パスワード再発行')
                     // ->line('以下のURLをクリックしてパスワードを再発行してください。')
                     // ->line(url(route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)));
@@ -68,4 +77,8 @@ class CustomResetPassword extends Notification
             //
         ];
     }
+    // public static function toMailUsing($callback)
+    // {
+    //     static::$toMailCallback = $callback;
+    // }
 }
