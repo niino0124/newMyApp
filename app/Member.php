@@ -33,7 +33,9 @@ class Member extends Authenticatable
     public function products(){
         return $this->hasMany('App\Product');
     }
-    // public function products(){
-    //     return $this->belongsToMany('App\Product');
-    // }
+
+    public function endEmailVerificationNotification(){
+        $this->notify(new \App\Notifications\CustomResetPassword());
+    }
+
 }

@@ -83,12 +83,13 @@
 <div class="element_wrap">
     <label for="email">メールアドレス</label>
     <div class="content-wrap">
-            <input id="email" type="email" class=" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
+            <input id="email" type="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}">
+
             @error('email')
             <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
             </span>
-    @enderror
+            @enderror
     </div>
 </div>
 
