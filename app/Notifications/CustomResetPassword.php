@@ -11,15 +11,18 @@ class CustomResetPassword extends Notification
 {
     use Queueable;
 
+    public $token;
+    protected $title = 'パスワード再設定';
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
     public static $toMailCallback;
-    public function __construct()
+    public function __construct($token)
     {
-        //
+        $this->token = $token;
     }
 
     /**
@@ -42,10 +45,15 @@ class CustomResetPassword extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('パスワード再設定')
-                    ->line('パスワード再発行')
-                    ->line('以下のURLをクリックしてパスワードを再発行してください。')
-                    ->line(url(route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)));
+                    ->subject($this->title)
+                    ->view(
+                        'mail.passwordreset',
+                        [
+                            'reset_url' => url('password/reset', $this->token),
+                        ]);
+                    // ->line('パスワード再発行')
+                    // ->line('以下のURLをクリックしてパスワードを再発行してください。')
+                    // ->line(url(route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)));
     }
 
     /**

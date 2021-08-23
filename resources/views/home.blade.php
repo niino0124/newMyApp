@@ -22,11 +22,11 @@
     </div>
 </div>
     <div class="man-body">
-        @if (session('status'))
+        {{-- @if (session('status'))
         <div class="alert alert-success" role="alert">
             {{ session('status') }}
         </div>
-    @endif
+    @endif --}}
     </div>
 </div>
 

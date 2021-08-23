@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+use App\Notifications\CustomResetPassword;
 use Illuminate\Database\Eloquent\Model;
 
 class Member extends Authenticatable
@@ -34,8 +35,8 @@ class Member extends Authenticatable
         return $this->hasMany('App\Product');
     }
 
-    public function endEmailVerificationNotification(){
-        $this->notify(new \App\Notifications\CustomResetPassword());
+    public function sendPasswordResetNotification($token){
+        $this->notify(new CustomResetPassword($token));
     }
 
 }
