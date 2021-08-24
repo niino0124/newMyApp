@@ -233,12 +233,40 @@ input[name="email"] {
 }
 
 input[name=image]{
-height : auto;
+display: none;
 }
+.file_design{
+    color: rgb(255, 102, 0);
+    background-color: white;
+    border:solid 2px rgb(255, 102, 0);
+    // width: 90px;
+    // height: 30px;
+    padding: 10px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+
+}
+
+.image_label{
+    text-align: left;
+}
+
+#preview{
+    margin-bottom: 15px;
+}
+
+#preview img {
+    width: 200px;
+    border: solid 1px silver;
+  }
+
 
 select {
     background: white;
     border: 1px black solid;
+    height: 20px;
+margin-right: 20px;
 }
 
 // 確認画面
@@ -298,6 +326,12 @@ select {
     input[name=email]{
         width: 74%;
     }
+}
+
+
+
+.long{
+    width:290px;
 }
 
 .inner_element {
@@ -388,10 +422,16 @@ select {
     flex-direction: column;
 }
 
+
+
 // エラーメッセージ
 .content_wrap {
     display: flex;
     flex-direction: column;
+    margin-right: 15px;
+}
+.content_wrap_v {
+    display: flex;
     margin-right: 15px;
 }
 ul{

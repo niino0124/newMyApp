@@ -26,12 +26,24 @@ Route::get('register/complete', 'Auth\RegisterController@complete')->name('user.
 
 
 // 商品登録
-// Route::get('product-register', 'ProductController@index')->name('product.resister_show');
-Route::get('product-register', 'ProductController@showRegistrationForm')->name('product.resister_show');
-Route::post('product-register', 'ProductController@validation')->name('product.validation');
 
-Route::get('product-register/confirm', "ProductController@confirm")->name('product.confirm');
-Route::post('product-register/confirm', "ProductController@send")->name('product.send');
+Route::group(['prefix' => 'product' , 'middleware' => 'auth'],function(){
+    Route::get('index','ProductController@index')->name('product.index');
+    // Ajaxで実行するメソッドのルーティング(カテゴリを選択した状態)
+    Route::post('add/{id}', 'ProductController@add')->name('product.add');
+
+
+    Route::post('create','ProductController@create')->name('product.create');
+    Route::get('confirm','ProductController@confirm')->name('product.confirm');
+    Route::post('store','ProductController@store')->name('product.store');
+
+    });
+// Route::get('product-register', 'ProductController@index')->name('product.resister_show');
+// Route::get('product-register', 'ProductController@showRegistrationForm')->name('product.resister_show');
+// Route::post('product-register', 'ProductController@validation')->name('product.validation');
+
+// Route::get('product-register/confirm', "ProductController@confirm")->name('product.confirm');
+// Route::post('product-register/confirm', "ProductController@send")->name('product.send');
 
 
 

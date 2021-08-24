@@ -124,6 +124,8 @@ return [
         'nickname' => 'ニックネーム',
         'email' => 'メールアドレス',
         'gender' => '性別',
+        'name' => '商品名',
+        'product_content' => '商品説明',
     ],
 
 ];

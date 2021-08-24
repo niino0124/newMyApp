@@ -55,14 +55,6 @@ class CustomResetPassword extends Notification
                         [
                             'reset_url' => url(route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)),
                         ]);
-                    // ->view(
-                    //     'mail.passwordreset',
-                    //     [
-                    //         'reset_url' => url('password/reset', $this->token),
-                    //     ]);
-                    // ->line('パスワード再発行')
-                    // ->line('以下のURLをクリックしてパスワードを再発行してください。')
-                    // ->line(url(route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)));
     }
 
     /**

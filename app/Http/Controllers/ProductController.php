@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use InterventionImage;
 // use App\Product;
 // use App\Member;
+use Illuminate\Support\Facades\DB;
 use App\ProductCategory;
 use App\ProductSubcategory;
 
@@ -27,35 +28,40 @@ class ProductController extends Controller
         'product_content' =>'required|max:100|string',
 	];
 
-    // public function index(){
-        // 主⇨従。メンバーIDが2の人が登録した商品
-        // $product =  Member::find(2)->products;
-        // dd($product);
 
-        // カテゴリー２（家電）の製品を取得
-        // $product =  ProductCategory::find(2)->products;
-        // dd($product);
-           // カテゴリー２（家電）に属するサブカテゴリー群を取得
-        // $product =  ProductCategory::find(5)->productSubcategory;
-        // dd($product);
-    // }
+    // 登録画面表示
+    public function index(){
+        // カテゴリは全て選択可能
+        $product_categories = ProductCategory::all();
+        // $selected = 選択されたカテゴリのID
 
-    public function showRegistrationForm(){
-        $categories = ProductCategory::all();
-        $subcategories = ProductSubcategory::all();
-        // dd($categories);
-        // $categories = $categories->prepend('カテゴリー名', '');
+        // サブカテゴリをクエリビルダで検索
+        // $query = DB::table('product_subcategories');
+        // $query->where('id','=','?');
 
-        return view('products.product-register',compact('categories','subcategories'));
+        $product_subcategories = ProductSubcategory::all();
 
+        return view('products.register',compact('product_categories','product_subcategories'));
     }
 
 
-    public function validation(Request $request){
+    // このメソッドをAjaxから実行したい
+    public function add($id) {
+        // 何らかの処理
+    }
+
+
+
+
+    // 確認画面以降前のバリデーションなど
+    public function create(Request $request){
         $input = $request->only($this->formItems);
+
+        // バリデーション
         $validator = Validator::make($input, $this->validator);
+
 		if($validator->fails()){
-			return redirect()->action("ProductController@showRegistrationForm")
+			return redirect()->action("ProductController@index")
 				->withInput()
 				->withErrors($validator);
 		}
@@ -63,30 +69,45 @@ class ProductController extends Controller
         //セッションに書き込む
 		$request->session()->put("form_input", $input);
 
-		return redirect()->action("ProductController@confirm");
+        // $imageFile = $request->image; //一時保存
+        // if(!is_null($imageFile) && $imageFile->isValid() ){
+        //     // Storage::putFile('public/products', $imageFile);
+        //     $fileName = uniqid(rand().’_’);
+        //     $extension = $imageFile->extension();
+        //     $fileNameToStore = $fileName. ‘.’ . $extension;
+        //     $resizedImage = InterventionImage::make($imageFile)->resize(1080, 1080)->encode();
 
-        $imageFile = $request->image; //一時保存
-        if(!is_null($imageFile) && $imageFile->isValid() ){
-            // Storage::putFile('public/products', $imageFile);
-            $fileName = uniqid(rand().’_’);
-            $extension = $imageFile->extension();
-            $fileNameToStore = $fileName. ‘.’ . $extension;
-            $resizedImage = InterventionImage::make($imageFile)->resize(1080, 1080)->encode();
+        //     Storage::put(‘public/images/’ . $fileNameToStore, $resizedImage );
+        // }
 
-            Storage::put(‘public/images/’ . $fileNameToStore, $resizedImage );
-        }
+        // return redirect()->action('product.confirm');
+        return redirect('product.confirm');
+        // return view("products.confirm",["input" => $input])
     }
 
             // 確認画面表示
             public function confirm(Request $request)
             {
-            //セッションから値を取り出す
-            $input = $request->session()->get("form_input");
+                //セッションから値を取り出す
+                $input = $request->session()->get("form_input");
+                dd($input);
+                //セッションに値が無い時はフォームに戻る
+                if(!$input){
+                    return redirect()->action("ProductController@index");
+                }
 
-            //セッションに値が無い時はフォームに戻る
-            if(!$input){
-                return redirect()->action("ProductController@showRegistrationForm");
+                return view("products.confirm",["input" => $input]);
             }
-            return view("products.product-confirm",["input" => $input]);
+
+            // 確認画面表示
+            public function store(Request $request)
+            {
+                //セッションから値を取り出す
+                $input = $request->session()->get("form_input");
+
+                // 保存
+
+                // 会員トップへ戻る
+                return redirect()->action("HomeController@index");
             }
 }
