@@ -28,14 +28,16 @@
                 @endforeach
             </select>
 
-            <select name="product_subcategory_id" id="product_subcategory_id">
-                <option value="" class="op_aj" id="children">選択してください</option>
-            </select>
+            {{-- <div class="ajax_op_wrap">
+    </div> --}}
+        <select name="product_subcategory_id" id="product_subcategory_id">
+            <option value="" class="op_aj" id="children">選択してください</option>
+        </select>
 
             {{-- <select name="product_subcategory_id" id="product_subcategory_id">
             <option value="">選択してください</option>
-            <option value="{{$product_subcategory->id}}">{{$product_subcategory->name}}</option> --}}
-            </select>
+            <option value="{{$product_subcategory->id}}">{{$product_subcategory->name}}</option>
+            </select> --}}
         </label>
     </div>
 </div>
@@ -78,29 +80,32 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
 <script>
-    // 選択されたカテゴリIDを取得
+    $('#product_subcategory_id').hide();
+
     $('#product_category_id').change(function() {
+        $('#product_subcategory_id').hide();
+        $('#product_subcategory_id option').remove('.add_op');
 
 
         let id = $('option:selected').val();//カテゴリIDを取得
         console.log(id);
 
     $.ajax({
+        
         type: 'GET',
         url:"/product/index/" + id , //通信したいURL
         dataType: 'json', //json形式で受け取る
-        }).done(function (data) { //ajaxが成功したときの処理
-            $('#product_subcategory_id option').remove();
 
+        }).done(function (data) {
+
+            $('#product_subcategory_id').show();
                 $.each(data, function (index, value) {
                 let id = value.id;
                 let name = value.name;
-
-                $('#product_subcategory_id').append($('<option>').text(name).attr('value', id));
+                $('#product_subcategory_id').append($('<option>').text(name).attr({value: id,class:'add_op'}));
                 })
 
             }).fail(function () {
-    //ajax通信がエラーのときの処理
                 console.log('どんまい！');
             });
     })
