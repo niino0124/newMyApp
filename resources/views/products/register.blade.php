@@ -16,12 +16,11 @@
     </div>
 </div>
 
-<div class="element_wrap">
+<div class="element_wrap ajax_wrap">
     <div class="content_wrap_v" >
-        <label for="product_category" >商品カテゴリ
-            <select name="product_category_id" onChange="
-            event.preventDefault();
-            ">
+        <label for="product_category" class="product_category">商品カテゴリ
+
+            <select name="product_category_id" id="product_category_id">
                 <option value="">選択してください</option>
                 @foreach ($product_categories as $product_category)
                 <option value="{{$product_category->id}}">{{$product_category->name}}</option>
@@ -29,17 +28,19 @@
                 @endforeach
             </select>
 
-            <select name="product_subcategory_id" >
-                <option value="">選択してください</option>
-                @foreach ($product_subcategories as $product_subcategory)
-                <option value="{{$product_subcategory->id}}">{{$product_subcategory->name}}</option>
-                <br>
-                @endforeach
+            <select name="product_subcategory_id" id="product_subcategory_id">
+                <option value="" class="op_aj" id="children">選択してください</option>
             </select>
 
+            {{-- <select name="product_subcategory_id" id="product_subcategory_id">
+            <option value="">選択してください</option>
+            <option value="{{$product_subcategory->id}}">{{$product_subcategory->name}}</option> --}}
+            </select>
         </label>
     </div>
 </div>
+
+
 
 <div class="element_wrap">
     <div class="relative">
@@ -73,54 +74,77 @@
     <a href="/" class="btn btn-back">トップに戻る</a>
 </div>
 </form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
 <script>
+    // 選択されたカテゴリIDを取得
+    $('#product_category_id').change(function() {
 
 
-//   $.ajax({
-//     type: "get", //HTTP通信の種類
-//     url:'/product/index', //通信したいURL
-//     dataType: 'json'
-//   })
+        let id = $('option:selected').val();//カテゴリIDを取得
+        console.log(id);
 
-//   //通信が成功したとき
-//   .done((res)=>{
-//  // 選択されたカテゴリのIDを取得
-//     const id = product_category_id.options[num].value;
-//   })
+    $.ajax({
+        type: 'GET',
+        url:"/product/index/" + id , //通信したいURL
+        dataType: 'json', //json形式で受け取る
+        }).done(function (data) { //ajaxが成功したときの処理
+            $('#product_subcategory_id option').remove();
 
-//   //通信が失敗したとき
-//   .fail((error)=>{
-//     console.log(error.statusText)
-//   })
+                $.each(data, function (index, value) {
+                let id = value.id;
+                let name = value.name;
 
+                $('#product_subcategory_id').append($('<option>').text(name).attr('value', id));
+                })
 
-  function previewFile(file) {
-  // プレビュー画像を追加する要素
-  const preview = document.getElementById('preview');
-
-  // FileReaderオブジェクトを作成
-  const reader = new FileReader();
-
-  // URLとして読み込まれたときに実行する処理
-  reader.onload = function (e) {
-    const imageUrl = e.target.result; // URLはevent.target.resultで呼び出せる
-    const img = document.createElement("img"); // img要素を作成
-    img.src = imageUrl; // URLをimg要素にセット
-    preview.appendChild(img); // #previewの中に追加
-  }
-
-  // いざファイルをURLとして読み込む
-  reader.readAsDataURL(file);
-}
-// <input>でファイルが選択されたときの処理
-const fileInput = document.getElementById('image');
-const handleFileSelect = () => {
-  const files = fileInput.files;
-  for (let i = 0; i < files.length; i++) {
-    previewFile(files[i]);
-  }
-}
-fileInput.addEventListener('change', handleFileSelect);
-
+            }).fail(function () {
+    //ajax通信がエラーのときの処理
+                console.log('どんまい！');
+            });
+    })
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+//   function previewFile(file) {
+//   // プレビュー画像を追加する要素
+//   const preview = document.getElementById('preview');
+
+//   // FileReaderオブジェクトを作成
+//   const reader = new FileReader();
+
+//   // URLとして読み込まれたときに実行する処理
+//   reader.onload = function (e) {
+//     const imageUrl = e.target.result; // URLはevent.target.resultで呼び出せる
+//     const img = document.createElement("img"); // img要素を作成
+//     img.src = imageUrl; // URLをimg要素にセット
+//     preview.appendChild(img); // #previewの中に追加
+//   }
+
+//   // いざファイルをURLとして読み込む
+//   reader.readAsDataURL(file);
+// }
+// // <input>でファイルが選択されたときの処理
+// const fileInput = document.getElementById('image');
+// const handleFileSelect = () => {
+//   const files = fileInput.files;
+//   for (let i = 0; i < files.length; i++) {
+//     previewFile(files[i]);
+//   }
+// }
+// fileInput.addEventListener('change', handleFileSelect);
+
+
 @endsection

@@ -33,21 +33,21 @@ class ProductController extends Controller
     public function index(){
         // カテゴリは全て選択可能
         $product_categories = ProductCategory::all();
-        // $selected = 選択されたカテゴリのID
-
-        // サブカテゴリをクエリビルダで検索
-        // $query = DB::table('product_subcategories');
-        // $query->where('id','=','?');
-
-        $product_subcategories = ProductSubcategory::all();
+        $product_subcategories = ProductSubCategory::all();
 
         return view('products.register',compact('product_categories','product_subcategories'));
     }
 
 
     // このメソッドをAjaxから実行したい
-    public function add($id) {
+    public function ajax($id) {
         // 何らかの処理
+        $product_subcategories = DB::table('product_subcategories')
+        ->where('product_category_id',$id)
+        ->get();
+
+        return response()->json($product_subcategories);
+
     }
 
 

@@ -29,8 +29,9 @@ Route::get('register/complete', 'Auth\RegisterController@complete')->name('user.
 
 Route::group(['prefix' => 'product' , 'middleware' => 'auth'],function(){
     Route::get('index','ProductController@index')->name('product.index');
-    // Ajaxで実行するメソッドのルーティング(カテゴリを選択した状態)
-    Route::post('add/{id}', 'ProductController@add')->name('product.add');
+
+ // url: '/product/index/' + idと同じ
+    Route::get('index/{id}', 'ProductController@ajax');
 
 
     Route::post('create','ProductController@create')->name('product.create');
