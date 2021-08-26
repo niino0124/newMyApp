@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('title', '商品登録')
 @section('content')
+
 <form method="post" action="{{route('product.create')}}" enctype="multipart/form-data" class="block-b">
     @csrf
 <h1>商品登録</h1>

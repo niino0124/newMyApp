@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Validator;
 use App\Product;
 use Illuminate\Support\Facades\Storage;
-use InterventionImage;
-// use App\Product;
-// use App\Member;
 use Illuminate\Support\Facades\DB;
 use App\ProductCategory;
 use App\ProductSubcategory;
+
+use InterventionImage;
+use Illuminate\Support\Facades\Auth;
+use Validator;
+// use App\Product;
+// use App\Member;
+use App\Models\UploadImage;
 
 
 
@@ -61,27 +63,34 @@ class ProductController extends Controller
         ->get();
 
         return response()->json($product_subcategories);
-
     }
+
 
     // 確認画面以降前のバリデーションなど
     public function create(Request $request){
-        $input = $request->only($this->formItems);
+        $input = $request->except('image_1');
+        $image_1 = $request->file('image_1');
 
-        // バリデーション
-        $validator = Validator::make($input, $this->validator);
-		if($validator->fails()){
-			return redirect()->action("ProductController@index")
-				->withInput()
-				->withErrors($validator);
-		}
+        $temp_path = $image_1->store('public/temp');
+        $read_temp_path = str_replace('public/', 'storage/', $temp_path); //追加
 
+        $name = $input['name'];
+        $product_category_id = $input['product_category_id'];
+        $product_subcategory_id = $input['product_subcategory_id'];
+        $product_content = $input['product_content'];
 
-        $input = $request->only($this->formItems);
-        //セッションに書き込む
-        $request->session()->put("form_input", $input);
+        $data = array(
+            'temp_path' => $temp_path,
+            'read_temp_path' => $read_temp_path, //追加
+            'name' => $name,
+            'product_category_id' => $product_category_id,
+            'product_subcategory_id' => $product_subcategory_id,
+            'product_content' => $product_content,
+        );
 
-        return redirect()->action("ProductController@confirm");
+        $request->session()->put('data', $data);
+
+        return view('products.confirm', compact('data') );
     }
 
             // 確認画面表示
@@ -114,52 +123,67 @@ class ProductController extends Controller
             // DBへあたい登録
             public function store(Request $request)
             {
+            //セッションから値を取り出す
+                $data = $request->session()->get("data");
 
-                //セッションから値を取り出す
-                $input = $request->session()->get("form_input");
-
-                if($request->has("back")){
-                    return redirect()->action("ProductController@index")
-                    ->withInput($input);
+                //セッションに値が無い時はフォームに戻る
+                if(!$data){
+                                    return redirect()->action("ProductController@index");
+                                }
+                                if($request->has("back")){
+                                    return redirect()->action("ProductController@index")
+                                    ->withInput($data);
                     }
 
-                    //セッションに値が無い時はフォームに戻る
-                    if(!$input){
-                        return redirect()->action("SampleFormController@show");
-                    }
+                $temp_path = $data['temp_path'];
+                $read_temp_path = $data['read_temp_path'];
+
+                $filename = str_replace('public/temp/', '', $temp_path);
+                //ファイル名は$temp_pathから"public/temp/"を除いたもの
+                $storage_path = 'public/productimage/'.$filename;
+                //画像を保存するパスは"public/productimage/xxx.jpeg"
+
+                $request->session()->forget('data');
+                
+                Storage::move($temp_path, $storage_path);
+                //Storageファサードのmoveメソッドで、第一引数->第二引数へファイルを移動
+
+                $read_path = str_replace('public/', 'storage/', $storage_path);
+                //商品一覧画面から画像を読み込むときのパスはstorage/productimage/xxx.jpeg"
+
+                // データベースへ登録
+                $post = new Product;
+
+                // 現在認証しているユーザーのIDを代入
+                $post->member_id =  auth()->id();
+                $post->name = $data['name'];
+                $post->product_category_id = $data['product_category_id'];
+                $post->product_subcategory_id = $data['product_subcategory_id'];
+                $post->image_1 = $read_path;
+                $post->product_content = $data['product_content'];
+
+                $post->save();
+
+        // 会員トップへ戻る
+        return redirect()->action("HomeController@index");
 
 
-                    // データベースへ登録
-                    $post = new Product;
 
 
-                    // 現在認証しているユーザーのIDを代入
-                    $post->member_id =  auth()->id();
 
-                    $post->product_category_id = $input['product_category_id'];
-                    $post->product_subcategory_id = $input['product_subcategory_id'];
-                    $post->name = $input['name'];
-                    if(!empty($input['image_1'])){
-                        $post->image_1 = $input['image_1'];
-                    }
-                    if(!empty($input['image_2'])){
-                        $post->image_2 = $input['image_2'];
-                    }
-                    if(!empty($input['image_3'])){
-                        $post->image_3 = $input['image_3'];
-                    }
-                    if(!empty($input['image_4'])){
-                        $post->image_4 = $input['image_4'];
-                    }
 
-                    $post->product_content = $input['product_content'];
 
-                    $post->save();
 
-                //セッションを空にする
-		$request->session()->forget("form_input");
 
-                // 会員トップへ戻る
-                return redirect()->action("HomeController@index");
+
+
+
+
+                    // if(!empty($input['image_1'])){
+                    //     $post->image_1 = $input['image_1'];
+                    // }
+                    // if(!empty($input['image_2'])){
+                    //     $post->image_2 = $input['image_2'];
+                    // }
             }
 }
