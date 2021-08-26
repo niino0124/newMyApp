@@ -48,16 +48,6 @@ class ProductController extends Controller
             return view('products.register',compact('product_categories','product_subcategories','old_product_subcategory_infos'));
         }
 
-        // if (null !== old('product_subcategory_id') ){
-        //     $product_subcategory_id = old('product_subcategory_id');
-
-        //     $old_product_subcategory_infos= DB::table('product_subcategories')
-        //     ->where('id',$product_subcategory_id)
-        //     ->select('id','product_category_id','name')
-        //     ->get();
-
-        //     return view('products.register',compact('product_categories','product_subcategories','old_product_subcategory_infos'));
-        // }
 
         return view('products.register',compact('product_categories','product_subcategories'));
     }
@@ -77,35 +67,21 @@ class ProductController extends Controller
     // 確認画面以降前のバリデーションなど
     public function create(Request $request){
         $input = $request->only($this->formItems);
-        // バリデーション
-        // $validator = Validator::make($input, $this->validator);
 
-		// if($validator->fails()){
-		// 	return redirect()->action("ProductController@index")
-		// 		->withInput()
-		// 		->withErrors($validator);
-		// }
+        // バリデーション
+        $validator = Validator::make($input, $this->validator);
+		if($validator->fails()){
+			return redirect()->action("ProductController@index")
+				->withInput()
+				->withErrors($validator);
+		}
 
 
         $input = $request->only($this->formItems);
-
         //セッションに書き込む
         $request->session()->put("form_input", $input);
 
         return redirect()->action("ProductController@confirm");
-        // $imageFile = $request->image; //一時保存
-        // if(!is_null($imageFile) && $imageFile->isValid() ){
-        //     // Storage::putFile('public/products', $imageFile);
-        //     $fileName = uniqid(rand().’_’);
-        //     $extension = $imageFile->extension();
-        //     $fileNameToStore = $fileName. ‘.’ . $extension;
-        //     $resizedImage = InterventionImage::make($imageFile)->resize(1080, 1080)->encode();
-
-        //     Storage::put(‘public/images/’ . $fileNameToStore, $resizedImage );
-        // }
-
-        // return redirect()->action('product.confirm');
-        // return view("products.confirm",["input" => $input])
     }
 
             // 確認画面表示
@@ -118,13 +94,6 @@ class ProductController extends Controller
                 $category_id = $input["product_category_id"];
                 // サブカテゴリID
                 $subcategory_id = $input["product_subcategory_id"];
-
-
-                // if(isset($input["product_subcategory_id_old"])){
-                //     $subcategory_id = $input["product_subcategory_id_old"];
-
-                // }
-
 
                 $category = DB::table('product_categories')
                 ->where('id',$category_id)->value('name');
@@ -149,8 +118,6 @@ class ProductController extends Controller
                 //セッションから値を取り出す
                 $input = $request->session()->get("form_input");
 
-
-
                 if($request->has("back")){
                     return redirect()->action("ProductController@index")
                     ->withInput($input);
@@ -172,10 +139,6 @@ class ProductController extends Controller
                     $post->product_category_id = $input['product_category_id'];
                     $post->product_subcategory_id = $input['product_subcategory_id'];
                     $post->name = $input['name'];
-                    // $post->image_1 = $input['image_1'];
-                    // $post->image_2 = $input['image_2'];
-                    // $post->image_3 = $input['image_3'];
-                    // $post->image_4 = $input['image_4'];
                     if(!empty($input['image_1'])){
                         $post->image_1 = $input['image_1'];
                     }

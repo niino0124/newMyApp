@@ -18,21 +18,29 @@
 
 <div class="element_wrap ajax_wrap">
     <div class="content_wrap_v" >
-        <label for="product_category" class="product_category">商品カテゴリ
+        <label for="product_category" class="product_category"  > <p>商品カテゴリ</p>
+            <div style="display: flex;
+            flex-direction: column">
+            <select name="product_category_id" id="product_category_id" >
 
-            <select name="product_category_id" id="product_category_id">
                 <option value="">選択してください</option>
                 @foreach ($product_categories as $product_category)
-
                 <option value="{{$product_category->id}}" @if(old('product_category_id') == $product_category->id) selected @endif >{{$product_category->name}}</option>
-
                 @endforeach
             </select>
 
+            @error('product_category_id')
+            <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+            </div>
+
+            <div style="display: flex;
+            flex-direction: column">
             <select name="product_subcategory_id" id="product_subcategory_id">
                 <option value="" class="op_aj" id="children">選択してください</option>
             </select>
-
             {{-- 確認画面から戻ってきた場合 --}}
             @if (null !== old('product_subcategory_id') )
             <select name="product_subcategory_id" id="product_subcategory_id_old">
@@ -45,14 +53,19 @@ selected
                 @endif>{{ $old_product_subcategory_info->name }}</option>
 
                 @endforeach
+
             </select>
             @endif
-
-
-
+            @error('product_subcategory_id')
+            <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+            </div>
 
         </label>
     </div>
+
 </div>
 
 
@@ -67,6 +80,11 @@ selected
                 <input type="file" id="image" name="image_1" accept=“image/png,image/jpeg,image/jpg” >
                 アップロード
             </label>
+            @error('image_1')
+            <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+            </span>
+            @enderror
         </label>
     </div>
 </div>

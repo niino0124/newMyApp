@@ -126,6 +126,10 @@ return [
         'gender' => '性別',
         'name' => '商品名',
         'product_content' => '商品説明',
+        'product_category_id'=> '商品カテゴリー',
+        'product_subcategory_id'=> '商品サブカテゴリー',
+        'image_1'=> '画像',
+
     ],
 
 ];
