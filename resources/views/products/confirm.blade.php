@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', '会員登情報確認フォーム')
 @section('content')
-<form method="post" action="{{route('product.send')}}" class="block-b">
+<form method="post" action="{{route('product.store')}}" class="block-b">
 	@csrf
   <h1>会員登情報確認フォーム</h1>
 
@@ -12,12 +12,18 @@
   </div>
   <div class="element_wrap_str">
     <label>商品カテゴリ</label>
-    <p>{{ $input["product_category_id"] }} > {{ $input["product_subcategory_id"] }}</p>
+    <p>{{ $category }} ＞ {{ $sub_category  }}</p>
+
+    {{-- <p>{{ $input['product_category_id'] }} ＞ {{ $input['product_subcategory_id']  }}</p> --}}
+
   </div>
+
+  @if (isset($input["image_1"] ))
   <div class="element_wrap_str">
     <label>商品写真</label>
-    <p>{{ $input["image"] }}</p>
+    <p>{{ $input["image_1"] }}</p>
  </div>
+  @endif
 
    <div class="element_wrap_str">
     <label>商品説明</label>
