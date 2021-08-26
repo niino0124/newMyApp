@@ -35,7 +35,7 @@
 
             {{-- 確認画面から戻ってきた場合 --}}
             @if (null !== old('product_subcategory_id') )
-            <select name="product_subcategory_id_old" id="product_subcategory_id_old">
+            <select name="product_subcategory_id" id="product_subcategory_id_old">
                 <option value="" class="op_aj" id="children">選択してください</option>
 
                 @foreach ($old_product_subcategory_infos as $old_product_subcategory_info)
@@ -47,16 +47,7 @@ selected
                 @endforeach
             </select>
             @endif
-            {{-- @if (null !== old('product_subcategory_id') )
-            <select name="product_subcategory_id_old" id="product_subcategory_id">
 
-                @foreach ($old_product_subcategory_infos as $old_product_subcategory_info)
-
-                <option value="{{ $old_product_subcategory_info->id }}" class="op_aj" id="children">{{ $old_product_subcategory_info->name }}</option>
-
-                @endforeach
-            </select>
-            @endif --}}
 
 
 

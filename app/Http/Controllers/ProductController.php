@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Validator;
 use App\Product;
 use Illuminate\Support\Facades\Storage;
@@ -113,9 +114,17 @@ class ProductController extends Controller
                 //セッションから値を取り出す
                 $input = $request->session()->get("form_input");
 
-
+                // カテゴリID
                 $category_id = $input["product_category_id"];
+                // サブカテゴリID
                 $subcategory_id = $input["product_subcategory_id"];
+
+
+                // if(isset($input["product_subcategory_id_old"])){
+                //     $subcategory_id = $input["product_subcategory_id_old"];
+
+                // }
+
 
                 $category = DB::table('product_categories')
                 ->where('id',$category_id)->value('name');
@@ -124,8 +133,6 @@ class ProductController extends Controller
                 ->where('id',$subcategory_id)->value('name');
 
 
-
-                // $input["product_category_id"]
 
                 //セッションに値が無い時はフォームに戻る
                 if(!$input){
@@ -154,19 +161,34 @@ class ProductController extends Controller
                         return redirect()->action("SampleFormController@show");
                     }
 
-                // 保存
-                        // データベースへ登録
+
+                    // データベースへ登録
                     $post = new Product;
 
-                    Auth::user()->id = $input['member_id'];
+
+                    // 現在認証しているユーザーのIDを代入
+                    $post->member_id =  auth()->id();
 
                     $post->product_category_id = $input['product_category_id'];
                     $post->product_subcategory_id = $input['product_subcategory_id'];
                     $post->name = $input['name'];
-                    $post->image_1 = $input['image_1'];
-                    $post->image_2 = $input['image_2'];
-                    $post->image_3 = $input['image_3'];
-                    $post->image_4 = $input['image_4'];
+                    // $post->image_1 = $input['image_1'];
+                    // $post->image_2 = $input['image_2'];
+                    // $post->image_3 = $input['image_3'];
+                    // $post->image_4 = $input['image_4'];
+                    if(!empty($input['image_1'])){
+                        $post->image_1 = $input['image_1'];
+                    }
+                    if(!empty($input['image_2'])){
+                        $post->image_2 = $input['image_2'];
+                    }
+                    if(!empty($input['image_3'])){
+                        $post->image_3 = $input['image_3'];
+                    }
+                    if(!empty($input['image_4'])){
+                        $post->image_4 = $input['image_4'];
+                    }
+
                     $post->product_content = $input['product_content'];
 
                     $post->save();
