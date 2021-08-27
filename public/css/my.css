@@ -259,10 +259,17 @@ input[name="email"] {
 }
 
 input[name=image_1] {
-  display: none;
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
 
 .file_design {
+  position: relative;
+  display: inline-block;
   color: #ff6600;
   background-color: white;
   border: solid 2px #ff6600;

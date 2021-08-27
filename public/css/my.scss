@@ -233,19 +233,26 @@ input[name="email"] {
 }
 
 input[name=image_1]{
-display: none;
+// display: none;
+height: 100%;
+left: 0;
+opacity: 0;
+position: absolute;
+top: 0;
+width: 100%;
+
 }
 .file_design{
+    position: relative;
+    display: inline-block;
+
     color: rgb(255, 102, 0);
     background-color: white;
     border:solid 2px rgb(255, 102, 0);
-    // width: 90px;
-    // height: 30px;
     padding: 4px 8px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
-
 }
 
 .image_label{

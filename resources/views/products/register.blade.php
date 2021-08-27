@@ -19,7 +19,7 @@
 
 <div class="element_wrap ajax_wrap">
     <div class="content_wrap_v" >
-        <label for="product_category" class="product_category"  > <p>商品カテゴリ</p>
+        <label for="product_category" class="product_category"  ><label for="name">商品カテゴリ</label>
             <div style="display: flex;
             flex-direction: column">
             <select name="product_category_id" id="product_category_id" >
@@ -63,7 +63,7 @@ selected
                     <strong>{{ $message }}</strong>
             </span>
             @enderror
-            
+
             </div>
 
         </label>
@@ -80,7 +80,7 @@ selected
             写真１
             <div id="preview"></div>
             <label for="image_1" class="file_design">
-                <input type="file" id="image" name="image_1" accept=“image/png,image/jpeg,image/jpg” >
+                <input type="file" id="image_1" name="image_1" accept=“image/png,image/jpeg,image/jpg” >
                 アップロード
             </label>
 
@@ -159,11 +159,6 @@ selected
 
 
 
-
-
-
-
-
   function previewFile(file) {
   // プレビュー画像を追加する要素
   const preview = document.getElementById('preview');
@@ -183,7 +178,7 @@ selected
   reader.readAsDataURL(file);
 }
 // <input>でファイルが選択されたときの処理
-const fileInput = document.getElementById('image');
+const fileInput = document.getElementById('image_1');
 const handleFileSelect = () => {
   const files = fileInput.files;
   for (let i = 0; i < files.length; i++) {
