@@ -16,14 +16,12 @@
 		<p>{{ $data["product_category_id"] }} ＞ {{ $data["product_subcategory_id"] }}</p>
 	</div>
 
-	@if (isset($data["read_temp_path"] ))
 	<div class="element_wrap_str">
 		<label>商品写真</label>
-		<img src="{{ $data['read_temp_path']  }}" width="200" height="130">
+        <img src="{{ '/storage/' . $data['path'][1]}}" class=''  width="200" height="130"/>
 	</div>
-	@endif
 
-	<div class="element_wrap_str">
+    <div class="element_wrap_str">
 		<label>商品説明</label>
 		<p>{{ $data["product_content"] }}</p>
 	</div>

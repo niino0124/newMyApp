@@ -93,7 +93,7 @@ selected
 <div class="element_wrap">
     <label for="product_content">商品説明</label>
     <div class="content-wrap">
-            <textarea id="product_content" type="product_content" class=" @error('product_content') is-invalid @enderror" name="product_content" style="height: 90px">{{ old('product_content') }}</textarea>
+            <textarea id="product_content" type="text" class=" @error('product_content') is-invalid @enderror" name="product_content" style="height: 90px">{{ old('product_content') }}</textarea>
             @error('product_content')
             <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

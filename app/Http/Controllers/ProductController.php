@@ -4,16 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use App\ProductCategory;
 use App\ProductSubcategory;
+use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Validator;
 use InterventionImage;
 use Illuminate\Support\Facades\Auth;
-use Validator;
-// use App\Product;
-// use App\Member;
+use App\Member;
 use App\Models\UploadImage;
 
 
@@ -71,8 +70,12 @@ class ProductController extends Controller
         $input = $request->except('image_1');
         $image_1 = $request->file('image_1');
 
-        $temp_path = $image_1->store('public/temp');
-        $read_temp_path = str_replace('public/', 'storage/', $temp_path); //追加
+        if($request->hasFile('image_1')){
+            $path = \Storage::put('/public', $image_1);
+            $path = explode('/', $path);
+        }else{
+            $path = null;
+        }
 
         $name = $input['name'];
         $product_category_id = $input['product_category_id'];
@@ -80,16 +83,16 @@ class ProductController extends Controller
         $product_content = $input['product_content'];
 
         $data = array(
-            'temp_path' => $temp_path,
-            'read_temp_path' => $read_temp_path, //追加
+            'path' => $path,
             'name' => $name,
             'product_category_id' => $product_category_id,
             'product_subcategory_id' => $product_subcategory_id,
             'product_content' => $product_content,
         );
 
-        $request->session()->put('data', $data);
+        // dd($data);
 
+        $request->session()->put('data', $data);
         return view('products.confirm', compact('data') );
     }
 
@@ -144,7 +147,7 @@ class ProductController extends Controller
                 //画像を保存するパスは"public/productimage/xxx.jpeg"
 
                 $request->session()->forget('data');
-                
+
                 Storage::move($temp_path, $storage_path);
                 //Storageファサードのmoveメソッドで、第一引数->第二引数へファイルを移動
 
