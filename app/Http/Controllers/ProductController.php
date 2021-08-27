@@ -7,6 +7,7 @@ use App\Product;
 use Illuminate\Support\Facades\DB;
 use App\ProductCategory;
 use App\ProductSubcategory;
+use App\Http\Requests\StoreProductForm;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Validator;
@@ -66,7 +67,7 @@ class ProductController extends Controller
 
 
     // 確認画面以降前のバリデーションなど
-    public function create(Request $request){
+    public function create(StoreProductForm $request){
         $input = $request->except('image_1');
         $image_1 = $request->file('image_1');
 

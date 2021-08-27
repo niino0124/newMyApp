@@ -57,11 +57,13 @@ selected
 
             </select>
             @endif
+
             @error('product_subcategory_id')
             <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
             </span>
             @enderror
+            
             </div>
 
         </label>
@@ -81,11 +83,13 @@ selected
                 <input type="file" id="image" name="image_1" accept=“image/png,image/jpeg,image/jpg” >
                 アップロード
             </label>
+
             @error('image_1')
             <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
             </span>
             @enderror
+
         </label>
     </div>
 </div>
@@ -94,11 +98,12 @@ selected
     <label for="product_content">商品説明</label>
     <div class="content-wrap">
             <textarea id="product_content" type="text" class=" @error('product_content') is-invalid @enderror" name="product_content" style="height: 90px">{{ old('product_content') }}</textarea>
+
             @error('product_content')
             <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
             </span>
-    @enderror
+            @enderror
     </div>
 </div>
 
