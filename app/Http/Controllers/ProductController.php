@@ -90,69 +90,34 @@ class ProductController extends Controller
             'product_content' => $product_content,
         );
 
+        $category =  DB::table('product_categories')
+        ->where('id',$product_category_id)->value('name');
+
+        $sub_category = DB::table('product_subcategories')
+        ->where('id',$product_subcategory_id)->value('name');
+
         // dd($data);
 
         $request->session()->put('data', $data);
-        return view('products.confirm', compact('data') );
+        return view('products.confirm', compact('data','category','sub_category') );
     }
 
-            // 確認画面表示
-            public function confirm(Request $request)
-            {
-                //セッションから値を取り出す
-                $input = $request->session()->get("form_input");
 
-                // カテゴリID
-                $category_id = $input["product_category_id"];
-                // サブカテゴリID
-                $subcategory_id = $input["product_subcategory_id"];
-
-                $category = DB::table('product_categories')
-                ->where('id',$category_id)->value('name');
-
-                $sub_category = DB::table('product_subcategories')
-                ->where('id',$subcategory_id)->value('name');
-
-
-
-                //セッションに値が無い時はフォームに戻る
-                if(!$input){
-                    return redirect()->action("ProductController@index");
-                }
-
-                return view("products.confirm",compact('input','category','sub_category'));
-            }
-
-            // DBへあたい登録
-            public function store(Request $request)
-            {
+    // DBへあたい登録
+    public function store(Request $request)
+        {
             //セッションから値を取り出す
-                $data = $request->session()->get("data");
+            $data = $request->session()->get("data");
 
-                //セッションに値が無い時はフォームに戻る
-                if(!$data){
-                                    return redirect()->action("ProductController@index");
-                                }
-                                if($request->has("back")){
-                                    return redirect()->action("ProductController@index")
-                                    ->withInput($data);
-                    }
-
-                $temp_path = $data['temp_path'];
-                $read_temp_path = $data['read_temp_path'];
-
-                $filename = str_replace('public/temp/', '', $temp_path);
-                //ファイル名は$temp_pathから"public/temp/"を除いたもの
-                $storage_path = 'public/productimage/'.$filename;
-                //画像を保存するパスは"public/productimage/xxx.jpeg"
-
-                $request->session()->forget('data');
-
-                Storage::move($temp_path, $storage_path);
-                //Storageファサードのmoveメソッドで、第一引数->第二引数へファイルを移動
-
-                $read_path = str_replace('public/', 'storage/', $storage_path);
-                //商品一覧画面から画像を読み込むときのパスはstorage/productimage/xxx.jpeg"
+            //セッションに値が無い時はフォームに戻る
+            if(!$data){
+                return redirect()->action("ProductController@index");
+            }
+            // 戻るボタン
+            if($request->has("back")){
+                return redirect()->action("ProductController@index")
+                ->withInput($data);
+            }
 
                 // データベースへ登録
                 $post = new Product;
@@ -162,31 +127,16 @@ class ProductController extends Controller
                 $post->name = $data['name'];
                 $post->product_category_id = $data['product_category_id'];
                 $post->product_subcategory_id = $data['product_subcategory_id'];
-                $post->image_1 = $read_path;
                 $post->product_content = $data['product_content'];
+                $post->image_1 = $data['path'][1];
 
                 $post->save();
+
+                $request->session()->forget("form_input");
+
 
         // 会員トップへ戻る
         return redirect()->action("HomeController@index");
 
-
-
-
-
-
-
-
-
-
-
-
-
-                    // if(!empty($input['image_1'])){
-                    //     $post->image_1 = $input['image_1'];
-                    // }
-                    // if(!empty($input['image_2'])){
-                    //     $post->image_2 = $input['image_2'];
-                    // }
             }
 }

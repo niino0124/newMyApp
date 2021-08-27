@@ -13,7 +13,7 @@
 
 	<div class="element_wrap_str">
 		<label>商品カテゴリ</label>
-		<p>{{ $data["product_category_id"] }} ＞ {{ $data["product_subcategory_id"] }}</p>
+		<p>{{ $category }} ＞ {{ $sub_category }}</p>
 	</div>
 
 	<div class="element_wrap_str">
