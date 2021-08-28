@@ -20,18 +20,6 @@ use App\Models\UploadImage;
 
 class ProductController extends Controller
 {
-
-    private $formItems = ['name','product_category_id','product_subcategory_id','image_1','product_content'];
-
-    private $validator = [
-        'name' =>'required|max:100|string',
-        "product_category_id" => "required|integer",
-        "product_subcategory_id" => "required|integer",
-        "image_1" => "image|mimes:jpeg,png,jpg,gif|max:10240",
-        'product_content' =>'required|max:100|string',
-	];
-
-
     // 登録画面表示
     public function index(){
         // カテゴリは全て選択可能
@@ -109,6 +97,7 @@ class ProductController extends Controller
         {
             //セッションから値を取り出す
             $data = $request->session()->get("data");
+
 
             //セッションに値が無い時はフォームに戻る
             if(!$data){

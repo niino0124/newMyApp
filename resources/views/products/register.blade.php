@@ -78,6 +78,11 @@ selected
         <label for="image" class="leading-7 text-sm text-gray-600">商品写真</label>
         <label class="image_label">
             写真１
+            @if (null !== old('path'))
+            {{-- <p>image_1のオールドは存在する</p> --}}
+            {{-- {{dd(old('path')[1])}} --}}
+            <img src="{{ '/storage/' . old('path')[1]}}" class=''  width="200" height="130"/>
+            @endif
             <div id="preview"></div>
             <label for="image_1" class="file_design">
                 <input type="file" id="image_1" name="image_1" accept=“image/png,image/jpeg,image/jpg” >
