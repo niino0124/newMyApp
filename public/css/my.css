@@ -270,6 +270,7 @@ input[type=file] {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  margin-bottom: 15px;
 }
 
 .file_design {
@@ -332,6 +333,13 @@ select {
 
 .element_wrap_v {
   margin-bottom: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.img_label {
+  text-align: left;
 }
 
 .element_wrap_str {

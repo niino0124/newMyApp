@@ -71,68 +71,56 @@
 
             </label>
         </div>
-
     </div>
 
+
+
     <div class="element_wrap_v">
-        <div class="view_box">
-            <label>写真１</label>
+        <label for="product_category" class="product_category"><label for="name">商品写真</label>
 
-            {{-- <input type="file" class="file" name="image_1" > --}}
-            <input  class="file" name="image_1" type="file">
+        <div class="pics_wrap">
+            <div class="view_box">
 
-            {{-- 確認画面から戻ってきた場合 --}}
-            @if(null !=  old('path1'))
-                <div class="img_view"><img alt="" class="img"  width="200" height="130" src="{{'/storage/' . old('path1')}}"><p><a href="#" class="img_del" src="">画像を削除する</a></p></div>
-                <input type="hidden" value={{old('path1')}} name="image_1">
-            {{-- @elseif ( null ==  old('path1'))
-                <p>old('path1')はnullです</p> --}}
-            @endif
+                <label class="img_label">写真１</label>
+                {{-- <input type="file" class="file" name="image_1" > --}}
+                <input  class="file" name="image_1" type="file">
 
+                {{-- 確認画面から戻ってきた場合 --}}
+                @if(null !=  old('path1'))
+                    <div class="img_view"><img alt="" class="img"  width="150" height="150" src="{{'/storage/' . old('path1')}}"><p><a href="#" class="img_del" src="">画像を削除する</a></p></div>
+                    <input type="hidden" value={{old('path1')}} name="image_1">
+                {{-- @elseif ( null ==  old('path1'))
+                    <p>old('path1')はnullです</p> --}}
+                @endif
+
+            </div>
+
+            <div class="view_box">
+                <label class="img_label">写真２</label>
+
+                {{-- <input type="file" class="file" name="image_2" > --}}
+                <input  class="file" name="image_2" type="file">
+
+                {{-- 確認画面から戻ってきた場合 --}}
+                @if(null !=  old('path2'))
+                    <div class="img_view"><img alt="" class="img"  width="150" height="150" src="{{'/storage/' . old('path2')}}"><p><a href="#" class="img_del" src="">画像を削除する</a></p></div>
+                    <input type="hidden" value={{old('path2')}} name="image_2">
+                {{-- @elseif ( null ==  old('path2'))
+                    <p>old('path2')はnullです</p> --}}
+                @endif
+
+            </div>
+        </div>
         </div>
 
-        <div class="view_box">
-            <label>写真２</label>
-
-            {{-- <input type="file" class="file" name="image_2" > --}}
-            <input  class="file" name="image_2" type="file">
-
-            {{-- 確認画面から戻ってきた場合 --}}
-            @if(null !=  old('path2'))
-                <div class="img_view"><img alt="" class="img"  width="200" height="130" src="{{'/storage/' . old('path2')}}"><p><a href="#" class="img_del" src="">画像を削除する</a></p></div>
-                <input type="hidden" value={{old('path2')}} name="image_2">
-            {{-- @elseif ( null ==  old('path2'))
-                <p>old('path2')はnullです</p> --}}
-            @endif
-
-        </div>
 
 
 
-
-        @error('image_1')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror
-
-        {{-- <div class="view_box">
-            <label>画像２</label>
-            <input type="file" class="file"  name="image_2">
-            @if(null !==  old('path2'))
-                    <div class="img_view"><img  class="img"  width="200" height="130" src="{{'/storage/' . old('path2')[1]}}"><p><a href="#" class="img_del" >画像を削除する</a></p></div>
-
-            @elseif ( null ==  old('path2'))
-                <p>nullです</p>
-            @endif
-        </div>
-        @error('image_2')
+        {{-- @error('image_1')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
         </span>
         @enderror --}}
-
-
 
 
     <div class="element_wrap">
@@ -178,7 +166,7 @@
         find_img.remove();
         }
 
-    var img = '<div class="img_view"><img alt="" class="img"  width="200" height="130"><p><a href="#" class="img_del">画像を削除する</a></p></div>';
+    var img = '<div class="img_view"><img alt="" class="img"  width="150" height="150"><p><a href="#" class="img_del">画像を削除する</a></p></div>';
 
     view_box.append(img);
     // file_design.append(img);
