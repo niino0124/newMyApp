@@ -178,19 +178,7 @@
     filereader.readAsDataURL(fileprop);
     });
 
-    function img_del(target){
-    target.find("a.img_del").on('click',function(){
-    var self = $(this),
-        parentBox = self.parent().parent().parent();
-    if(window.confirm('画像を削除します。\nよろしいですか？')){
-        setTimeout(function(){
-        parentBox.find('input[type=file]').val('');
-        parentBox.find('.img_view').remove();
-        } , 0);
-        }
-        return false;
-    });
-    }
+
 
 });
 </script>
