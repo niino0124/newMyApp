@@ -18,28 +18,21 @@
 
 
 
+    @if($data['path1'] !== NULL)
 	<div class="element_wrap_str">
 		<label>商品写真</label>
         <img src="{{ '/storage/' . $data['path1']}}" class=''  width="200" height="130"/>
 	</div>
+    @endif
 
+    @if($data['path2'] !== NULL)
 	<div class="element_wrap_str">
 		<label>商品写真２</label>
         <img src="{{ '/storage/' . $data['path2']}}" class=''  width="200" height="130"/>
 	</div>
+    @endif
 
-	{{-- <div class="element_wrap_str">
-		<label>商品写真</label>
-        <img src="{{ '/storage/' . $data['path2'][1]}}" class=''  width="200" height="130"/>
-	</div> --}}
-	{{-- <div class="element_wrap_str">
-		<label>商品写真</label>
-        <img src="{{ '/storage/' . $data['path3'][1]}}" class=''  width="200" height="130"/>
-	</div>
-	<div class="element_wrap_str">
-		<label>商品写真</label>
-        <img src="{{ '/storage/' . $data['path4'][1]}}" class=''  width="200" height="130"/>
-	</div> --}}
+
 
 
     <div class="element_wrap_str">

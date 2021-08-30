@@ -27,6 +27,8 @@ class StoreProductForm extends FormRequest
             'name' =>'required|max:100|string',
             "product_category_id" => "required|integer",
             "product_subcategory_id" => "required|integer",
+            "image_1" => "nullable",
+            "image_2" => "nullable",
             // "image_1" => "image|mimes:jpeg,png,jpg,gif|max:10240|nullable",
             // "image_2" => "image|mimes:jpeg,png,jpg,gif|max:10240|nullable",
             // "image_3" => "image|mimes:jpeg,png,jpg,gif|max:10240|nullable",

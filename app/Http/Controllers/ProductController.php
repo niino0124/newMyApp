@@ -58,23 +58,23 @@ class ProductController extends Controller
         $input = $request->except('image_1','image_2');
         $image_1 = $request->image_1;
         $image_2 = $request->image_2;
-        // dd (gettype($image_1));
 
 
-    // もし、$image_1が既にパスとして出来上がっている場合は以下の処理は必要ない。
-    // パスとして出来上がる前は配列
 
-        // 一旦コメントアウト(1228)
-    if(is_object($image_1)){
+
+
+    if(is_null($image_1)){
+        // NULLなら
+        $path1 = NULL;
+        'Nullです';
+
+    }elseif(is_object($image_1)){
         echo '第一';
         // まだオブジェクトだったら
             $path1 = \Storage::put('/public', $image_1);
             $path1 = explode('/', $path1);
             $path1 = $path1[1];
             dump($path1);
-        }elseif(is_null($image_1)){
-            // NULLなら
-            'Nullです';
         }else{
             echo '第三';
             // $image_1が既にパスとして出来上がっている場合はそのままpathに代入
@@ -82,16 +82,17 @@ class ProductController extends Controller
             dump($path1);
         }
 
-    if(is_object($image_2)){
+
+    if(is_null($image_2)){
+        $path2 = NULL;
+        'Nullです';
+    }elseif(is_object($image_2)){
         echo '第一';
         // まだオブジェクトだったら
             $path2 = \Storage::put('/public', $image_2);
             $path2 = explode('/', $path2);
             $path2 = $path2[1];
             dump($path2);
-        }elseif(is_null($image_2)){
-            // NULLなら
-            'Nullです';
         }else{
             echo '第三';
             // $image_2が既にパスとして出来上がっている場合はそのままpathに代入
