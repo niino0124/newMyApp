@@ -231,16 +231,24 @@ input[name="email"] {
         width: 200px;
     }
 }
+input[type=file]{
+    height:auto;
+}
 
-input[name=image_1]{
-// display: none;
-height: 100%;
-left: 0;
-opacity: 0;
-position: absolute;
-top: 0;
-width: 100%;
+// input[name=image_1]{
+// // display: none;
+// height: 100%;
+// left: 0;
+// opacity: 0;
+// position: absolute;
+// top: 0;
+// width: 100%;
 
+// }
+
+.view_box{
+    display: flex;
+    flex-direction: column;
 }
 .file_design{
     position: relative;
@@ -295,6 +303,10 @@ margin-right: 20px;
 
 .product_category{
     display: flex;
+}
+
+.element_wrap_v{
+    margin-bottom: 50px;
 }
 
 .element_wrap_str {
@@ -595,8 +607,6 @@ input[name="title"] {
     font-size: 1.6rem;
     text-align: left;
     margin-bottom: 50px;
-    // margin: 0 auto;
-    // width: 60%;
 }
 
 .forget_lead_sent {

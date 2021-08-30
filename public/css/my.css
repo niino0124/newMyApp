@@ -258,13 +258,18 @@ input[name="email"] {
   }
 }
 
-input[name=image_1] {
-  height: 100%;
-  left: 0;
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  width: 100%;
+input[type=file] {
+  height: auto;
+}
+
+.view_box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .file_design {
@@ -323,6 +328,10 @@ select {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+
+.element_wrap_v {
+  margin-bottom: 50px;
 }
 
 .element_wrap_str {

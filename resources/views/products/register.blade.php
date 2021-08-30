@@ -4,130 +4,220 @@
 
 <form method="post" action="{{route('product.create')}}" enctype="multipart/form-data" class="block-b">
     @csrf
-<h1>商品登録</h1>
-<div class="element_wrap">
-    <label for="name">商品名</label>
-    <div class="content-wrap">
-            <input id="name" type="text" class=" @error('name') is-invalid @enderror long" name="name" value="{{ old('name') }}" >
+    <h1>商品登録</h1>
+    <div class="element_wrap">
+        <label for="name">商品名</label>
+        <div class="content-wrap">
+            <input id="name" type="text" class=" @error('name') is-invalid @enderror long" name="name"
+                value="{{ old('name') }}">
             @error('name')
             <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-            </span>
-    @enderror
-    </div>
-</div>
-
-<div class="element_wrap ajax_wrap">
-    <div class="content_wrap_v" >
-        <label for="product_category" class="product_category"  ><label for="name">商品カテゴリ</label>
-            <div style="display: flex;
-            flex-direction: column">
-            <select name="product_category_id" id="product_category_id" >
-
-                <option value="">選択してください</option>
-                @foreach ($product_categories as $product_category)
-                <option value="{{$product_category->id}}" @if(old('product_category_id') == $product_category->id) selected @endif >{{$product_category->name}}</option>
-                @endforeach
-            </select>
-
-            @error('product_category_id')
-            <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
+                <strong>{{ $message }}</strong>
             </span>
             @enderror
-            </div>
-
-            <div style="display: flex;
-            flex-direction: column">
-            <select name="product_subcategory_id" id="product_subcategory_id">
-                <option value="" class="op_aj" id="children">選択してください</option>
-            </select>
-            {{-- 確認画面から戻ってきた場合 --}}
-            @if (null !== old('product_subcategory_id') )
-            <select name="product_subcategory_id" id="product_subcategory_id_old">
-                <option value="" class="op_aj" id="children">選択してください</option>
-
-                @foreach ($old_product_subcategory_infos as $old_product_subcategory_info)
-
-                <option value="{{ $old_product_subcategory_info->id }}" class="op_aj" id="children" @if ($old_product_subcategory_info->id == old('product_subcategory_id'))
-selected
-                @endif>{{ $old_product_subcategory_info->name }}</option>
-
-                @endforeach
-
-            </select>
-            @endif
-
-            @error('product_subcategory_id')
-            <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-
-            </div>
-
-        </label>
+        </div>
     </div>
 
-</div>
+    <div class="element_wrap ajax_wrap">
+        <div class="content_wrap_v">
+            <label for="product_category" class="product_category"><label for="name">商品カテゴリ</label>
+                <div style="display: flex;
+            flex-direction: column">
+                    <select name="product_category_id" id="product_category_id">
 
+                        <option value="">選択してください</option>
+                        @foreach ($product_categories as $product_category)
+                        <option value="{{$product_category->id}}" @if(old('product_category_id')==$product_category->id)
+                            selected @endif >{{$product_category->name}}</option>
+                        @endforeach
+                    </select>
 
+                    @error('product_category_id')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
 
-<div class="element_wrap">
-    <div class="relative">
-        <label for="image" class="leading-7 text-sm text-gray-600">商品写真</label>
-        <label class="image_label">
-            写真１
-            @if (null !== old('path'))
-            {{-- <p>image_1のオールドは存在する</p> --}}
-            {{-- {{dd(old('path')[1])}} --}}
-            <img src="{{ '/storage/' . old('path')[1]}}" class=''  width="200" height="130"/>
-            @endif
-            <div id="preview"></div>
-            <label for="image_1" class="file_design">
-                <input type="file" id="image_1" name="image_1" accept=“image/png,image/jpeg,image/jpg” >
-                アップロード
+                <div style="display: flex;
+            flex-direction: column">
+                    <select name="product_subcategory_id" id="product_subcategory_id">
+                        <option value="" class="op_aj" id="children">選択してください</option>
+                    </select>
+                    {{-- 確認画面から戻ってきた場合 --}}
+                    @if (null !== old('product_subcategory_id') )
+                    <select name="product_subcategory_id" id="product_subcategory_id_old">
+                        <option value="" class="op_aj" id="children">選択してください</option>
+
+                        @foreach ($old_product_subcategory_infos as $old_product_subcategory_info)
+
+                        <option value="{{ $old_product_subcategory_info->id }}" class="op_aj" id="children" @if(
+                            old('product_subcategory_id')==($old_product_subcategory_info->id))
+                            selected
+                            @endif >{{ $old_product_subcategory_info->name }}</option>
+
+                        @endforeach
+
+                    </select>
+                    @endif
+
+                    @error('product_subcategory_id')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+
+                </div>
+
             </label>
+        </div>
 
-            @error('image_1')
-            <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-
-        </label>
     </div>
-</div>
 
-<div class="element_wrap">
-    <label for="product_content">商品説明</label>
-    <div class="content-wrap">
-            <textarea id="product_content" type="text" class=" @error('product_content') is-invalid @enderror" name="product_content" style="height: 90px">{{ old('product_content') }}</textarea>
+    <div class="element_wrap_v">
+        <div class="view_box">
+            <label>写真１</label>
+
+            {{-- <input type="file" class="file" name="image_1" > --}}
+            <input  class="file" name="image_1" type="file">
+
+            {{-- 確認画面から戻ってきた場合 --}}
+            @if(null !=  old('path1'))
+                <div class="img_view"><img alt="" class="img"  width="200" height="130" src="{{'/storage/' . old('path1')}}"><p><a href="#" class="img_del" src="">画像を削除する</a></p></div>
+                <input type="hidden" value={{old('path1')}} name="image_1">
+            {{-- @elseif ( null ==  old('path1'))
+                <p>old('path1')はnullです</p> --}}
+            @endif
+
+        </div>
+
+        <div class="view_box">
+            <label>写真２</label>
+
+            {{-- <input type="file" class="file" name="image_2" > --}}
+            <input  class="file" name="image_2" type="file">
+
+            {{-- 確認画面から戻ってきた場合 --}}
+            @if(null !=  old('path2'))
+                <div class="img_view"><img alt="" class="img"  width="200" height="130" src="{{'/storage/' . old('path2')}}"><p><a href="#" class="img_del" src="">画像を削除する</a></p></div>
+                <input type="hidden" value={{old('path2')}} name="image_2">
+            {{-- @elseif ( null ==  old('path2'))
+                <p>old('path2')はnullです</p> --}}
+            @endif
+
+        </div>
+
+
+
+
+        @error('image_1')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
+
+        {{-- <div class="view_box">
+            <label>画像２</label>
+            <input type="file" class="file"  name="image_2">
+            @if(null !==  old('path2'))
+                    <div class="img_view"><img  class="img"  width="200" height="130" src="{{'/storage/' . old('path2')[1]}}"><p><a href="#" class="img_del" >画像を削除する</a></p></div>
+
+            @elseif ( null ==  old('path2'))
+                <p>nullです</p>
+            @endif
+        </div>
+        @error('image_2')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror --}}
+
+
+
+
+    <div class="element_wrap">
+        <label for="product_content">商品説明</label>
+        <div class="content-wrap">
+            <textarea id="product_content" type="text" class=" @error('product_content') is-invalid @enderror"
+                name="product_content" style="height: 90px">{{ old('product_content') }}</textarea>
 
             @error('product_content')
             <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
+                <strong>{{ $message }}</strong>
             </span>
             @enderror
+        </div>
     </div>
-</div>
 
 
-<div class="btn-wrap">
-    <input class="btn" type="submit" value="確認画面へ" />
-    <a href="/" class="btn btn-back">トップに戻る</a>
-</div>
+    <div class="btn-wrap">
+        <input class="btn" type="submit" value="確認画面へ" />
+        <a href="/" class="btn btn-back">トップに戻る</a>
+    </div>
+
 </form>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+{{-- jQuery --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+{{-- 画像読み込み --}}
 <script>
+    $(document).ready(function () {
+        $(".file").on('change', function(){
+        var fileprop = $(this).prop('files')[0],
+            find_img = $(this).parent().find('img'),
+            filereader = new FileReader(),
+            view_box = $(this).parent('.view_box');
+            // 追加
+            // file_design = $(this).parent('.file_design');
 
-// 初期状態ではサブカテゴリ欄は隠しておく
-    $('#product_subcategory_id').hide();
+        if(find_img.length){
+        find_img.nextAll().remove();
+        find_img.remove();
+        }
 
-// カテゴリ欄に変更があった時の処理
-    $('#product_category_id').change(function() {
+    var img = '<div class="img_view"><img alt="" class="img"  width="200" height="130"><p><a href="#" class="img_del">画像を削除する</a></p></div>';
+
+    view_box.append(img);
+    // file_design.append(img);
+
+    filereader.onload = function() {
+    view_box.find('img').attr('src', filereader.result);
+    img_del(view_box);
+    }
+    filereader.readAsDataURL(fileprop);
+    });
+
+    function img_del(target){
+    target.find("a.img_del").on('click',function(){
+    var self = $(this),
+        parentBox = self.parent().parent().parent();
+    if(window.confirm('画像を削除します。\nよろしいですか？')){
+        setTimeout(function(){
+        parentBox.find('input[type=file]').val('');
+        parentBox.find('.img_view').remove();
+        } , 0);
+        }
+        return false;
+    });
+    }
+
+});
+</script>
+
+
+
+
+{{-- カテゴリ・サブカテゴリ --}}
+<script>
+    $(function() {
+        // 初期状態ではサブカテゴリ欄は隠しておく
+        $('#product_subcategory_id').hide();
+
+        // カテゴリ欄に変更があった時の処理
+        $('#product_category_id').change(function() {
 
         // もし前に選択したサブカテゴリ欄が残っていれば隠す
         $('#product_subcategory_id').hide();
@@ -142,7 +232,7 @@ selected
 
 
         // IDをもとに、サブカテゴリ欄を表示、選択肢群を追加
-    $.ajax({
+        $.ajax({
 
         type: 'GET',
         url:"/product/index/" + id ,
@@ -160,51 +250,8 @@ selected
             }).fail(function () {
                 console.log('どんまい！');
             });
-    })
-
-
-
-  function previewFile(file) {
-  // プレビュー画像を追加する要素
-  const preview = document.getElementById('preview');
-
-  // FileReaderオブジェクトを作成
-  const reader = new FileReader();
-
-  // URLとして読み込まれたときに実行する処理
-  reader.onload = function (e) {
-    const imageUrl = e.target.result; // URLはevent.target.resultで呼び出せる
-    const img = document.createElement("img"); // img要素を作成
-    img.src = imageUrl; // URLをimg要素にセット
-    preview.appendChild(img); // #previewの中に追加
-  }
-
-  // いざファイルをURLとして読み込む
-  reader.readAsDataURL(file);
-}
-// <input>でファイルが選択されたときの処理
-const fileInput = document.getElementById('image_1');
-const handleFileSelect = () => {
-  const files = fileInput.files;
-  for (let i = 0; i < files.length; i++) {
-    previewFile(files[i]);
-  }
-}
-fileInput.addEventListener('change', handleFileSelect);
-
-
+    });
+    });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
 
 @endsection

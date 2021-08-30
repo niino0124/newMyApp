@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\DB;
 use App\ProductCategory;
 use App\ProductSubcategory;
 use App\Http\Requests\StoreProductForm;
-use Illuminate\Support\Facades\Storage;
 
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use InterventionImage;
 use Illuminate\Support\Facades\Auth;
@@ -38,7 +38,6 @@ class ProductController extends Controller
             return view('products.register',compact('product_categories','product_subcategories','old_product_subcategory_infos'));
         }
 
-
         return view('products.register',compact('product_categories','product_subcategories'));
     }
 
@@ -56,15 +55,50 @@ class ProductController extends Controller
 
     // 確認画面以降前のバリデーションなど
     public function create(StoreProductForm $request){
-        $input = $request->except('image_1');
-        $image_1 = $request->file('image_1');
+        $input = $request->except('image_1','image_2');
+        $image_1 = $request->image_1;
+        $image_2 = $request->image_2;
+        // dd (gettype($image_1));
 
-        if($request->hasFile('image_1')){
-            $path = \Storage::put('/public', $image_1);
-            $path = explode('/', $path);
+
+    // もし、$image_1が既にパスとして出来上がっている場合は以下の処理は必要ない。
+    // パスとして出来上がる前は配列
+
+        // 一旦コメントアウト(1228)
+    if(is_object($image_1)){
+        echo '第一';
+        // まだオブジェクトだったら
+            $path1 = \Storage::put('/public', $image_1);
+            $path1 = explode('/', $path1);
+            $path1 = $path1[1];
+            dump($path1);
+        }elseif(is_null($image_1)){
+            // NULLなら
+            'Nullです';
         }else{
-            $path = null;
+            echo '第三';
+            // $image_1が既にパスとして出来上がっている場合はそのままpathに代入
+            $path1 = $image_1;
+            dump($path1);
         }
+
+    if(is_object($image_2)){
+        echo '第一';
+        // まだオブジェクトだったら
+            $path2 = \Storage::put('/public', $image_2);
+            $path2 = explode('/', $path2);
+            $path2 = $path2[1];
+            dump($path2);
+        }elseif(is_null($image_2)){
+            // NULLなら
+            'Nullです';
+        }else{
+            echo '第三';
+            // $image_2が既にパスとして出来上がっている場合はそのままpathに代入
+            $path2 = $image_2;
+            dump($path2);
+        }
+
 
         $name = $input['name'];
         $product_category_id = $input['product_category_id'];
@@ -72,12 +106,16 @@ class ProductController extends Controller
         $product_content = $input['product_content'];
 
         $data = array(
-            'path' => $path,
+            'path1' => $path1,
+            'path2' => $path2,
+            // 'path3' => $path3,
+            // 'path4' => $path4,
             'name' => $name,
             'product_category_id' => $product_category_id,
             'product_subcategory_id' => $product_subcategory_id,
             'product_content' => $product_content,
         );
+
 
         $category =  DB::table('product_categories')
         ->where('id',$product_category_id)->value('name');
@@ -85,7 +123,6 @@ class ProductController extends Controller
         $sub_category = DB::table('product_subcategories')
         ->where('id',$product_subcategory_id)->value('name');
 
-        // dd($data);
 
         $request->session()->put('data', $data);
         return view('products.confirm', compact('data','category','sub_category') );
@@ -118,15 +155,18 @@ class ProductController extends Controller
                 $post->product_category_id = $data['product_category_id'];
                 $post->product_subcategory_id = $data['product_subcategory_id'];
                 $post->product_content = $data['product_content'];
-                $post->image_1 = $data['path'][1];
+                $post->image_1 = $data['path1'];
+                $post->image_2 = $data['path2'];
+                // $post->image_3 = $data['path3'][1];
+                // $post->image_4 = $data['path4'][1];
 
                 $post->save();
 
                 $request->session()->forget("form_input");
 
 
-        // 会員トップへ戻る
-        return redirect()->action("HomeController@index");
+                // 会員トップへ戻る
+                return redirect()->action("HomeController@index");
 
             }
 }
