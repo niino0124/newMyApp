@@ -17,20 +17,29 @@
 	</div>
 
 
+@if($data['path1'] !== NULL || $data['path2'] !== NULL)
+<div class="element_wrap">
 
-    @if($data['path1'] !== NULL)
-	<div class="element_wrap_str">
-		<label>商品写真</label>
-        <img src="{{ '/storage/' . $data['path1']}}" class=''  width="200" height="130"/>
-	</div>
-    @endif
+    <label>商品写真</label>
 
-    @if($data['path2'] !== NULL)
-	<div class="element_wrap_str">
-		<label>商品写真２</label>
-        <img src="{{ '/storage/' . $data['path2']}}" class=''  width="200" height="130"/>
-	</div>
-    @endif
+    <div class="">
+        @if($data['path1'] !== NULL)
+        <div class="view_box">
+            <label class="image_label">写真１</label>
+            <img src="{{ '/storage/' . $data['path1']}}" class=''  width="150" height="150"/>
+        </div>
+        @endif
+
+        @if($data['path2'] !== NULL)
+        <div class="view_box">
+            <label class="image_label">写真２</label>
+            <img src="{{ '/storage/' . $data['path2']}}" class=''  width="150" height="150"/>
+        </div>
+        @endif
+    </div>
+
+</div>
+@endif
 
 
 
