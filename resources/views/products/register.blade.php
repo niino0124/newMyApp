@@ -100,17 +100,6 @@
         <label for="product_category" class="product_category"><label for="name">商品写真</label>
 
         <div class="pics_wrap">
-                {{-- <div class="view_box">
-                    <label class="img_label">写真１
-                    </label>
-                    @if(null != old('path1'))
-                    <div class="img_view"><img alt="" class="img" width="150" height="150"
-                            src="{{'/storage/' . old('path1')}}"></div>
-                    <input type="hidden" value={{old('path1')}} name="image_1">
-                    @endif
-                    <input class="file" name="image_1" type="file">
-                </div> --}}
-
                 <div class="view_box">
                     <label class="img_label">写真１
                     </label>
@@ -159,12 +148,13 @@
 
         $(".file").on('change', function(){
         var fileprop = $(this).prop('files')[0],
+
             find_img = $(this).parent().siblings('.img_view').find('img'),
-            // find_img = $(this).parent().find('img'),
+            find_img_2 = $(this).parent().siblings('.img_label').find('img'),
+
             filereader = new FileReader(),
-            // view_box = $(this).parent('.view_box');
-            // img_label = $(this).parents('.img_label');
             img_label = $(this).parent().siblings('.img_label');
+            // img_view = $(this).parent().siblings('.img_view');
 
 
             // console.log(img_label);
@@ -175,6 +165,12 @@
         if(find_img.length){
         find_img.nextAll().remove();
         find_img.remove();
+        }
+
+        // 特定の要素が存在するかどうかを判別する処理②【.length】
+        if(find_img_2.length){
+        find_img_2.nextAll().remove();
+        find_img_2.remove();
         }
 
         var img = '<div class="img_view"><img alt="" class="img"  width="150" height="150"></div>';
