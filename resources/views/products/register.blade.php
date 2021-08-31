@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="element_wrap ajax_wrap">
+    <div class="element_wrap ">
         <div class="content_wrap_v">
             <label for="product_category" class="product_category"><label for="name">商品カテゴリ</label>
                 <div style="display: flex;
@@ -100,28 +100,42 @@
         <label for="product_category" class="product_category"><label for="name">商品写真</label>
 
         <div class="pics_wrap">
-                <div class="view_box">
-                    <label class="img_label">写真１</label>
-                    {{-- 確認画面から戻ってきた場合 --}}
+                {{-- <div class="view_box">
+                    <label class="img_label">写真１
+                    </label>
                     @if(null != old('path1'))
                     <div class="img_view"><img alt="" class="img" width="150" height="150"
                             src="{{'/storage/' . old('path1')}}"></div>
                     <input type="hidden" value={{old('path1')}} name="image_1">
                     @endif
                     <input class="file" name="image_1" type="file">
-                </div>
+                </div> --}}
 
                 <div class="view_box">
+                    <label class="img_label">写真１
+                    </label>
+                    @if(null != old('path1'))
+                    <div class="img_view"><img alt="" class="img" width="150" height="150"
+                            src="{{'/storage/' . old('path1')}}"></div>
+                    <input type="hidden" value={{old('path1')}} name="image_1">
+                    @endif
+                    <div class="originalFileBtn">
+                        アップロード
+                        <input class="file" name="image_1" type="file">
+                    </div>
+                </div>
+                <div class="view_box">
                     <label class="img_label">写真２
-
-
                     </label>
                     @if(null != old('path2'))
                     <div class="img_view"><img alt="" class="img" width="150" height="150"
                             src="{{'/storage/' . old('path2')}}"></div>
                     <input type="hidden" value={{old('path2')}} name="image_2">
                     @endif
-                    <input class="file" name="image_2" type="file">
+                    <div class="originalFileBtn">
+                        アップロード
+                        <input class="file" name="image_2" type="file">
+                    </div>
                 </div>
             </div>
     </div>
@@ -145,16 +159,19 @@
 
         $(".file").on('change', function(){
         var fileprop = $(this).prop('files')[0],
-            find_img = $(this).parent().find('img'),
+            find_img = $(this).parent().siblings('.img_view').find('img'),
+            // find_img = $(this).parent().find('img'),
             filereader = new FileReader(),
             // view_box = $(this).parent('.view_box');
-            img_label = $(this).prev('.img_label');
+            // img_label = $(this).parents('.img_label');
+            img_label = $(this).parent().siblings('.img_label');
 
 
-            console.log(img_label);
+            // console.log(img_label);
+            console.log(find_img);
 
 
-
+        // 特定の要素が存在するかどうかを判別する処理【.length】
         if(find_img.length){
         find_img.nextAll().remove();
         find_img.remove();
