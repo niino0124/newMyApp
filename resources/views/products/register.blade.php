@@ -78,49 +78,40 @@
     <div class="element_wrap_v">
         <label for="product_category" class="product_category"><label for="name">商品写真</label>
 
-        <div class="pics_wrap">
-            <div class="view_box">
+            <div class="pics_wrap">
+                <div class="view_box">
 
-                <label class="img_label">写真１</label>
-                {{-- <input type="file" class="file" name="image_1" > --}}
-                <input  class="file" name="image_1" type="file">
-
-                {{-- 確認画面から戻ってきた場合 --}}
-                @if(null !=  old('path1'))
-                    <div class="img_view"><img alt="" class="img"  width="150" height="150" src="{{'/storage/' . old('path1')}}"></div>
+                    <label class="img_label">写真１</label>
+                    {{-- 確認画面から戻ってきた場合 --}}
+                    @if(null != old('path1'))
+                    <div class="img_view"><img alt="" class="img" width="150" height="150"
+                            src="{{'/storage/' . old('path1')}}"></div>
                     <input type="hidden" value={{old('path1')}} name="image_1">
-                {{-- @elseif ( null ==  old('path1'))
-                    <p>old('path1')はnullです</p> --}}
-                @endif
+                    @endif
+                    <input class="file" name="image_1" type="file">
 
-            </div>
 
-            <div class="view_box">
-                <label class="img_label">写真２</label>
 
-                {{-- <input type="file" class="file" name="image_2" > --}}
-                <input  class="file" name="image_2" type="file">
+                </div>
 
-                {{-- 確認画面から戻ってきた場合 --}}
-                @if(null !=  old('path2'))
-                    <div class="img_view"><img alt="" class="img"  width="150" height="150" src="{{'/storage/' . old('path2')}}"></div>
+                <div class="view_box">
+                    <label class="img_label">写真２</label>
+
+                    @if(null != old('path2'))
+                    <div class="img_view"><img alt="" class="img" width="150" height="150"
+                            src="{{'/storage/' . old('path2')}}"></div>
                     <input type="hidden" value={{old('path2')}} name="image_2">
-                {{-- @elseif ( null ==  old('path2'))
-                    <p>old('path2')はnullです</p> --}}
-                @endif
+                    @endif
 
+                    <input class="file" name="image_2" type="file">
+
+
+
+                </div>
             </div>
-        </div>
-        </div>
+    </div>
 
 
-
-
-        {{-- @error('image_1')
-        <span class="invalid-feedback" role="alert">
-            <strong>{{ $message }}</strong>
-        </span>
-        @enderror --}}
 
 
     <div class="element_wrap">
@@ -153,32 +144,35 @@
 {{-- 画像読み込み --}}
 <script>
     $(document).ready(function () {
+
         $(".file").on('change', function(){
         var fileprop = $(this).prop('files')[0],
             find_img = $(this).parent().find('img'),
             filereader = new FileReader(),
             view_box = $(this).parent('.view_box');
-            // 追加
-            // file_design = $(this).parent('.file_design');
+
+            console.log(fileprop);
+            console.log(find_img);
+            console.log(filereader);
+            console.log(view_box);
+
+
 
         if(find_img.length){
         find_img.nextAll().remove();
         find_img.remove();
         }
 
-    var img = '<div class="img_view"><img alt="" class="img"  width="150" height="150"></div>';
+        var img = '<div class="img_view"><img alt="" class="img"  width="150" height="150"></div>';
 
-    view_box.append(img);
-    // file_design.append(img);
+        view_box.append(img);
 
-    filereader.onload = function() {
-    view_box.find('img').attr('src', filereader.result);
-    img_del(view_box);
-    }
-    filereader.readAsDataURL(fileprop);
+        filereader.onload = function() {
+        view_box.find('img').attr('src', filereader.result);
+        // img_del(view_box);
+        }
+        filereader.readAsDataURL(fileprop);
     });
-
-
 
 });
 </script>
