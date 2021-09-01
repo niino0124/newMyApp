@@ -18,7 +18,7 @@
 
 
 @if($data['path1'] !== NULL || $data['path2'] !== NULL)
-<div class="element_wrap">
+<div class="element_wrap_str">
 
     <label>商品写真</label>
 

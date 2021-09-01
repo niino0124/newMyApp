@@ -113,6 +113,11 @@
                         <input class="file" name="image_1" type="file">
                     </div>
                 </div>
+                @error('image_1')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
                 <div class="view_box">
                     <label class="img_label">写真２
                     </label>
@@ -126,6 +131,11 @@
                         <input class="file" name="image_2" type="file">
                     </div>
                 </div>
+                @error('image_2')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
     </div>
 

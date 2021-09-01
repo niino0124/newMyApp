@@ -83,6 +83,10 @@ class ProductController extends Controller
         }
 
 
+
+
+
+
     if(is_null($image_2)){
         $path2 = NULL;
         'Nullです';
