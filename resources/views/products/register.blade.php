@@ -79,7 +79,6 @@
 
 
 
-
     <div class="element_wrap">
         <label for="product_content">商品説明</label>
         <div class="content-wrap">
@@ -114,10 +113,15 @@
                     </div>
                 </div>
                 @error('image_1')
-                <span class="invalid-feedback" role="alert">
+                <span class="invalid-feedback " role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
+                {{-- jqueryで表示させるエラー --}}
+                <span class="invalid-feedback j_message" role="alert">
+                    <strong></strong>
+                </span>
+
                 <div class="view_box">
                     <label class="img_label">写真２
                     </label>
@@ -136,6 +140,10 @@
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
+                {{-- jqueryで表示させるエラー --}}
+                    <span class="invalid-feedback j_message" role="alert">
+                        <strong></strong>
+                    </span>
             </div>
     </div>
 
@@ -158,17 +166,21 @@
 
         $(".file").on('change', function(){
         var fileprop = $(this).prop('files')[0],
-
             find_img = $(this).parent().siblings('.img_view').find('img'),
             find_img_2 = $(this).parent().siblings('.img_label').find('img'),
-
             filereader = new FileReader(),
             img_label = $(this).parent().siblings('.img_label');
-            // img_view = $(this).parent().siblings('.img_view');
 
 
-            // console.log(img_label);
             console.log(find_img);
+
+                //画像でない場合は処理終了
+                // 存在しない場合は -1 を返します。
+            if(fileprop.type.indexOf('image') < 0){
+                var error_message = '画像ファイルを指定してください。';
+                $('.j_message').children('strong').append(error_message);
+            return false;
+            }
 
 
         // 特定の要素が存在するかどうかを判別する処理【.length】
@@ -177,7 +189,6 @@
         find_img.remove();
         }
 
-        // 特定の要素が存在するかどうかを判別する処理②【.length】
         if(find_img_2.length){
         find_img_2.nextAll().remove();
         find_img_2.remove();
@@ -185,14 +196,10 @@
 
         var img = '<div class="img_view"><img alt="" class="img"  width="150" height="150"></div>';
 
-        // view_box.prepend(img);
-        // view_box.append(img);
         img_label.append(img);
 
         filereader.onload = function() {
             img_label.find('img').attr('src', filereader.result);
-        // view_box.find('img').attr('src', filereader.result);
-        // img_del(view_box);
         }
         filereader.readAsDataURL(fileprop);
     });
