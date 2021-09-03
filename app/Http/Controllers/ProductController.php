@@ -24,7 +24,7 @@ class ProductController extends Controller
     public function index(){
         // カテゴリは全て選択可能
         $product_categories = ProductCategory::all();
-        $product_subcategories = ProductSubCategory::all();
+        $product_subcategories = ProductSubcategory::all();
 
         // 確認画面から戻ってくる場合
         if (null !== old('product_category_id') ){
