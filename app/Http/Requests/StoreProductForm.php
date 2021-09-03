@@ -24,16 +24,16 @@ class StoreProductForm extends FormRequest
     public function rules()
     {
         return [
-            'name' =>'required|max:100|string',
+            'name' =>'|max:99|required|string',
+            'product_content' =>'required|max:499|string',
+            // "image_2" => "mimes:jpeg,png,jpg,gif|max:10000|nullable",
+            // "image_3" => "image|mimes:jpeg,png,jpg,gif|max:10240|nullable",
+            // "image_4" => "image|mimes:jpeg,png,jpg,gif|max:10240|nullable",
             "product_category_id" => "required|integer",
             "product_subcategory_id" => "required|integer",
             "image_1" => "max:10240|nullable",
             "image_2" => "max:10240|nullable",
             // "image_1" => "mimes:jpeg,png,jpg,gif|max:10000|nullable",
-            // "image_2" => "mimes:jpeg,png,jpg,gif|max:10000|nullable",
-            // "image_3" => "image|mimes:jpeg,png,jpg,gif|max:10240|nullable",
-            // "image_4" => "image|mimes:jpeg,png,jpg,gif|max:10240|nullable",
-            'product_content' =>'required|max:100|string',
         ];
     }
 

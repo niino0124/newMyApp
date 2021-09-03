@@ -364,6 +364,16 @@ select {
 
 .img_label {
   text-align: left;
+  margin-bottom: 0;
+}
+
+.img_view {
+  padding-bottom: 15px;
+}
+
+.img_view img {
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .element_wrap_str {

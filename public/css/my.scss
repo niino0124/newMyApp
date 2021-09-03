@@ -337,6 +337,14 @@ margin-right: 20px;
 
 .img_label{
     text-align: left;
+    margin-bottom: 0;
+}
+
+.img_view{
+  padding-bottom: 15px;
+  img{
+      object-fit: cover;
+  }
 }
 
 .element_wrap_str {
@@ -598,7 +606,7 @@ input[name="title"] {
 .block-b {
     padding: 20px 40px;
     max-width: 550px;
- 
+
 }
 .block-a {
     width: 100%;
