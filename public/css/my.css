@@ -7,6 +7,10 @@ p {
   margin: 0;
 }
 
+.fw-bold {
+  font-weight: bold;
+}
+
 @media screen and (max-width: 767px) {
   h1 {
     font-size: 1.3rem !important;
@@ -103,14 +107,9 @@ form h1 {
 }
 
 .man-body-tables {
+  background: #ffebc8;
   height: auto;
-  padding: 30px 35px 40px;
-}
-
-@media screen and (max-width: 767px) {
-  .man-body-tables {
-    padding: 30px 20px;
-  }
+  padding: 40px 25px 50px;
 }
 
 .man-name {
@@ -187,19 +186,69 @@ form h1 {
   color: blue;
 }
 
+.product_lists {
+  border-top: 1px solid;
+  margin-top: 15px;
+}
+
+.product_lists .product {
+  border-bottom: 1px solid;
+  padding: 15px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.product_lists .product .product_body {
+  margin-left: 50px;
+}
+
+.product_lists .product .product_body p {
+  font-size: 1.2rem !important;
+}
+
+.product_lists .product .product_body .cat {
+  background: white;
+  padding: 2px 4px;
+  border: 1px solid;
+}
+
+.product_lists .product .product_body .product_name {
+  text-align: left;
+  margin-top: 15px;
+}
+
+.product_header {
+  width: 100px;
+  height: 100px;
+  background: #000;
+}
+
+.product_header img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .example {
   margin-top: 25px;
   padding-left: 0;
 }
 
 .example li {
-  font-size: 1.4rem;
+  font-size: 1rem;
   display: inline;
-  padding: 5px 5px;
   border: 1px black solid;
   color: black;
   background: white;
   border-radius: 0;
+}
+
+.example li a {
+  color: black;
 }
 
 .example .this {
@@ -482,6 +531,18 @@ select {
   color: white;
 }
 
+.btn-back-bl {
+  text-decoration: none;
+  background: white;
+  color: blue;
+  border: blue solid 1px;
+}
+
+.btn-back-bl:hover, .btn-back-bl:focus {
+  background: blue;
+  color: white;
+}
+
 .admin-btn {
   float: left;
   margin-top: 0;
@@ -633,8 +694,8 @@ ul {
   border: solid 1px black;
   color: black;
   display: inline-block;
-  padding: 8px 18px;
-  font-size: 1.4rem;
+  padding: 4px 8px;
+  font-size: 1.2rem;
   text-align: center;
   text-decoration: none;
   -webkit-transition: 0.3s;
@@ -789,43 +850,36 @@ input[name="title"] {
   }
 }
 
-.search_container {
-  padding: 0;
-  margin: 20px auto;
+.search-wrap {
+  background: white;
+  padding: 25px 30px;
+  margin: 0px auto;
+  border: 1px solid black;
+}
+
+.search-wrap label {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  background: transparent;
-  border: none;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
 
-.search_container input[name="search"] {
-  width: 75%;
-  height: 40px;
+.search-wrap label input,
+.search-wrap label select {
+  margin-left: 15px;
 }
 
-@media screen and (max-width: 767px) {
-  .search_container input[name="search"] {
-    height: 30px;
-    width: 65%;
-    padding: 0;
-  }
+.search-wrap button {
+  background: white;
+  display: block;
+  margin: 0 auto;
 }
 
-.search_container input[name="search-btn"] {
-  height: 40px;
-}
-
-@media screen and (max-width: 767px) {
-  .search_container input[name="search-btn"] {
-    height: 30px;
-    width: 30%;
-    font-size: 1.2rem;
-    padding: 0;
-  }
+.search-wrap button:hover {
+  background: black;
+  color: white;
 }
 
 .search_container_mem {

@@ -19,6 +19,7 @@
                 <div class="blue-board ">
                     <div class="header">
                       <div class="simple-wrap" style="justify-content:flex-end;">
+                        <a href="{{route('product.list')}}" class="btn-simple">商品一覧</a>
                         <a href="{{ route('user.resister_show') }}" class="btn-simple">新規会員登録</a>
                         <a href="{{ route('login') }}" class="btn-simple">ログイン</a>
                       </div>

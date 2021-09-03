@@ -174,4 +174,40 @@ class ProductController extends Controller
                 return redirect()->action("HomeController@index");
 
             }
+
+
+            // 一覧表示
+            public function list(Request $request){
+
+                $search = $request->input('search');
+
+                // 検索フォーム
+                $query = DB::table('products');
+
+                // もしキーワードがあったら
+                if($search !== null){
+                //全角スペースを半角に
+                    $search_split = mb_convert_kana($search,'s');
+
+                //空白で区切る
+                    $search_split2 = preg_split('/[\s]+/', $search_split,-1,PREG_SPLIT_NO_EMPTY);
+
+                //単語をループで回す
+                    foreach($search_split2 as $value)
+                    {
+                    $query->where('name','like','%'.$value.'%');
+                    }
+                };
+
+                $query->select( 'name', 'product_category_id', 'product_subcategory_id','image_1');
+                $query->orderBy('created_at', 'asc');
+                $products = $query->paginate(3);
+
+                $product_categories = ProductCategory::all();
+                $product_subcategories = ProductSubcategory::all();
+
+                return view('products.list',compact('product_categories','product_subcategories','products'));
+            }
+
+
 }
