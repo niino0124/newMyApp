@@ -198,24 +198,19 @@
             if (type != 'image/jpeg' && type != 'image/gif' && type != 'image/png' && type != 'image/jpeg') {
                 $(this).parent().siblings('.j_message').append(error2);
             // 作業打ち切り！
+            console.log('ここ');
             return false;
-            }else if(type == 'image/jpeg' || type == 'image/gif' || type == 'image/png' || type == 'image/jpeg') {
+            } else if(type == 'image/jpeg' || type == 'image/gif' || type == 'image/png' || type == 'image/jpeg') {
                 $(this).parent().siblings('.j_message').find('.error2').remove();
+                console.log('ここ２');
             }
 
 
 
 
-        // 特定の要素が存在するかどうかを判別する処理【.length】
-        // if(find_img.length){
-        // find_img.nextAll().remove();
-        // find_img.remove();
-        // }
 
-        // if(find_img_2.length){
-        // find_img_2.nextAll().remove();
-        // find_img_2.remove();
-        // }
+
+
 
         var img = '<div class="img_view"><img alt="" class="img"  width="150" height="150"></div>';
 
