@@ -39,6 +39,8 @@ Route::group(['prefix' => 'product' , 'middleware' => 'auth'],function(){
     Route::post('store','ProductController@store')->name('product.store');
 
     Route::get('list', 'ProductController@list')->name('product.list');
+    Route::get('list/{id}', 'ProductController@listAjax');
+
 
     });
 // Route::get('product-register', 'ProductController@showRegistrationForm')->name('product.resister_show');

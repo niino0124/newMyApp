@@ -25,7 +25,7 @@
             flex-direction: column">
                     <select name="product_category_id" id="product_category_id">
 
-                        <option value="">選択してください</option>
+                        <option value="0">選択してください</option>
                         @foreach ($product_categories as $product_category)
                         <option value="{{$product_category->id}}" @if(old('product_category_id')==$product_category->id)
                             selected @endif >{{$product_category->name}}</option>
@@ -109,7 +109,9 @@
                     </label>
                     <div class="originalFileBtn">
                         アップロード
+                        {{-- <input  name="image_1" type="file" class="image_1"> --}}
                         <input class="file" name="image_1" type="file">
+
                     </div>
                     @error('image_1')
                     <span class="invalid-feedback " role="alert">
@@ -132,6 +134,7 @@
                     </label>
                     <div class="originalFileBtn">
                         アップロード
+                        {{-- <input class="image_1" name="image_2" type="file"> --}}
                         <input class="file" name="image_2" type="file">
                     </div>
 
@@ -169,8 +172,6 @@
             // もともと画像やエラーが入っていたら削除
             var img_view = $(this).parent().siblings('.img_label').find('.img_view');
             img_view.remove();
-            // var j_message = $(this).parent().siblings('.j_message');
-            // j_message.remove();
 
             // 選択したファイルの情報を取得
         var fileprop = $(this).prop('files')[0],
@@ -195,21 +196,25 @@
                 $(this).parent().siblings('.j_message').find('.error1').remove();
             }
 
-            if (type != 'image/jpeg' && type != 'image/gif' && type != 'image/png' && type != 'image/jpeg') {
-                $(this).parent().siblings('.j_message').append(error2);
-            // 作業打ち切り！
-            console.log('ここ');
+            //画像でない場合は処理終了
+            if(type.indexOf("image") < 0){
+            $(this).parent().siblings('.j_message').append(error2);
             return false;
-            } else if(type == 'image/jpeg' || type == 'image/gif' || type == 'image/png' || type == 'image/jpeg') {
-                $(this).parent().siblings('.j_message').find('.error2').remove();
-                console.log('ここ２');
+            }else{
+            $(this).parent().siblings('.j_message').find('.error2').remove();
             }
 
 
 
-
-
-
+            // if (type != 'image/jpeg' && type != 'image/gif' && type != 'image/png' && type != 'image/jpeg') {
+            //     $(this).parent().siblings('.j_message').append(error2);
+            // // 作業打ち切り！
+            // console.log('ここ');
+            // return false;
+            // } else if(type == 'image/jpeg' || type == 'image/gif' || type == 'image/png' || type == 'image/jpeg') {
+            //     $(this).parent().siblings('.j_message').find('.error2').remove();
+            //     console.log('ここ２');
+            // }
 
 
         var img = '<div class="img_view"><img alt="" class="img"  width="150" height="150"></div>';
@@ -248,13 +253,11 @@
         // カテゴリ欄に変更があった時の処理
         $('#product_category_id').change(function() {
 
-        // もし前に選択したサブカテゴリ欄が残っていれば隠す
-        $('#product_subcategory_id').hide();
-        $('#product_subcategory_id_old').hide();
-
         // もし前に選択したサブカテゴリの選択肢群があれば削除
-        $('#product_subcategory_id option').remove('.add_op');
-        $('#product_subcategory_id_old option').remove('.op_aj');
+        $('.add_op').remove();
+
+        // OLDのサブカテゴリ欄が残っていれば消す
+        $('#product_subcategory_id_old').remove();
 
         //選択したカテゴリIDを取得
         let id = $('option:selected').val();
@@ -268,7 +271,13 @@
         dataType: 'json',
 
         }).done(function (data) {
+            // もしも「選択してください」が選択されたら
+            if(data == ''){
+                console.log('nullです');
+                return $('#product_subcategory_id').hide();
+            }
 
+            // 「選択してください」以外が選択されたら
             $('#product_subcategory_id').show();
                 $.each(data, function (index, value) {
                 let id = value.id;

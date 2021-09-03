@@ -44,10 +44,19 @@ class ProductController extends Controller
 
     // このメソッドをAjaxから実行したい
     public function ajax($id) {
-        // 何らかの処理
-        $product_subcategories = DB::table('product_subcategories')
-        ->where('product_category_id',$id)
-        ->get();
+         // カテゴリが選択されていなければ、全サブカテゴリを表示
+         if($id == 0){
+            $product_subcategories = '';
+        }
+
+        // 何らかのカテゴリが選択されてれば、特定のサブカテゴリを表示
+        if($id != 0){
+            $product_subcategories = DB::table('product_subcategories')
+            ->where('product_category_id',$id)
+            ->get();
+        }
+
+
 
         return response()->json($product_subcategories);
     }
@@ -195,7 +204,8 @@ class ProductController extends Controller
                 //単語をループで回す
                     foreach($search_split2 as $value)
                     {
-                    $query->where('name','like','%'.$value.'%');
+                    $query->where('name','like','%'.$value.'%')->orWhere('product_content', 'like','%'.$value.'%')
+                    ;
                     }
                 };
 
@@ -209,5 +219,22 @@ class ProductController extends Controller
                 return view('products.list',compact('product_categories','product_subcategories','products'));
             }
 
+
+            public function listAjax($id) {
+                // カテゴリが選択されていなければ、全サブカテゴリを表示
+                if($id == 0){
+                    $product_subcategories = DB::table('product_subcategories')
+                    ->get();
+                }
+
+                // 何らかのカテゴリが選択されてれば、特定のサブカテゴリを表示
+                if($id != 0){
+                    $product_subcategories = DB::table('product_subcategories')
+                    ->where('product_category_id',$id)
+                    ->get();
+                }
+
+                return response()->json($product_subcategories);
+            }
 
 }
