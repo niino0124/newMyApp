@@ -185,9 +185,18 @@ class ProductController extends Controller
             }
 
 
+
+
+
+
+
+
+
+
+
+
             // 一覧表示
             public function list(Request $request){
-
                 $search = $request->input('search');
                 $product_category_id = $request->input('product_category_id');
                 $product_subcategory_id = $request->input('product_subcategory_id');
@@ -222,7 +231,7 @@ class ProductController extends Controller
 
                 $query->select( 'name', 'product_category_id', 'product_subcategory_id','image_1');
                 $query->orderBy('created_at', 'desc');
-                $products = $query->paginate(3);
+                $products = $query->paginate(10);
 
                 $product_categories = ProductCategory::all();
                 $product_subcategories = ProductSubcategory::all();

@@ -63,25 +63,9 @@
         </ul>
         {{ $products->links() }}
 
-        <ul class="example">
-            <li class="t_prev"><a class="" href="#">＜前へ</a></li>
-            <li class="mid"><a class=" this" href="#">1</a></li>
-            <li class="mid"><a class="" href="#">2</a></li>
-            <li class="mid"><a class="" href="#">3</a></li>
-            <li class="t_next"><a class="" href="#">次へ＞</a></li>
-        </ul>
 
-        {{-- <div class="pagination p12">
-            <ul>
-              <a href="#"><li>Previous</li></a>
-              <a href="#"><li>1</li></a>
-              <a href="#"><li>2</li></a>
-              <a href="#"><li>3</li></a>
-              <a class="is-active" href="#"><li>6</li></a>
-              <a href="#"><li>Next</li></a>
-            </ul>
-          </div>
-        </div> --}}
+
+
 
 
 
