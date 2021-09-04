@@ -61,7 +61,7 @@
             </li>
             @endforeach
         </ul>
-        {{ $products->onEachSide(1)->links() }}
+        {{ $products->links() }}
 
         <ul class="example">
             <li class="t_prev"><a class="" href="#">＜前へ</a></li>

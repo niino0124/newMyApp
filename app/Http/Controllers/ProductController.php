@@ -194,6 +194,7 @@ class ProductController extends Controller
 
                 // 検索フォーム
                 $query = DB::table('products');
+                // $query = Product::all();
 
                 // もしキーワードがあったら
                 if($search !== null){
