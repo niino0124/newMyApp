@@ -14,12 +14,12 @@ $breakpoints: (
 html {
     font-size: 62.5%;
 }
-p{
-   font-size: 1.6rem;
-   margin: 0;
+p {
+    font-size: 1.6rem;
+    margin: 0;
 }
 
-.fw-bold{
+.fw-bold {
     font-weight: bold;
 }
 
@@ -109,7 +109,6 @@ form {
     background: #ffebc8;
     height: auto;
     padding: 40px 25px 50px;
-
 }
 
 .man-name {
@@ -176,68 +175,96 @@ form {
     color: blue;
 }
 
-.product_lists{
-    border-top: 1px solid ;
+.product_lists {
+    border-top: 1px solid;
     margin-top: 15px;
 
-    .product{
-border-bottom: 1px solid;
-padding: 15px 0;
-display: flex;
-align-items: flex-start;
+    .product {
+        border-bottom: 1px solid;
+        padding: 15px 0;
+        display: flex;
+        align-items: flex-start;
 
-.product_body{
-    margin-left: 50px;
-    p{
-        font-size: 1.2rem !important;
-    }
+        .product_body {
+            margin-left: 50px;
+            p {
+                font-size: 1.2rem !important;
+            }
 
-    .cat{
-        background: white;
-        padding: 2px 4px;
-        border: 1px solid;
-    }
+            .cat {
+                background: white;
+                padding: 2px 4px;
+                border: 1px solid;
+            }
 
-    .product_name{
-        text-align: left;
-        margin-top: 15px;
+            .product_name {
+                text-align: left;
+                margin-top: 15px;
+            }
+        }
     }
 }
+.product_header {
+    width: 100px;
+    height: 100px;
+    // background: #000;
+    img {
+        width: 100%;
+        object-fit: cover;
     }
 }
-.product_header{
-width: 100px;
-height: 100px;
-background: #000;
-img{
-    width: 100%;
-    object-fit: cover;
-}
-}
 
-// 管理画面検索ページング
+// ページング
 .example {
     margin-top: 25px;
     padding-left: 0;
+    display: flex;
 
-
-    li {
-        font-size: 1rem;
-        display: inline;
-        // padding: 5px 5px;
+    li{
+        position: relative;
         border: 1px black solid;
-        color: black;
+    }
+
+    .t_prev,
+    .t_next{
+    background: white;
+    border :1px solid;
+    width: 4.5rem;
+    height: 1.4rem;
+    }
+    .t_prev {
+        margin-right: 10px;
+    }
+    .t_next {
+        margin-left: 10px;
+    }
+
+    .mid{
+        display: inline-block;
+        width: 1.4rem;
+        height: 1.4rem;
         background: white;
         border-radius: 0;
-        a{
-            color: black;
-        }
     }
+
+    a {
+        color: black;
+        line-height: auto;
+        position: absolute;
+        top: 0;
+        left:0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        font-size: 1.2rem;
+    }
+
     .this {
         background-color: #777;
         color: #fff;
     }
 }
+
 
 label {
     font-size: 1.4rem !important;
@@ -278,8 +305,8 @@ input[name="email"] {
         width: 200px;
     }
 }
-input[type=file]{
-    height:auto;
+input[type="file"] {
+    height: auto;
 }
 
 // input[name=image_1]{
@@ -293,7 +320,7 @@ input[type=file]{
 
 // }
 
-.originalFileBtn{
+.originalFileBtn {
     border: 2px solid #ff8800;
     border-radius: 8px;
     color: #ff8800;
@@ -302,8 +329,8 @@ input[type=file]{
     padding: 2px 4px;
     position: relative;
     width: 120px;
-    &:hover{
-        opacity: .6;
+    &:hover {
+        opacity: 0.6;
     }
 }
 
@@ -316,44 +343,42 @@ input[type=file]{
     width: 100%;
 }
 
-
-.view_box{
+.view_box {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
 }
-.file_design{
+.file_design {
     position: relative;
     display: inline-block;
 
     color: rgb(255, 102, 0);
     background-color: white;
-    border:solid 2px rgb(255, 102, 0);
+    border: solid 2px rgb(255, 102, 0);
     padding: 4px 8px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1rem;
 }
 
-.image_label{
+.image_label {
     text-align: left;
 }
 
-#preview{
+#preview {
     margin-bottom: 15px;
 }
 
 #preview img {
     width: 200px;
     border: solid 1px silver;
-  }
-
+}
 
 select {
     background: white;
     border: 1px black solid;
     height: 20px;
-margin-right: 20px;
+    margin-right: 20px;
 }
 
 // 確認画面
@@ -373,25 +398,25 @@ margin-right: 20px;
     }
 }
 
-.product_category{
+.product_category {
     display: flex;
 }
 
-.element_wrap_v{
+.element_wrap_v {
     margin-bottom: 50px;
     display: flex;
 }
 
-.img_label{
+.img_label {
     text-align: left;
     margin-bottom: 0;
 }
 
-.img_view{
-  padding-bottom: 15px;
-  img{
-      object-fit: cover;
-  }
+.img_view {
+    padding-bottom: 15px;
+    img {
+        object-fit: cover;
+    }
 }
 
 .element_wrap_str {
@@ -431,15 +456,13 @@ margin-right: 20px;
         margin-right: 15px;
         font-size: 1.4rem;
     }
-    input[name=email]{
+    input[name="email"] {
         width: 74%;
     }
 }
 
-
-
-.long{
-    width:290px;
+.long {
+    width: 290px;
 }
 
 .inner_element {
@@ -541,8 +564,6 @@ margin-right: 20px;
     flex-direction: column;
 }
 
-
-
 // エラーメッセージ
 .content_wrap {
     display: flex;
@@ -553,8 +574,9 @@ margin-right: 20px;
     display: flex;
     margin-right: 15px;
 }
-ul{
+ul {
     padding-left: 0;
+    list-style: none;
 }
 .error {
     color: #ff2e5a;
@@ -562,7 +584,6 @@ ul{
     text-align: left;
     list-style: none;
     display: block;
-
 }
 // 掲示板
 .header {
@@ -664,7 +685,6 @@ input[name="title"] {
 .block-b {
     padding: 20px 40px;
     max-width: 550px;
-
 }
 .block-a {
     width: 100%;
@@ -729,17 +749,17 @@ input[name="title"] {
     }
 }
 
-.search-wrap{
+.search-wrap {
     background: white;
     padding: 25px 30px;
     margin: 0px auto;
-    border :1px solid black;
+    border: 1px solid black;
 
-    label{
+    label {
         display: flex;
         justify-content: flex-start;
         input,
-        select{
+        select {
             margin-left: 15px;
         }
     }
@@ -747,7 +767,7 @@ input[name="title"] {
         background: white;
         display: block;
         margin: 0 auto;
-        &:hover{
+        &:hover {
             background: black;
             color: white;
         }

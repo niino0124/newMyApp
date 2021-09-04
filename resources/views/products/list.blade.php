@@ -19,9 +19,7 @@
         </div>
     </div>
 
-    @foreach ($products as $product)
-    <p>{{$product->name}}</p>
-    @endforeach
+
 
     <div class="man-body-tables">
         <form class="search-wrap" method="GET" action="{{route('product.list')}}">
@@ -53,26 +51,43 @@
 
 
         <ul class="product_lists">
+            @foreach ($products as $product)
             <li class="product">
-                <div class="product_header"><img src="" alt=""></div>
+                <div class="product_header"><img src="{{ '/storage/' .$product->image_1}}" alt="" width="100" height="100"></div>
                 <div class="product_body">
-                    <p class="cat">大カテゴリー＞小カテゴリー</p>
-                    <p class="product_name">商品名</p>
+                    <p class="cat">{{$product->product_category_id}}＞{{$product->product_subcategory_id}}</p>
+                    <p class="product_name">{{$product->name}}</p>
                 </div>
             </li>
+            @endforeach
         </ul>
-
+        {{ $products->onEachSide(1)->links() }}
 
         <ul class="example">
-            <li class=" t_next"><a class="" href="#">＜前へ</a></li>
-            <li class=""><a class=" this" href="#">1</a></li>
-            <li class=""><a class="" href="#">2</a></li>
-            <li class=""><a class="" href="#">3</a></li>
+            <li class="t_prev"><a class="" href="#">＜前へ</a></li>
+            <li class="mid"><a class=" this" href="#">1</a></li>
+            <li class="mid"><a class="" href="#">2</a></li>
+            <li class="mid"><a class="" href="#">3</a></li>
             <li class="t_next"><a class="" href="#">次へ＞</a></li>
         </ul>
 
+        {{-- <div class="pagination p12">
+            <ul>
+              <a href="#"><li>Previous</li></a>
+              <a href="#"><li>1</li></a>
+              <a href="#"><li>2</li></a>
+              <a href="#"><li>3</li></a>
+              <a class="is-active" href="#"><li>6</li></a>
+              <a href="#"><li>Next</li></a>
+            </ul>
+          </div>
+        </div> --}}
+
+
+
+
         <div class="btn-wrap">
-            <a href="/" class="btn btn-back-bl" s>トップに戻る</a>
+            <a href="/" class="btn btn-back-bl" >トップに戻る</a>
         </div>
 
     </div>
