@@ -202,8 +202,17 @@ class ProductController extends Controller
                 $product_subcategory_id = $request->input('product_subcategory_id');
 
                 // 検索フォーム
-                $query = DB::table('products');
-                // $query = Product::all();
+                $query = Product::query();
+                $query->select( 'name', 'product_category_id', 'product_subcategory_id','image_1');
+
+                // もしカテゴリが選択されていたらAND
+                if($product_category_id !== null){
+                    $query->where('product_category_id',$product_category_id);
+                };
+
+                if($product_subcategory_id !== null){
+                    $query->where('product_subcategory_id',$product_subcategory_id);
+                };
 
                 // もしキーワードがあったら
                 if($search !== null){
@@ -216,22 +225,17 @@ class ProductController extends Controller
                 //単語をループで回す
                     foreach($search_split2 as $value)
                     {
-                    $query->where('name','like','%'.$value.'%')->orWhere('product_content', 'like','%'.$value.'%')
-                    ;
+                    $query->where('name','LIKE','%'.$value.'%')
+                    ->orWhere('product_content', 'LIKE','%'.$value.'%');
                     }
                 };
 
-                if($product_category_id !== null){
-                    $query->where('product_category_id',$product_category_id);
-                };
 
-                if($product_subcategory_id !== null){
-                    $query->where('product_subcategory_id',$product_subcategory_id);
-                };
 
-                $query->select( 'name', 'product_category_id', 'product_subcategory_id','image_1');
                 $query->orderBy('created_at', 'desc');
                 $products = $query->paginate(10);
+
+                
 
                 $product_categories = ProductCategory::all();
                 $product_subcategories = ProductSubcategory::all();

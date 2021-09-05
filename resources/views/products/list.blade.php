@@ -61,7 +61,8 @@
             </li>
             @endforeach
         </ul>
-        {{ $products->links() }}
+        {{ $products->appends(request()->input())->links() }}
+        {{-- {{ $products->links() }} --}}
 
 
 
