@@ -62,7 +62,13 @@
 
 
         <div class="btn-wrap">
+            @auth
+            <a href="/home" class="btn btn-back-bl" >トップに戻る</a>
+            @endauth
+            @guest
             <a href="/" class="btn btn-back-bl" >トップに戻る</a>
+            @endguest
+
         </div>
 
     </div>
