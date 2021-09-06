@@ -16,9 +16,10 @@
             </div>
         </div>
     </div>
+
     <div class="man-body-tables">
 <div class="show_wrap">
-    <p>{{$product->product_category_id}} ＞ {{$product->product_subcategory_id}}</p>
+    <p>{{ $product->productCategory->name }} ＞ {{ $product->productSubcategory->name }}</p>
     <div class="name_wrap">
         <p class="name">{{$product->name}}</p>
         <p>更新日時：{{$product->created_at}}</p>
