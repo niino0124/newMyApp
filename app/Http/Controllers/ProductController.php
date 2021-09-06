@@ -199,10 +199,14 @@ class ProductController extends Controller
 
             // 一覧表示
             public function list(Request $request){
-
                 $search = $request->input('search');
                 $product_category_id = $request->input('product_category_id');
                 $product_subcategory_id = $request->input('product_subcategory_id');
+
+                dump('これがカテゴリ！！');
+                dump($product_category_id);
+                dump('これがサブカテゴリ！！');
+                dump($product_subcategory_id);
 
                  // 検索フォーム
                 $query = Product::query();
@@ -220,6 +224,7 @@ class ProductController extends Controller
 
                 }else{
                     dump('検索表示');
+
                     // もしカテゴリが選択されていたらAND
                     if($product_category_id !== '0'){
                         $query->where('product_category_id',$product_category_id);
@@ -250,7 +255,7 @@ class ProductController extends Controller
                 $query->orderBy('created_at', 'desc');
                 $products = $query->paginate(10);
 
-
+                dump($query->toSql(), $query->getBindings());
                 // カテゴリ検索のためにある
                 $product_categories = ProductCategory::all();
                 $product_subcategories = ProductSubcategory::all();
