@@ -186,72 +186,59 @@ class ProductController extends Controller
 
 
 
-
-
-
-
-
-
-
-
-
             // 一覧表示
             public function list(Request $request){
+
                 $search = $request->input('search');
                 $product_category_id = $request->input('product_category_id');
                 $product_subcategory_id = $request->input('product_subcategory_id');
 
-                // dd(getType($search),getType($product_category_id),getType($product_subcategory_id));
-                // この時点では三つの値が正確に取れている
-
-                // 検索フォーム
+                 // 検索フォーム
                 $query = Product::query();
-
-                // カテゴリnameを別のテーブルから持ってくるため
+                 // カテゴリnameを別のテーブルから持ってくるため
                 $query->with('productCategory');
                 $query->with('productSubcategory');
 
-                // どのカラムか
+                 // どのカラムか
                 $query->select( 'name', 'product_category_id', 'product_subcategory_id','image_1');
 
-                // もしカテゴリが選択されていたらAND
-                if($product_category_id !== '0'){
-                    $query->where('product_category_id',$product_category_id);
-                };
+
+                if($search == null && $product_category_id == null && $product_subcategory_id == null){
+                    dump('全件表示');
+                    $query->get();
+
+                }else{
+                    dump('検索表示');
+                    // もしカテゴリが選択されていたらAND
+                    if($product_category_id !== '0'){
+                        $query->where('product_category_id',$product_category_id);
+                    };
 
 
-                if($product_subcategory_id !== '0'){
-                    $query->where('product_subcategory_id',$product_subcategory_id);
-                };
+                    if($product_subcategory_id !== '0'){
+                        $query->where('product_subcategory_id',$product_subcategory_id);
+                    };
 
-                // もしキーワードがあったら
-                if($search !== null){
-                //全角スペースを半角に
-                    $search_split = mb_convert_kana($search,'s');
+                    // もしキーワードがあったら
+                    if($search !== null){
+                    //全角スペースを半角に
+                        $search_split = mb_convert_kana($search,'s');
 
-                //空白で区切る
-                    $search_split2 = preg_split('/[\s]+/', $search_split,-1,PREG_SPLIT_NO_EMPTY);
+                    //空白で区切る
+                        $search_split2 = preg_split('/[\s]+/', $search_split,-1,PREG_SPLIT_NO_EMPTY);
 
-                //単語をループで回す
-                    foreach($search_split2 as $value)
-                    {
-                    $query->where('name','LIKE','%'.$value.'%')
-                    ->orWhere('product_content', 'LIKE','%'.$value.'%');
-                    }
-                };
-
-
-
-// dd(getType($product_category_id),$product_subcategory_id,$search);
-
-// 検索条件を何も選択されないまま送信されてきたら全件表示を返す
-// if($product_category_id === '0' && $product_subcategory_id === '0' && $search === null){
-    //                     $query->orderBy('created_at', 'desc');
-
-    // }
+                    //単語をループで回す
+                        foreach($search_split2 as $value)
+                        {
+                        $query->where('name','LIKE','%'.$value.'%')
+                        ->orWhere('product_content', 'LIKE','%'.$value.'%');
+                        }
+                    };
+                }
 
                 $query->orderBy('created_at', 'desc');
                 $products = $query->paginate(10);
+
 
                 // カテゴリ検索のためにある
                 $product_categories = ProductCategory::all();

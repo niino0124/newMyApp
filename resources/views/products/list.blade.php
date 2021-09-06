@@ -62,13 +62,6 @@
             @endforeach
         </ul>
         {{ $products->appends(request()->input())->links() }}
-        {{-- {{ $products->links() }} --}}
-
-
-
-
-
-
 
 
         <div class="btn-wrap">
