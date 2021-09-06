@@ -52,9 +52,9 @@
             <li class="product">
                 <div class="product_header"><img src="{{ '/storage/' .$product->image_1}}" alt="" width="100" height="100"></div>
                 <div class="product_body">
-                    <p class="cat">{{ $product->productCategory->name }}＞{{ $product->productSubcategory->name }}</p>
-                    <p class="product_name">{{$product->name}}</p>
-                    <a href="{{route('product.show',['id' => $product->id])}}">詳細</a>
+                    <div class="left-block"><p class="cat">{{ $product->productCategory->name }}＞{{ $product->productSubcategory->name }}</p></div>
+                    <p class="product_name"><a href="{{route('product.show',['id' => $product->id])}}">{{$product->name}}</a></p>
+                    <button href="{{route('product.show',['id' => $product->id])}}" class="blue_btn">詳細</button>
                 </div>
             </li>
             @endforeach

@@ -8,50 +8,38 @@
             <p class="fw-bold">商品詳細</p>
             <div class="simple-wrap">
                 @auth
-                <a href="/home" class="btn btn-back-bl" >トップに戻る</a>
+                <a href="/home" class="btn-simple" >トップに戻る</a>
                 @endauth
                 @guest
-                <a href="/" class="btn btn-back-bl" >トップに戻る</a>
+                <a href="/" class="btn-simple" >トップに戻る</a>
                 @endguest
             </div>
         </div>
     </div>
     <div class="man-body-tables">
-        <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">番号</th>
-                <th scope="col">氏名</th>
-                <th scope="col">タイトル</th>
-                <th scope="col">メール</th>
-                <th scope="col">url</th>
-
-                <th scope="col">内容</th>
-                <th scope="col">作成日時</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{{$product->id}}
-                </td>
-                <td>{{$product->name}}</td>
-                <td>                    {{$product->created_at}}
-                </td>
-                <td>{{$product->image_1}}</td>
-                <td>{{$product->image_2}}</td>
-                <td>{{$product->product_content}}</td>
-                <td>{{$product->created_at}}</td>
-            </tr>
-            </tbody>
-          </table>
+<div class="show_wrap">
+    <p>{{$product->product_category_id}} ＞ {{$product->product_subcategory_id}}</p>
+    <div class="name_wrap">
+        <p class="name">{{$product->name}}</p>
+        <p>更新日時：{{$product->created_at}}</p>
+    </div>
+    <div class="img_wrap">
+        <div class="img_wrap_item"><img src="{{ '/storage/' .$product->image_1}}" alt="" width="100" height="100"></div>
+        <div class="img_wrap_item"><img src="{{ '/storage/' .$product->image_2}}" alt="" width="100" height="100"></div>
+    </div>
+    <div class="content_wrap">
+        <p>■商品説明</p>
+        <p>{{$product->product_content}}</p>
+    </div>
+</div>
 
 
 
 
 
 
-        <div class="btn-wrap">
-            <a href="{{url()->previous()}}" class="btn btn-back-bl" >商品一覧に戻る</a>
+        <div class="btn-wrap" >
+            <a href="{{url()->previous()}}" class="blue_btn_md">商品一覧に戻る</a>
         </div>
 
     </div>
