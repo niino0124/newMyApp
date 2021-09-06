@@ -203,6 +203,10 @@ class ProductController extends Controller
 
                 // 検索フォーム
                 $query = Product::query();
+                
+                $query->with('productCategory');
+                $query->with('productSubcategory');
+
                 $query->select( 'name', 'product_category_id', 'product_subcategory_id','image_1');
 
                 // もしカテゴリが選択されていたらAND
@@ -235,7 +239,7 @@ class ProductController extends Controller
                 $query->orderBy('created_at', 'desc');
                 $products = $query->paginate(10);
 
-                
+
 
                 $product_categories = ProductCategory::all();
                 $product_subcategories = ProductSubcategory::all();

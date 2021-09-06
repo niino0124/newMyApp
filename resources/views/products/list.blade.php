@@ -55,7 +55,7 @@
             <li class="product">
                 <div class="product_header"><img src="{{ '/storage/' .$product->image_1}}" alt="" width="100" height="100"></div>
                 <div class="product_body">
-                    <p class="cat">{{$product->product_category_id}}＞{{$product->product_subcategory_id}}</p>
+                    <p class="cat">{{ $product->productCategory->name }}＞{{ $product->productSubcategory->name }}</p>
                     <p class="product_name">{{$product->name}}</p>
                 </div>
             </li>
