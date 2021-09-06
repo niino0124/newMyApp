@@ -154,7 +154,7 @@
 
     <div class="btn-wrap">
         <input class="btn" type="submit" value="確認画面へ" />
-        <a href="/" class="btn btn-back">トップに戻る</a>
+        <a href="{{url()->previous()}}" class="btn btn-back">{{ $btn_back }}</a>
     </div>
 
 </form>

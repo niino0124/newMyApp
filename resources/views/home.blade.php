@@ -5,7 +5,7 @@
 <div class="blue-board ">
     <div class="header">
         <div class="simple-wrap_sb">
-            <p>{{ Auth::user()->name_sei }}{{ Auth::user()->name_mei }}様</p>
+            <p>ようこそ{{ Auth::user()->nickname }}様</p>
 <div class="simple-wrap">
     <a class="btn-simple" href="{{route('product.list')}}">
     商品一覧

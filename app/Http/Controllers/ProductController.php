@@ -26,6 +26,17 @@ class ProductController extends Controller
         $product_categories = ProductCategory::all();
         $product_subcategories = ProductSubcategory::all();
 
+
+        $prev_page_url = $_SERVER['HTTP_REFERER'];
+        if(strpos($prev_page_url,'list') !== false){
+            $btn_back = '商品一覧へ戻る';
+        }elseif(strpos($prev_page_url,'home') !== false){
+            $btn_back = 'トップへ戻る';
+        }
+
+        // "http://localhost/product/list"
+        // "http://localhost/home"
+
         // 確認画面から戻ってくる場合
         if (null !== old('product_category_id') ){
             $product_category_id = old('product_category_id');
@@ -38,7 +49,7 @@ class ProductController extends Controller
             return view('products.register',compact('product_categories','product_subcategories','old_product_subcategory_infos'));
         }
 
-        return view('products.register',compact('product_categories','product_subcategories'));
+        return view('products.register',compact('product_categories','product_subcategories','btn_back'));
     }
 
 
@@ -252,17 +263,12 @@ class ProductController extends Controller
                 // カテゴリが選択されていなければ、全サブカテゴリを表示
                 if($id == 0){
                     $product_subcategories = ProductSubcategory::get();
-                    // $product_subcategories = DB::table('product_subcategories')
-                    // ->get();
                 }
 
                 // 何らかのカテゴリが選択されてれば、特定のサブカテゴリを表示
                 if($id != 0){
                     $product_subcategories = ProductSubcategory::where('product_category_id',$id)
                     ->get();
-                    // $product_subcategories = DB::table('product_subcategories')
-                    // ->where('product_category_id',$id)
-                    // ->get();
                 }
 
                 return response()->json($product_subcategories);
