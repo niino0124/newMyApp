@@ -251,15 +251,18 @@ class ProductController extends Controller
             public function listAjax($id) {
                 // カテゴリが選択されていなければ、全サブカテゴリを表示
                 if($id == 0){
-                    $product_subcategories = DB::table('product_subcategories')
-                    ->get();
+                    $product_subcategories = ProductSubcategory::get();
+                    // $product_subcategories = DB::table('product_subcategories')
+                    // ->get();
                 }
 
                 // 何らかのカテゴリが選択されてれば、特定のサブカテゴリを表示
                 if($id != 0){
-                    $product_subcategories = DB::table('product_subcategories')
-                    ->where('product_category_id',$id)
+                    $product_subcategories = ProductSubcategory::where('product_category_id',$id)
                     ->get();
+                    // $product_subcategories = DB::table('product_subcategories')
+                    // ->where('product_category_id',$id)
+                    // ->get();
                 }
 
                 return response()->json($product_subcategories);
