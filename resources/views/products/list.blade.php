@@ -34,7 +34,7 @@
                 </select>
 
                 <select name="product_subcategory_id" id="product_subcategory_id">
-                    <option value="">サブカテゴリ</option>
+                    <option value="0">サブカテゴリ</option>
                     @foreach ($product_subcategories as $product_subcategory)
                     <option value="{{$product_category->id}}" @if(old('product_subcategory_id')==$product_subcategory->
                         id)

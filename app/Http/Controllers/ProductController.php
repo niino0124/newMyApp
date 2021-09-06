@@ -201,20 +201,26 @@ class ProductController extends Controller
                 $product_category_id = $request->input('product_category_id');
                 $product_subcategory_id = $request->input('product_subcategory_id');
 
+                // dd(getType($search),getType($product_category_id),getType($product_subcategory_id));
+                // この時点では三つの値が正確に取れている
+
                 // 検索フォーム
                 $query = Product::query();
-                
+
+                // カテゴリnameを別のテーブルから持ってくるため
                 $query->with('productCategory');
                 $query->with('productSubcategory');
 
+                // どのカラムか
                 $query->select( 'name', 'product_category_id', 'product_subcategory_id','image_1');
 
                 // もしカテゴリが選択されていたらAND
-                if($product_category_id !== null){
+                if($product_category_id !== '0'){
                     $query->where('product_category_id',$product_category_id);
                 };
 
-                if($product_subcategory_id !== null){
+
+                if($product_subcategory_id !== '0'){
                     $query->where('product_subcategory_id',$product_subcategory_id);
                 };
 
@@ -236,11 +242,18 @@ class ProductController extends Controller
 
 
 
+// dd(getType($product_category_id),$product_subcategory_id,$search);
+
+// 検索条件を何も選択されないまま送信されてきたら全件表示を返す
+// if($product_category_id === '0' && $product_subcategory_id === '0' && $search === null){
+    //                     $query->orderBy('created_at', 'desc');
+
+    // }
+
                 $query->orderBy('created_at', 'desc');
                 $products = $query->paginate(10);
 
-
-
+                // カテゴリ検索のためにある
                 $product_categories = ProductCategory::all();
                 $product_subcategories = ProductSubcategory::all();
 
