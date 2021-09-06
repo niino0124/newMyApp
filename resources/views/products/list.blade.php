@@ -7,14 +7,11 @@
         <div class="simple-wrap_sb">
             <p class="fw-bold">商品一覧</p>
             <div class="simple-wrap">
-
+                @auth
                 <a class="btn-simple" href="{{route('product.index')}}">
                     新規商品登録
                 </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                </form>
+                @endauth
             </div>
         </div>
     </div>
