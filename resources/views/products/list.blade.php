@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'トップページ（ログイン状態時）')
+@section('title', '商品一覧')
 @section('content')
 
 <div class="blue-board ">
@@ -54,6 +54,7 @@
                 <div class="product_body">
                     <p class="cat">{{ $product->productCategory->name }}＞{{ $product->productSubcategory->name }}</p>
                     <p class="product_name">{{$product->name}}</p>
+                    <a href="{{route('product.show',['id' => $product->id])}}">詳細</a>
                 </div>
             </li>
             @endforeach

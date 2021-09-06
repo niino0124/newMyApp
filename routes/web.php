@@ -46,7 +46,11 @@ Route::group(['prefix' => 'product' , 'middleware' => 'auth'],function(){
 
     Route::get('product/list', 'ProductController@list')->name('product.list');
     Route::get('product/list/{id}', 'ProductController@listAjax');
-    
+
+// 個別詳細ページ
+    Route::get('product/show/{id}', 'ProductController@show')->name('product.show');
+
+
 // Route::get('product-register', 'ProductController@showRegistrationForm')->name('product.resister_show');
 // Route::post('product-register', 'ProductController@validation')->name('product.validation');
 

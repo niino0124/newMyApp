@@ -79,10 +79,6 @@ class ProductController extends Controller
         $image_1 = $request->image_1;
         $image_2 = $request->image_2;
 
-
-
-
-
     if(is_null($image_1)){
         // NULLなら
         $path1 = NULL;
@@ -101,10 +97,6 @@ class ProductController extends Controller
             $path1 = $image_1;
             dump($path1);
         }
-
-
-
-
 
 
     if(is_null($image_2)){
@@ -203,10 +195,7 @@ class ProductController extends Controller
                 $product_category_id = $request->input('product_category_id');
                 $product_subcategory_id = $request->input('product_subcategory_id');
 
-                dump('これがカテゴリ！！');
-                dump($product_category_id);
-                dump('これがサブカテゴリ！！');
-                dump($product_subcategory_id);
+
 
                  // 検索フォーム
                 $query = Product::query();
@@ -215,7 +204,7 @@ class ProductController extends Controller
                 $query->with('productSubcategory');
 
                  // どのカラムか
-                $query->select( 'name', 'product_category_id', 'product_subcategory_id','image_1');
+                $query->select( 'name', 'product_category_id', 'product_subcategory_id','image_1','id');
 
 
                 if($search == null && $product_category_id == null && $product_subcategory_id == null){
@@ -255,7 +244,7 @@ class ProductController extends Controller
                 $query->orderBy('created_at', 'desc');
                 $products = $query->paginate(10);
 
-                dump($query->toSql(), $query->getBindings());
+                // dump($query->toSql(), $query->getBindings());
                 // カテゴリ検索のためにある
                 $product_categories = ProductCategory::all();
                 $product_subcategories = ProductSubcategory::all();
@@ -277,6 +266,14 @@ class ProductController extends Controller
                 }
 
                 return response()->json($product_subcategories);
+            }
+
+            public function show($id)
+            {
+                $product = Product::find($id);
+
+                return view('products.show',compact('product'));
+
             }
 
 }
