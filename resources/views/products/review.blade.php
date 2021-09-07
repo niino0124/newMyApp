@@ -32,7 +32,7 @@
             </li>
         </ul>
 
-        <form method="post" action="{{ route('product.review-confirm',['id' => $product->id]) }}">
+        <form method="POST" action="{{ route('product.review-confirm') }}">
             @csrf
             <div class="element_wrap_str_review">
                     <label for="evaluation" class="evaluation">商品評価</label>
@@ -40,13 +40,13 @@
                     <div class="cp_ipselect cp_sl02">
                         <select required name="evaluation">
                             <option value="" hidden>選択してください</option>
-                            <option value="5">5</option>
-                            <option value="4">4</option>
-                            <option value="3">3</option>
-                            <option value="2">2</option>
-                            <option value="1">1</option>
+                            <option value="5" @if(old('evaluation')=='5') selected  @endif>5</option>
+                            <option value="4" @if(old('evaluation')=='4') selected  @endif>4</option>
+                            <option value="3" @if(old('evaluation')=='3') selected  @endif>3</option>
+                            <option value="2" @if(old('evaluation')=='2') selected  @endif>2</option>
+                            <option value="1" @if(old('evaluation')=='1') selected  @endif>1</option>
                         </select>
-                        </div>
+                    </div>
 
                             @error('evaluation')
                             <span class="invalid-feedback" role="alert">
@@ -66,6 +66,9 @@
                     @enderror
                 </div>
             </div>
+            <input hidden value="{{$product->image_1}}" name="image_1">
+            <input hidden value="{{$product->name}}" name="name">
+            <input hidden value="{{$product->id}}" name="product_id">
             {{-- ブルー --}}
             <div class="btn-wrap" >
                 <input  class="btn_b" type="submit" value="商品レビュー登録確認">

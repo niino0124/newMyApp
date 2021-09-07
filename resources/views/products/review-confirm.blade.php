@@ -22,29 +22,34 @@
 
         <ul class="product_lists" style="border-top:none;">
             <li class="product" style="align-items:flex-start;">
-                <div class="product_header"><img src="{{ '/storage/' .$product->image_1}}" alt="" width="100" height="100"></div>
+                <div class="product_header"><img src="{{ '/storage/' . $input_data['image_1']}}" alt="" width="100" height="100"></div>
                 <div class="product_body">
                     <div class="left-block">
-                        <p class="product_name" style="color: black;">{{$product->name}}</p>
+                        <p class="product_name" style="color: black;">{{ $input_data['name'] }}</p>
                         <p class="product_star">総合評価　★★★　３</p>
                     </div>
                 </div>
             </li>
         </ul>
 
-        <form method="post" action="{{ route('product.review-store',['id' => $product->id]) }}">
+        <form method="post" action="{{ route('product.review-store') }}">
             @csrf
             <div class="element_wrap_str_review">
                     <label for="evaluation" class="evaluation">商品評価</label>
-                <p>{{ $request->evaluation }}</p>
+                <p>{{ $input_data['evaluation'] }}</p>
             </div>
 
             <div class="element_wrap_fill_no_margin">
                 <label for="comment">商品コメント</label>
                 <div class="content-wrap">
-                    {{ $request->comment }}
+                    {{ $input_data['comment'] }}
                 </div>
             </div>
+            <input hidden value="{{$input_data['image_1']}}" name="image_1">
+            <input hidden value="{{ $input_data['name'] }}" name="name">
+            <input hidden value="{{ $input_data['product_id'] }}" name="product_id">
+            <input hidden value="{{$input_data['comment']}}" name="comment">
+            <input hidden value="{{$input_data['evaluation']}}" name="evaluation">
             {{-- ブルー --}}
             <div class="btn-wrap" >
                 <input href="" class="btn_b" value="登録する" type="submit">

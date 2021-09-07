@@ -273,67 +273,60 @@ class ProductController extends Controller
                 return response()->json($product_subcategories);
             }
 
+            // 個別ページ
             public function show($id)
             {
                 $product = Product::find($id);
-
                 return view('products.show',compact('product'));
-
             }
 
+            // レビュー作成ページ
             public function review($id)
             {
                 $product = Product::find($id);
                 return view('products.review',compact('product'));
             }
 
-            // 確認ボタンを押したら
-            public function reviewConfirm(StoreReviewForm $request ,$id)
+            // 確認ボタンを押した時の処理
+            public function reviewConfirm(StoreReviewForm $request)
             {
-                $product = Product::find($id);
-                $input = $request->all();
+                $name = $request->name;
+                $image_1 = $request->image_1;
+                $comment = $request->comment;
+                $evaluation = $request->evaluation;
+                $product_id = $request->product_id;
+                
+                // dd($name,$image_1,$comment,$evaluation);
 
-                //セッションに書き込む
-                $request->session()->put("form_input", $input);
+                // 確認画面に表示する値を格納
+                $input_data = [
+                    'name' => $name,
+                    'image_1' => $image_1,
+                    'comment' => $comment,
+                    'evaluation' => $evaluation,
+                    'product_id' => $product_id
+                ];
 
-                //セッションに値が無い時はフォームに戻る
-                if (!$request) {
-                    return redirect()->action('product.review');
-                }
-// dd($product,$request);
-                //セッションに書き込んだ内容を確認画面に表示
-                return view('products.review-confirm',compact('product','request'));
+                return view('products.review-confirm',compact('input_data'));
             }
 
-            public function reviewStore(Request $request ,$id)
+            public function reviewStore(Request $request )
             {
-                $product = Product::find($id);
-
-                //セッションから値を取り出す
-                $request = $request->session()->get("form_input");
-
-                // dd($request);
-                // 戻るボタン
-                if ($request->has("back")) {
-                    return redirect()->action($this->form_show)
-                        ->withInput($request)
-                    ;
+                // dd($request->product_id);
+                $id = $request->product_id;
+                // 戻るボタンが押された場合
+                if ($request->get('back')) {
+                    return redirect()->route('product.review', ['id' => $id])
+                    ->withInput();
                 }
-                // if ($request->has("back")) {
-                //     return redirect('product/review', [
-                //     'id' => $id])
-                //     ->compact('request','product');
-                // }
-                // if ($request->has("back")) {
-                //     return redirect()->action($this->form_show)
-                //         ->withInput($input);
-                // }
+
+
 
                 $post = new Review;
 
                 // 現在認証しているユーザーのIDを代入
                 $post->member_id =  auth()->id();
-                $post->product_id = $product->id;
+                $post->product_id = $request['id'];
                 $post->evaluation = $request['evaluation'];
                 $post->comment = $request['comment'];
 

@@ -43,8 +43,8 @@ Route::group(['prefix' => 'product' , 'middleware' => 'auth'],function(){
 
 // レビュー登録ページ
     Route::get('product/review/{id}', 'ProductController@review')->name('product.review');
-    Route::post('product/review/confirm/{id}', 'ProductController@reviewConfirm')->name('product.review-confirm');
-    Route::post('product/review/store/{id}', 'ProductController@reviewStore')->name('product.review-store');
+    Route::post('product/review/confirm', 'ProductController@reviewConfirm')->name('product.review-confirm');
+    Route::post('product/review/store', 'ProductController@reviewStore')->name('product.review-store');
 
  
 
