@@ -34,6 +34,9 @@ class Member extends Authenticatable
     public function products(){
         return $this->hasMany('App\Product');
     }
+    public function reviews(){
+        return $this->hasMany('App\Review');
+    }
 
     public function sendPasswordResetNotification($token){
         $this->notify(new CustomResetPassword($token));

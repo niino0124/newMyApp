@@ -7,7 +7,9 @@ use App\Product;
 use Illuminate\Support\Facades\DB;
 use App\ProductCategory;
 use App\ProductSubcategory;
+use App\Review;
 use App\Http\Requests\StoreProductForm;
+use App\Http\Requests\StoreReviewForm;
 
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -20,6 +22,9 @@ use App\Models\UploadImage;
 
 class ProductController extends Controller
 {
+
+    private $form_show = 'ProductController@review';
+
     // 登録画面表示
     public function index(){
         // カテゴリは全て選択可能
@@ -275,5 +280,74 @@ class ProductController extends Controller
                 return view('products.show',compact('product'));
 
             }
+
+            public function review($id)
+            {
+                $product = Product::find($id);
+                return view('products.review',compact('product'));
+            }
+
+            // 確認ボタンを押したら
+            public function reviewConfirm(StoreReviewForm $request ,$id)
+            {
+                $product = Product::find($id);
+                $input = $request->all();
+
+                //セッションに書き込む
+                $request->session()->put("form_input", $input);
+
+                //セッションに値が無い時はフォームに戻る
+                if (!$request) {
+                    return redirect()->action('product.review');
+                }
+// dd($product,$request);
+                //セッションに書き込んだ内容を確認画面に表示
+                return view('products.review-confirm',compact('product','request'));
+            }
+
+            public function reviewStore(Request $request ,$id)
+            {
+                $product = Product::find($id);
+
+                //セッションから値を取り出す
+                $request = $request->session()->get("form_input");
+
+                // dd($request);
+                // 戻るボタン
+                if ($request->has("back")) {
+                    return redirect()->action($this->form_show)
+                        ->withInput($request)
+                    ;
+                }
+                // if ($request->has("back")) {
+                //     return redirect('product/review', [
+                //     'id' => $id])
+                //     ->compact('request','product');
+                // }
+                // if ($request->has("back")) {
+                //     return redirect()->action($this->form_show)
+                //         ->withInput($input);
+                // }
+
+                $post = new Review;
+
+                // 現在認証しているユーザーのIDを代入
+                $post->member_id =  auth()->id();
+                $post->product_id = $product->id;
+                $post->evaluation = $request['evaluation'];
+                $post->comment = $request['comment'];
+
+
+                $post->save();
+
+                $request->session()->forget("form_input");
+
+
+                // 会員トップへ戻る
+                return view('products.review-complete');
+
+            }
+
+
 
 }

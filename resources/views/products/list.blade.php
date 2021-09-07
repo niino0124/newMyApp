@@ -54,6 +54,7 @@
                 <div class="product_body">
                     <div class="left-block"><p class="cat">{{ $product->productCategory->name }}＞{{ $product->productSubcategory->name }}</p></div>
                     <p class="product_name"><a href="{{route('product.show',['id' => $product->id])}}">{{$product->name}}</a></p>
+                    <p class="product_star">★★★　３</p>
                     <a href="{{route('product.show',['id' => $product->id])}}" class="blue_btn">詳細</a>
                 </div>
             </li>

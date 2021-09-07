@@ -111,44 +111,42 @@ form {
     padding: 40px 25px 50px;
 }
 
-.show_wrap{
+.show_wrap {
     padding: 0px 40px;
     text-align: left;
 
-    .name_wrap{
+    .name_wrap {
         display: flex;
-        align-items:center;
+        align-items: center;
         margin-top: 20px;
 
-        .name{
+        .name {
             font-weight: bold;
             margin-right: 50px;
             font-size: 1.8rem;
         }
 
-        p+p{
+        p + p {
             font-size: 1.3rem;
         }
-
     }
 
-    .img_wrap{
+    .img_wrap {
         display: flex;
         margin-top: 20px;
 
-        .img_wrap_item{
+        .img_wrap_item {
             margin-right: 10px;
         }
     }
 
-    .content_wrap{
+    .content_wrap {
         margin-top: 20px;
 
-        p+p{
+        p + p {
             margin-top: 10px;
         }
     }
-
 }
 
 .man-name {
@@ -244,7 +242,6 @@ form {
                 background: white;
                 padding: 2px 4px;
                 border: 1px solid;
-
             }
 
             .product_name {
@@ -252,10 +249,15 @@ form {
                 margin-top: 15px;
                 color: blue;
 
-                &:hover{
-                    opacity:.7;
+                &:hover {
+                    opacity: 0.7;
                     cursor: pointer;
                 }
+            }
+            .product_star {
+                text-align: left;
+                margin-top: 15px;
+                color: black;
             }
         }
     }
@@ -437,7 +439,7 @@ select {
     margin-right: 20px;
 }
 
-// 確認画面
+// inputラップ集
 .element_wrap {
     display: flex;
     justify-content: space-between;
@@ -451,6 +453,25 @@ select {
         font-size: 1.4rem;
         display: inline-block;
         margin: 0;
+    }
+}
+
+.element_wrap_fill {
+    @extend .element_wrap;
+
+    label {
+        font-size: 1.4rem;
+    }
+
+    input[name="email"] {
+        width: 74%;
+    }
+}
+
+.element_wrap_fill_no_margin {
+    @extend .element_wrap_fill;
+    label {
+        margin-right: 0;
     }
 }
 
@@ -503,17 +524,17 @@ select {
         text-align: left;
     }
 }
-.element_wrap_fill {
-    display: flex;
-    justify-content: space-between;
-    margin: 0px auto 15px;
 
+.element_wrap_str_review {
+    @extend .element_wrap_str;
     label {
-        margin-right: 15px;
-        font-size: 1.4rem;
+        margin-right: 0px;
+        @include mq(sm) {
+            margin-right: 0px;
+        }
     }
-    input[name="email"] {
-        width: 74%;
+    select {
+        width: 100px;
     }
 }
 
@@ -525,7 +546,7 @@ select {
     margin-right: 20px !important;
 }
 
-// ここから
+// 基本ボタン集
 .btn {
     box-sizing: border-box;
     width: 210px;
@@ -551,6 +572,21 @@ select {
     }
 }
 
+.btn_b {
+    @extend .btn;
+    background: #486693;
+    border-color: #486693;
+    font-size: 1.4rem;
+    padding: 8px 20px;
+
+    &:hover,
+    &:focus {
+        color: #486693;
+        background: white;
+        border: 1px solid #486693;
+    }
+}
+
 .btn-back {
     text-decoration: none;
     background: white;
@@ -562,15 +598,26 @@ select {
         color: white;
     }
 }
+
+.btn-back_b {
+    @extend .btn-back;
+    color: #486693;
+    border: #486693 solid 1px;
+
+    &:hover,
+    &:focus {
+        background: #486693;
+    }
+}
+
+// 中サイズボタン集
 .btn-back-bl {
-    text-decoration: none;
-    background: white;
+    @extend .btn-back;
     color: blue;
     border: blue solid 1px;
     &:hover,
     &:focus {
         background: blue;
-        color: white;
     }
 }
 
@@ -592,12 +639,12 @@ select {
     font-size: 1.3rem;
     margin-left: auto;
 
-&:hover{
-    opacity: .7;
-}
+    &:hover {
+        opacity: 0.7;
+    }
 }
 
-.blue_btn_md{
+.blue_btn_md {
     margin-top: 20px;
     border: solid rgb(72, 102, 147) 1px;
     border-radius: 7px;
@@ -609,10 +656,21 @@ select {
     margin-left: auto;
     font-size: 1.2rem;
 
-&:hover{
-    opacity: .8;
-    color:white;
+    &:hover {
+        opacity: 0.8;
+        color: white;
+    }
 }
+
+.blue_btn_md_con {
+    @extend .blue_btn_md;
+    width: 250px;
+    color: rgb(72, 102, 147);
+    background: white;
+
+    &:hover {
+        color: rgb(72, 102, 147);
+    }
 }
 
 .admin_regist {
@@ -992,6 +1050,7 @@ table {
         float: right;
     }
 }
+
 h1 {
     margin-bottom: 0;
     font-size: 2rem;
@@ -1020,81 +1079,6 @@ h1 {
     font-size: 1.6rem;
     line-height: 1.7;
     text-align: left;
-}
-
-// ページチェンジ矢印
-.page-change {
-    display: flex;
-    justify-content: space-between;
-    font-size: 1.6rem;
-    margin: 25px auto;
-    list-style: none;
-    padding-left: 0px !important;
-
-    a {
-        text-decoration: none;
-        color: black;
-        font-weight: bold;
-        &:hover {
-            opacity: 0.6;
-        }
-    }
-
-    .gray {
-        color: gray;
-    }
-}
-
-// 皆さんのコメント
-.vertical-posts {
-    list-style: none;
-    text-align: left;
-    padding: 0;
-}
-
-.vertical-posts__item {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid gray;
-
-    &:first-child {
-        padding-top: 0;
-    }
-    p {
-        font-size: 1.6rem;
-        display: inline-block;
-        margin: 0px 5px 0px 0px;
-    }
-}
-
-.vertical-posts__header {
-    margin-bottom: 10px;
-}
-
-.vertical-posts__title {
-    display: flex;
-    align-items: center;
-    p {
-        display: inline-block;
-        width: 75%;
-    }
-}
-// ライクボタン
-
-.fas {
-    color: rgb(252, 32, 72);
-    font-size: 3rem;
-}
-
-.far {
-    color: black;
-    font-size: 3rem;
-}
-
-.sum_like {
-    padding-left: 5px;
-    display: inline-block;
-    width: 10px !important;
 }
 
 // 退会
@@ -1171,4 +1155,67 @@ a.page_number:visited {
 // 追加
 .double_col {
     display: flex;
+}
+
+.cp_ipselect {
+    overflow: hidden;
+    width: 150px;
+    // margin: 2em auto;
+    text-align: center;
+}
+.cp_ipselect select {
+    width: 100%;
+    padding-right: 1em;
+    cursor: pointer;
+    text-indent: 0.01px;
+    text-overflow: ellipsis;
+    border: none;
+    outline: none;
+    background: transparent;
+    background-image: none;
+    box-shadow: none;
+    -webkit-appearance: none;
+    appearance: none;
+    position: relative;
+    top: 2px;
+    left:2px;
+}
+.cp_ipselect select::-ms-expand {
+    display: none;
+}
+.cp_ipselect.cp_sl02 {
+    position: relative;
+    border: 1px solid black;
+    border-radius: 2px;
+    background: #ffffff;
+}
+.cp_ipselect.cp_sl02::before {
+    position: absolute;
+    top: 0.9em;
+    right: 0.8em;
+    content: "";
+    pointer-events: none;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 8.7px 5px 0 5px;
+    border-color: black transparent transparent transparent;
+    // width: 0;
+    // height: 0;
+    // padding: 0;
+    // border-left: 10px solid transparent;
+    // border-right: 10px solid transparent;
+    // border-top: 10px solid black;
+}
+.cp_ipselect.cp_sl02:after {
+    position: absolute;
+    top: 0;
+    right: 2.5em;
+    bottom: 0;
+    width: 2px;
+    content: "";
+    border-left: 1px solid black;
+}
+.cp_ipselect.cp_sl02 select {
+    color: black;
 }
