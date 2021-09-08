@@ -51,7 +51,7 @@ class ProductController extends Controller
             return view('products.register',compact('product_categories','product_subcategories','old_product_subcategory_infos'));
         }
 
-        return view('products.register',compact('product_categories','product_subcategories','btn_back'));
+        return view('products.register',compact('product_categories','product_subcategories'));
     }
 
 
@@ -80,6 +80,8 @@ class ProductController extends Controller
         $input = $request->except('image_1','image_2');
         $image_1 = $request->image_1;
         $image_2 = $request->image_2;
+
+        dd($image_1);
 
     if(is_null($image_1)){
         // NULLなら

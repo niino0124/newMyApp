@@ -151,7 +151,8 @@
 
     <div class="btn-wrap">
         <input class="btn" type="submit" value="確認画面へ" />
-        <a href="{{url()->previous()}}" class="btn btn-back">{{ $btn_back }}</a>
+        <a href="{{url()->previous()}}" class="btn btn-back">戻る</a>
+        {{-- <a href="{{url()->previous()}}" class="btn btn-back">{{ $btn_back }}</a> --}}
     </div>
 
 </form>
@@ -271,7 +272,7 @@
                 })
 
             }).fail(function () {
-                console.log('どんまい！');
+                console.log('どんまい！!');
             });
     });
     });
