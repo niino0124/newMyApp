@@ -7,12 +7,7 @@
         <div class="simple-wrap_sb">
             <p class="fw-bold">商品レビュー登録確認</p>
             <div class="simple-wrap">
-                @auth
                 <a href="/home" class="btn-simple" >トップに戻る</a>
-                @endauth
-                @guest
-                <a href="/" class="btn-simple" >トップに戻る</a>
-                @endguest
             </div>
         </div>
     </div>
@@ -39,7 +34,7 @@
                 <p>{{ $input_data['evaluation'] }}</p>
             </div>
 
-            <div class="element_wrap_fill_no_margin">
+            <div class="element_wrap_str_review">
                 <label for="comment">商品コメント</label>
                 <div class="content-wrap">
                     {{ $input_data['comment'] }}

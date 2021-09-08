@@ -137,6 +137,9 @@ form {
 
         .img_wrap_item {
             margin-right: 10px;
+            img{
+                object-fit: cover;
+            }
         }
     }
 
@@ -262,6 +265,39 @@ form {
         }
     }
 }
+
+.product_top {
+    @extend .product_lists;
+    border: none;
+    margin-top: 0px;
+    .product {
+        border-bottom:none;
+        padding: 0px;
+
+        .product_body {
+            p {
+                font-size: 1.5rem !important;
+            }
+
+            .product_name {
+                margin-top: 0px;
+                color: black;
+
+                &:hover {
+                    opacity: 1;
+                    cursor: auto;
+                }
+            }
+        }
+    }
+
+
+    .product_star,
+    .product_name{
+        font-size: 1.8rem;
+    }
+}
+
 .product_header {
     width: 100px;
     height: 100px;
@@ -270,6 +306,22 @@ form {
         width: 100px;
         height: 100px;
         object-fit: cover;
+    }
+}
+
+.comment_header {
+    width: 130px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: left;
+    p {
+        font-weight: bold;
+        font-size: 1.4em;
+    }
+
+    p + p {
+        margin-top: 10px;
     }
 }
 
@@ -1178,7 +1230,7 @@ a.page_number:visited {
     appearance: none;
     position: relative;
     top: 2px;
-    left:2px;
+    left: 2px;
 }
 .cp_ipselect select::-ms-expand {
     display: none;

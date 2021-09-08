@@ -7,12 +7,7 @@
         <div class="simple-wrap_sb">
             <p class="fw-bold">商品レビュー登録</p>
             <div class="simple-wrap">
-                @auth
                 <a href="/home" class="btn-simple" >トップに戻る</a>
-                @endauth
-                @guest
-                <a href="/" class="btn-simple" >トップに戻る</a>
-                @endguest
             </div>
         </div>
     </div>

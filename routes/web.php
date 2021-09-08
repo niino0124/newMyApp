@@ -32,6 +32,13 @@ Route::group(['prefix' => 'product' , 'middleware' => 'auth'],function(){
     Route::post('create','ProductController@create')->name('product.create');
     Route::get('confirm','ProductController@confirm')->name('product.confirm');
     Route::post('store','ProductController@store')->name('product.store');
+
+    // レビュー登録ページ
+    Route::get('review/{id}', 'ProductController@review')->name('product.review');
+    Route::post('review/confirm', 'ProductController@reviewConfirm')->name('product.review-confirm');
+    Route::post('review/store', 'ProductController@reviewStore')->name('product.review-store');
+    Route::get('review/complete', 'ProductController@reviewComplete')->name('product.review-complete');
+
     });
 
 // 商品一覧ページ
@@ -41,18 +48,10 @@ Route::group(['prefix' => 'product' , 'middleware' => 'auth'],function(){
 // 個別詳細ページ
     Route::get('product/show/{id}', 'ProductController@show')->name('product.show');
 
-// レビュー登録ページ
-    Route::get('product/review/{id}', 'ProductController@review')->name('product.review');
-    Route::post('product/review/confirm', 'ProductController@reviewConfirm')->name('product.review-confirm');
-    Route::post('product/review/store', 'ProductController@reviewStore')->name('product.review-store');
+// 商品レビュー一覧ページ
+    Route::get('product/review-archive/{id}', 'ProductController@reviewArchive')->name('product.review-archive');
 
- 
 
-// Route::get('product-register', 'ProductController@showRegistrationForm')->name('product.resister_show');
-// Route::post('product-register', 'ProductController@validation')->name('product.validation');
-
-// Route::get('product-register/confirm', "ProductController@confirm")->name('product.confirm');
-// Route::post('product-register/confirm', "ProductController@send")->name('product.send');
 
 
 

@@ -277,7 +277,15 @@ class ProductController extends Controller
             public function show($id)
             {
                 $product = Product::find($id);
-                return view('products.show',compact('product'));
+
+                $evaluations = Review::where('product_id',$id)
+                ->select('evaluation')
+                ->get();
+
+                $avg = $evaluations->avg('evaluation');
+                $avg = ceil($avg);
+
+                return view('products.show',compact('product','avg'));
             }
 
             // レビュー作成ページ
@@ -296,7 +304,6 @@ class ProductController extends Controller
                 $evaluation = $request->evaluation;
                 $product_id = $request->product_id;
                 
-                // dd($name,$image_1,$comment,$evaluation);
 
                 // 確認画面に表示する値を格納
                 $input_data = [
@@ -310,37 +317,43 @@ class ProductController extends Controller
                 return view('products.review-confirm',compact('input_data'));
             }
 
+
+
             public function reviewStore(Request $request )
             {
-                // dd($request->product_id);
                 $id = $request->product_id;
-                // 戻るボタンが押された場合
+
                 if ($request->get('back')) {
                     return redirect()->route('product.review', ['id' => $id])
                     ->withInput();
                 }
 
-
-
                 $post = new Review;
 
                 // 現在認証しているユーザーのIDを代入
                 $post->member_id =  auth()->id();
-                $post->product_id = $request['id'];
+                $post->product_id = $id;
                 $post->evaluation = $request['evaluation'];
                 $post->comment = $request['comment'];
 
-
                 $post->save();
-
-                $request->session()->forget("form_input");
-
-
-                // 会員トップへ戻る
-                return view('products.review-complete');
-
+                // 完了ページを表示
+                return view('products.review-complete',compact('id'));
             }
 
+            // 商品レビュー一覧
+            public function reviewArchive($id)
+            {
+                $product = Product::find($id);
 
+                $reviews = Review::where('product_id',$id)
+                ->with('member')
+                ->paginate(5);
+
+                $avg = $reviews->avg('evaluation');
+                $avg = ceil($avg);
+
+                return view('products.review-archive',compact('product','avg','reviews'));
+            }
 
 }

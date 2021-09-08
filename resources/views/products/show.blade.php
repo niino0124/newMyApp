@@ -34,8 +34,8 @@
     </div>
     <div class="content_wrap">
         <p>■商品レビュー</p>
-        <p>総合評価　★★★　３</p>
-        <p><a href=""> ＞＞レビューを見る</a></p>
+        <p>総合評価　@for($i = 0; $i < $avg; $i++)★@endfor {{ $avg }}</p>
+        <p><a href="{{route('product.review-archive',['id' => $product->id])}}"> ＞＞レビューを見る</a></p>
     </div>
 </div>
 
@@ -46,9 +46,8 @@
 
         <div class="btn-wrap" >
             <a href="{{ route('product.review',['id' => $product->id]) }}" class="blue_btn_md_con">この商品についてのレビューを登録</a>
-            <a href="{{url()->previous()}}" class="blue_btn_md">商品一覧に戻る</a>
+            <a href="{{route('product.list')}}" class="blue_btn_md">商品一覧に戻る</a>
         </div>
-
     </div>
 </div>
 
