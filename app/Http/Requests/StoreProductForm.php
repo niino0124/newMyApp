@@ -31,9 +31,8 @@ class StoreProductForm extends FormRequest
             // "image_4" => "image|mimes:jpeg,png,jpg,gif|max:10240|nullable",
             "product_category_id" => "required|integer",
             "product_subcategory_id" => "required|integer",
-            "image_1" => "max:10240|nullable",
-            "image_2" => "max:10240|nullable",
-            // "image_1" => "mimes:jpeg,png,jpg,gif|max:10000|nullable",
+            // "image_1" => "max:10240|nullable",
+            // "image_2" => "max:10240|nullable",
         ];
     }
 
@@ -45,8 +44,8 @@ class StoreProductForm extends FormRequest
     public function messages()
     {
         return [
-            'image_1.max' => '10MBを超えるファイルはアップロードできません。',
-            'image_1.mimes' => '指定のファイル形式以外は添付できません。',
+            // 'image_1.max' => '10MBを超えるファイルはアップロードできません。',
+            // 'image_1.mimes' => '指定のファイル形式以外は添付できません。',
         ];
     }
 }

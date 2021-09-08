@@ -23,7 +23,6 @@ use App\Models\UploadImage;
 class ProductController extends Controller
 {
 
-    private $form_show = 'ProductController@review';
 
     // 登録画面表示
     public function index(){
@@ -39,8 +38,6 @@ class ProductController extends Controller
             $btn_back = 'トップへ戻る';
         }
 
-        // "http://localhost/product/list"
-        // "http://localhost/home"
 
         // 確認画面から戻ってくる場合
         if (null !== old('product_category_id') ){

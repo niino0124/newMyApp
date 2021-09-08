@@ -457,6 +457,9 @@ input[type="file"] {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
+    img{
+        object-fit: cover;
+    }
 }
 .file_design {
     position: relative;

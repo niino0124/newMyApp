@@ -498,6 +498,11 @@ input[type="file"] {
   margin-bottom: 15px;
 }
 
+.view_box img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .file_design {
   position: relative;
   display: inline-block;

@@ -24,7 +24,6 @@
                 <div style="display: flex;
             flex-direction: column">
                     <select name="product_category_id" id="product_category_id">
-
                         <option value="0">選択してください</option>
                         @foreach ($product_categories as $product_category)
                         <option value="{{$product_category->id}}" @if(old('product_category_id')==$product_category->id)
@@ -98,7 +97,7 @@
     <div class="element_wrap_v">
         <label for="product_category" class="product_category"><label for="name">商品写真</label>
 
-        <div class="pics_wrap">
+            <div class="pics_wrap">
                 <div class="view_box">
                     <label class="img_label">写真１
                         @if(null != old('path1'))
@@ -109,9 +108,7 @@
                     </label>
                     <div class="originalFileBtn">
                         アップロード
-                        {{-- <input  name="image_1" type="file" class="image_1"> --}}
                         <input class="file" name="image_1" type="file">
-
                     </div>
                     @error('image_1')
                     <span class="invalid-feedback " role="alert">
@@ -203,18 +200,6 @@
             }else{
             $(this).parent().siblings('.j_message').find('.error2').remove();
             }
-
-
-
-            // if (type != 'image/jpeg' && type != 'image/gif' && type != 'image/png' && type != 'image/jpeg') {
-            //     $(this).parent().siblings('.j_message').append(error2);
-            // // 作業打ち切り！
-            // console.log('ここ');
-            // return false;
-            // } else if(type == 'image/jpeg' || type == 'image/gif' || type == 'image/png' || type == 'image/jpeg') {
-            //     $(this).parent().siblings('.j_message').find('.error2').remove();
-            //     console.log('ここ２');
-            // }
 
 
         var img = '<div class="img_view"><img alt="" class="img"  width="150" height="150"></div>';
