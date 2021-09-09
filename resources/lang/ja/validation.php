@@ -53,7 +53,7 @@ return [
     'json'                 => '※:attributeには正しい形式のJSON文字列を指定してください。',
     'max'                  => [
         'numeric' => '※:attributeには:max以下の数値を指定してください。',
-        'file'    => '※:attributeには:max KB以下のファイルを指定してください。',
+        'file'    => '※:attributeには:10 MB以下のファイルを指定してください。',
         'string'  => '※:attributeには:max文字以下の文字列を指定してください。',
         'array'   => '※:attributeには:max個以下の要素を持つ配列を指定してください。',
     ],
@@ -129,6 +129,7 @@ return [
         'product_category_id'=> '商品カテゴリー',
         'product_subcategory_id'=> '商品サブカテゴリー',
         'image_1'=> '画像',
+        'image_2'=> '画像',
 
     ],
 

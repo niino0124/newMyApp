@@ -100,11 +100,19 @@
             <div class="pics_wrap">
                 <div class="view_box">
                     <label class="img_label">写真１
+
                         @if(null != old('path1'))
+                        <p>こっちがあり！</p>
+
                         <div class="img_view"><img alt="" class="img" width="150" height="150"
                                 src="{{'/storage/' . old('path1')}}"></div>
-                        <input type="hidden" value={{old('path1')}} name="image_1">
+                        <input type="hidden" value={{old('path1')}} name="path1">
                         @endif
+
+                        @if(null != old('image_1'))
+                        <p>あり！</p>
+                        @endif
+
                     </label>
                     <div class="originalFileBtn">
                         アップロード
@@ -128,6 +136,14 @@
                                 src="{{'/storage/' . old('path2')}}"></div>
                         <input type="hidden" value={{old('path2')}} name="image_2">
                         @endif
+
+                        @if(null != old('image_2'))
+                        <p>あり！</p>
+                        {{-- <div class="img_view"><img alt="" class="img" width="150" height="150"
+                                src="{{'/storage/' . old('image_2')[0]}}"></div>
+                        <input type="hidden" value={{old('image_2')[0]}} name="image_2"> --}}
+                        @endif
+
                     </label>
                     <div class="originalFileBtn">
                         アップロード

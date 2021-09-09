@@ -31,8 +31,8 @@ class StoreProductForm extends FormRequest
             // "image_4" => "image|mimes:jpeg,png,jpg,gif|max:10240|nullable",
             "product_category_id" => "required|integer",
             "product_subcategory_id" => "required|integer",
-            // "image_1" => "max:10240|nullable",
-            // "image_2" => "max:10240|nullable",
+            "image_1" => "max:10240|nullable|mimes:jpeg,png,jpg,gif|image",
+            "image_2" => "max:10240|nullable|mimes:jpeg,png,jpg,gif|image",
         ];
     }
 

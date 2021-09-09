@@ -81,44 +81,48 @@ class ProductController extends Controller
         $image_1 = $request->image_1;
         $image_2 = $request->image_2;
 
-        dd($image_1);
+        $path1 = $request->path1;
+        $path2 = $request->path2;
 
-    if(is_null($image_1)){
+        if(isset($path1) && is_null($image_1)){
+
+        $path1 = $path1;
+        'path1はoldとして戻ってきた';
+
+        }elseif(is_null($image_1) && is_null($path1)){
         // NULLなら
         $path1 = NULL;
         'Nullです';
 
-    }elseif(is_object($image_1)){
+        }elseif(isset($image_1)){
         echo '第一';
         // まだオブジェクトだったら
             $path1 = \Storage::put('/public', $image_1);
             $path1 = explode('/', $path1);
             $path1 = $path1[1];
             dump($path1);
-        }else{
-            echo '第三';
-            // $image_1が既にパスとして出来上がっている場合はそのままpathに代入
-            $path1 = $image_1;
-            dump($path1);
         }
 
+        if(isset($path2) && is_null($image_2)){
 
-    if(is_null($image_2)){
+            $path2 = $path2;
+'path2はoldとして戻ってきた';
+
+        }elseif(is_null($image_2) && is_null($path2)){
+        // NULLなら
         $path2 = NULL;
         'Nullです';
-    }elseif(is_object($image_2)){
+
+    }elseif(isset($image_2)){
         echo '第一';
         // まだオブジェクトだったら
             $path2 = \Storage::put('/public', $image_2);
             $path2 = explode('/', $path2);
             $path2 = $path2[1];
             dump($path2);
-        }else{
-            echo '第三';
-            // $image_2が既にパスとして出来上がっている場合はそのままpathに代入
-            $path2 = $image_2;
-            dump($path2);
         }
+
+
 
 
         $name = $input['name'];
@@ -126,11 +130,10 @@ class ProductController extends Controller
         $product_subcategory_id = $input['product_subcategory_id'];
         $product_content = $input['product_content'];
 
+
         $data = array(
             'path1' => $path1,
             'path2' => $path2,
-            // 'path3' => $path3,
-            // 'path4' => $path4,
             'name' => $name,
             'product_category_id' => $product_category_id,
             'product_subcategory_id' => $product_subcategory_id,
@@ -159,7 +162,8 @@ class ProductController extends Controller
 
             //セッションに値が無い時はフォームに戻る
             if(!$data){
-                return redirect()->action("ProductController@index");
+                dd($data); 
+            return redirect()->action("ProductController@index");
             }
             // 戻るボタン
             if($request->has("back")){
