@@ -487,6 +487,10 @@ input[type="file"] {
   width: 100%;
 }
 
+.pics_wrap {
+  margin-left: 30px;
+}
+
 .view_box {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -582,7 +586,7 @@ select {
 
 .img_label {
   text-align: left;
-  margin-bottom: 0;
+  margin-bottom: 5px;
 }
 
 .img_view {

@@ -73,27 +73,6 @@
     </div>
 
 
-
-
-
-
-
-    <div class="element_wrap">
-        <label for="product_content">商品説明</label>
-        <div class="content-wrap">
-            <textarea id="product_content" type="text" class=" @error('product_content') is-invalid @enderror"
-                name="product_content" style="height: 90px">{{ old('product_content') }}</textarea>
-
-            @error('product_content')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
-    </div>
-
-
-
     <div class="element_wrap_v">
         <label for="product_category" class="product_category"><label for="name">商品写真</label>
 
@@ -170,7 +149,7 @@
                 </div>
 
                 <div class="view_box">
-                    <label class="img_label">写真２
+                    <label class="img_label">写真４
                         @if(null != old('path4'))
                         <div class="img_view"><img alt="" class="img" width="150" height="150"
                                 src="{{'/storage/' . old('path4')}}"></div>
@@ -193,6 +172,22 @@
             </div>
     </div>
 
+
+
+
+    <div class="element_wrap">
+        <label for="product_content">商品説明</label>
+        <div class="content-wrap">
+            <textarea id="product_content" type="text" class=" @error('product_content') is-invalid @enderror"
+                name="product_content" style="height: 90px">{{ old('product_content') }}</textarea>
+
+            @error('product_content')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+    </div>
 
     <div class="btn-wrap">
         <input class="btn" type="submit" value="確認画面へ" />
