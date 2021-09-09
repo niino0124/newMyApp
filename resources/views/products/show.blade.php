@@ -25,8 +25,18 @@
         <p>更新日時：{{$product->created_at}}</p>
     </div>
     <div class="img_wrap">
+        @if($product->image_1)
         <div class="img_wrap_item"><img src="{{ '/storage/' .$product->image_1}}" alt="" width="100" height="100"></div>
+        @endif
+        @if($product->image_2)
         <div class="img_wrap_item"><img src="{{ '/storage/' .$product->image_2}}" alt="" width="100" height="100"></div>
+        @endif
+        @if($product->image_3)
+        <div class="img_wrap_item"><img src="{{ '/storage/' .$product->image_3}}" alt="" width="100" height="100"></div>
+        @endif
+        @if($product->image_4)
+        <div class="img_wrap_item"><img src="{{ '/storage/' .$product->image_4}}" alt="" width="100" height="100"></div>
+        @endif
     </div>
     <div class="content_wrap">
         <p>■商品説明</p>

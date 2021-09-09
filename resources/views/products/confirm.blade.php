@@ -36,6 +36,20 @@
             <img src="{{ '/storage/' . $data['path2']}}" class=''  width="150" height="150"/>
         </div>
         @endif
+
+        @if($data['path3'] !== NULL)
+        <div class="view_box">
+            <label class="image_label">写真３</label>
+            <img src="{{ '/storage/' . $data['path3']}}" class=''  width="150" height="150"/>
+        </div>
+        @endif
+
+        @if($data['path4'] !== NULL)
+        <div class="view_box">
+            <label class="image_label">写真４</label>
+            <img src="{{ '/storage/' . $data['path4']}}" class=''  width="150" height="150"/>
+        </div>
+        @endif
     </div>
 
 </div>

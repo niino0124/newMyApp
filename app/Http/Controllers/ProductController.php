@@ -77,12 +77,16 @@ class ProductController extends Controller
 
     // 確認画面以降前のバリデーションなど
     public function create(StoreProductForm $request){
-        $input = $request->except('image_1','image_2');
+        $input = $request->except('image_1','image_2','image_3','image_4');
         $image_1 = $request->image_1;
         $image_2 = $request->image_2;
+        $image_3 = $request->image_3;
+        $image_4 = $request->image_4;
 
         $path1 = $request->path1;
         $path2 = $request->path2;
+        $path3 = $request->path3;
+        $path4 = $request->path4;
 
         if(isset($path1) && is_null($image_1)){
 
@@ -103,23 +107,40 @@ class ProductController extends Controller
             dump($path1);
         }
 
+        // ２
         if(isset($path2) && is_null($image_2)){
-
             $path2 = $path2;
-'path2はoldとして戻ってきた';
-
         }elseif(is_null($image_2) && is_null($path2)){
-        // NULLなら
         $path2 = NULL;
-        'Nullです';
-
-    }elseif(isset($image_2)){
-        echo '第一';
-        // まだオブジェクトだったら
+        }elseif(isset($image_2)){
             $path2 = \Storage::put('/public', $image_2);
             $path2 = explode('/', $path2);
             $path2 = $path2[1];
             dump($path2);
+        }
+
+        // ３
+        if(isset($path3) && is_null($image_3)){
+            $path3 = $path3;
+        }elseif(is_null($image_3) && is_null($path3)){
+        $path3 = NULL;
+        }elseif(isset($image_3)){
+            $path3 = \Storage::put('/public', $image_3);
+            $path3 = explode('/', $path3);
+            $path3 = $path3[1];
+            dump($path3);
+        }
+
+        // ４
+        if(isset($path4) && is_null($image_4)){
+            $path4 = $path4;
+        }elseif(is_null($image_4) && is_null($path4)){
+        $path4 = NULL;
+        }elseif(isset($image_4)){
+            $path4 = \Storage::put('/public', $image_4);
+            $path4 = explode('/', $path4);
+            $path4 = $path4[1];
+            dump($path4);
         }
 
 
@@ -134,6 +155,8 @@ class ProductController extends Controller
         $data = array(
             'path1' => $path1,
             'path2' => $path2,
+            'path3' => $path3,
+            'path4' => $path4,
             'name' => $name,
             'product_category_id' => $product_category_id,
             'product_subcategory_id' => $product_subcategory_id,
@@ -162,7 +185,6 @@ class ProductController extends Controller
 
             //セッションに値が無い時はフォームに戻る
             if(!$data){
-                dd($data); 
             return redirect()->action("ProductController@index");
             }
             // 戻るボタン
@@ -182,8 +204,9 @@ class ProductController extends Controller
                 $post->product_content = $data['product_content'];
                 $post->image_1 = $data['path1'];
                 $post->image_2 = $data['path2'];
-                // $post->image_3 = $data['path3'][1];
-                // $post->image_4 = $data['path4'][1];
+                $post->image_3 = $data['path3'];
+                $post->image_4 = $data['path4'];
+
 
                 $post->save();
 
@@ -303,6 +326,9 @@ class ProductController extends Controller
             {
                 $name = $request->name;
                 $image_1 = $request->image_1;
+                $image_2 = $request->image_2;
+                $image_3 = $request->image_3;
+                $image_4 = $request->image_4;
                 $comment = $request->comment;
                 $evaluation = $request->evaluation;
                 $product_id = $request->product_id;
@@ -312,6 +338,9 @@ class ProductController extends Controller
                 $input_data = [
                     'name' => $name,
                     'image_1' => $image_1,
+                    'image_2' => $image_2,
+                    'image_3' => $image_3,
+                    'image_4' => $image_4,
                     'comment' => $comment,
                     'evaluation' => $evaluation,
                     'product_id' => $product_id

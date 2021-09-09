@@ -102,16 +102,12 @@
                     <label class="img_label">写真１
 
                         @if(null != old('path1'))
-                        <p>こっちがあり！</p>
-
                         <div class="img_view"><img alt="" class="img" width="150" height="150"
                                 src="{{'/storage/' . old('path1')}}"></div>
                         <input type="hidden" value={{old('path1')}} name="path1">
                         @endif
 
-                        @if(null != old('image_1'))
-                        <p>あり！</p>
-                        @endif
+
 
                     </label>
                     <div class="originalFileBtn">
@@ -134,23 +130,13 @@
                         @if(null != old('path2'))
                         <div class="img_view"><img alt="" class="img" width="150" height="150"
                                 src="{{'/storage/' . old('path2')}}"></div>
-                        <input type="hidden" value={{old('path2')}} name="image_2">
+                        <input type="hidden" value={{old('path2')}} name="path2">
                         @endif
-
-                        @if(null != old('image_2'))
-                        <p>あり！</p>
-                        {{-- <div class="img_view"><img alt="" class="img" width="150" height="150"
-                                src="{{'/storage/' . old('image_2')[0]}}"></div>
-                        <input type="hidden" value={{old('image_2')[0]}} name="image_2"> --}}
-                        @endif
-
                     </label>
                     <div class="originalFileBtn">
                         アップロード
-                        {{-- <input class="image_1" name="image_2" type="file"> --}}
                         <input class="file" name="image_2" type="file">
                     </div>
-
                     @error('image_2')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -158,7 +144,50 @@
                     @enderror
                     {{-- jqueryで表示させるエラー --}}
                     <span class="invalid-feedback j_message" role="alert">
+                    </span>
+                </div>
 
+                <div class="view_box">
+                    <label class="img_label">写真３
+                        @if(null != old('path3'))
+                        <div class="img_view"><img alt="" class="img" width="150" height="150"
+                                src="{{'/storage/' . old('path3')}}"></div>
+                        <input type="hidden" value={{old('path3')}} name="path3">
+                        @endif
+                    </label>
+                    <div class="originalFileBtn">
+                        アップロード
+                        <input class="file" name="image_3" type="file">
+                    </div>
+                    @error('image_3')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                    {{-- jqueryで表示させるエラー --}}
+                    <span class="invalid-feedback j_message" role="alert">
+                    </span>
+                </div>
+
+                <div class="view_box">
+                    <label class="img_label">写真２
+                        @if(null != old('path4'))
+                        <div class="img_view"><img alt="" class="img" width="150" height="150"
+                                src="{{'/storage/' . old('path4')}}"></div>
+                        <input type="hidden" value={{old('path4')}} name="path4">
+                        @endif
+                    </label>
+                    <div class="originalFileBtn">
+                        アップロード
+                        <input class="file" name="image_4" type="file">
+                    </div>
+                    @error('image_4')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                    {{-- jqueryで表示させるエラー --}}
+                    <span class="invalid-feedback j_message" role="alert">
                     </span>
                 </div>
             </div>

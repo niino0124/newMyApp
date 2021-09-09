@@ -130,6 +130,8 @@ return [
         'product_subcategory_id'=> '商品サブカテゴリー',
         'image_1'=> '画像',
         'image_2'=> '画像',
+        'image_3'=> '画像',
+        'image_4'=> '画像',
 
     ],
 
