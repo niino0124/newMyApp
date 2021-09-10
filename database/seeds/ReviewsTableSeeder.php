@@ -68,6 +68,15 @@ class ReviewsTableSeeder extends Seeder
             'created_at' => new DateTime(),
             'updated_at' => new DateTime(),
             ],
+            [
+            'member_id' => '2',
+            'product_id' => '20',
+            'evaluation' => '4',
+            'comment' => 'かっこいい',
+            'created_at' => new DateTime(),
+            'updated_at' => new DateTime(),
+            ],
+            
             
         ]);
     }

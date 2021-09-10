@@ -21,6 +21,7 @@ class CreateReviewsTable extends Migration
             $table->text('comment')->comment('商品コメント');
             $table->timestamps();
             $table->softDeletes()->comment('削除日時');
+
         });
     }
 
