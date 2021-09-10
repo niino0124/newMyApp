@@ -32,10 +32,16 @@ class ProductController extends Controller
 
 
         $prev_page_url = $_SERVER['HTTP_REFERER'];
+
+
+
+        // dd($prev_page_url);
         if(strpos($prev_page_url,'list') !== false){
             $btn_back = '商品一覧へ戻る';
         }elseif(strpos($prev_page_url,'home') !== false){
             $btn_back = 'トップへ戻る';
+        }else{
+            $btn_back = '戻る';
         }
 
 
@@ -51,7 +57,7 @@ class ProductController extends Controller
             return view('products.register',compact('product_categories','product_subcategories','old_product_subcategory_infos'));
         }
 
-        return view('products.register',compact('product_categories','product_subcategories'));
+            return view('products.register',compact('product_categories','product_subcategories','btn_back'));
     }
 
 
@@ -104,7 +110,7 @@ class ProductController extends Controller
             $path1 = \Storage::put('/public', $image_1);
             $path1 = explode('/', $path1);
             $path1 = $path1[1];
-            dump($path1);
+            // dump($path1);
         }
 
         // ２
@@ -116,7 +122,7 @@ class ProductController extends Controller
             $path2 = \Storage::put('/public', $image_2);
             $path2 = explode('/', $path2);
             $path2 = $path2[1];
-            dump($path2);
+            // dump($path2);
         }
 
         // ３
@@ -128,7 +134,7 @@ class ProductController extends Controller
             $path3 = \Storage::put('/public', $image_3);
             $path3 = explode('/', $path3);
             $path3 = $path3[1];
-            dump($path3);
+            // dump($path3);
         }
 
         // ４
@@ -140,7 +146,7 @@ class ProductController extends Controller
             $path4 = \Storage::put('/public', $image_4);
             $path4 = explode('/', $path4);
             $path4 = $path4[1];
-            dump($path4);
+            // dump($path4);
         }
 
 
@@ -212,9 +218,8 @@ class ProductController extends Controller
 
                 $request->session()->forget("form_input");
 
-
-                // 会員トップへ戻る
-                return redirect()->action("HomeController@index");
+                // 商品一覧へ戻る
+                return redirect()->action("ProductController@list");
 
             }
 
@@ -239,11 +244,11 @@ class ProductController extends Controller
 
 
                 if($search == null && $product_category_id == null && $product_subcategory_id == null){
-                    dump('全件表示');
+                    // dump('全件表示');
                     $query->get();
 
                 }else{
-                    dump('検索表示');
+                    // dump('検索表示');
 
                     // もしカテゴリが選択されていたらAND
                     if($product_category_id !== '0'){
@@ -300,8 +305,23 @@ class ProductController extends Controller
             }
 
             // 個別ページ
-            public function show($id)
+            public function show(Request $request,$id)
             {
+                $back_url = $request->back_url;
+
+                // dump($back_url,$id);
+
+                $request->session()->put('back_url', 'back_url');
+
+                 //セッションから値を取り出す
+                // $back_url = $request->session()->get("back_url");
+
+                //セッションに書き込む（見本）
+                // $input = $request->only($this->formItems);
+                // $request->session()->put("form_input", $input);
+                //セッションから値を取り出す
+                // $input = $request->session()->get("form_input");
+
                 $product = Product::find($id);
 
                 $evaluations = Review::where('product_id',$id)
@@ -311,7 +331,7 @@ class ProductController extends Controller
                 $avg = $evaluations->avg('evaluation');
                 $avg = ceil($avg);
 
-                return view('products.show',compact('product','avg'));
+                return view('products.show',compact('product','avg','back_url'));
             }
 
             // レビュー作成ページ

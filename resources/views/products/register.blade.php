@@ -22,7 +22,7 @@
         <div class="content_wrap_v">
             <label for="product_category" class="product_category"><label for="name">商品カテゴリ</label>
                 <div style="display: flex;
-            flex-direction: column">
+            flex-direction: column" >
                     <select name="product_category_id" id="product_category_id">
                         <option value="0">選択してください</option>
                         @foreach ($product_categories as $product_category)
@@ -39,7 +39,7 @@
                 </div>
 
                 <div style="display: flex;
-            flex-direction: column">
+            flex-direction: column" >
                     <select name="product_subcategory_id" id="product_subcategory_id">
                         <option value="" class="op_aj" id="children">選択してください</option>
                     </select>
@@ -191,7 +191,7 @@
 
     <div class="btn-wrap">
         <input class="btn" type="submit" value="確認画面へ" />
-        <a href="{{url()->previous()}}" class="btn btn-back">戻る</a>
+        <a href="{{url()->previous()}}" class="btn btn-back">{{ $btn_back }}</a>
         {{-- <a href="{{url()->previous()}}" class="btn btn-back">{{ $btn_back }}</a> --}}
     </div>
 
