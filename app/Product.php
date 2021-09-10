@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $dates = ['display_date'];
+    
     public function member(){
         return $this->belongsTo('App\Member');
     }

@@ -22,7 +22,7 @@
     <p>{{ $product->productCategory->name }} ＞ {{ $product->productSubcategory->name }}</p>
     <div class="name_wrap">
         <p class="name">{{$product->name}}</p>
-        <p>更新日時：{{$product->created_at}}</p>
+        <p>更新日時：{{$product->created_at->format('Ymd')}}</p>
     </div>
     <div class="img_wrap">
         @if($product->image_1)
