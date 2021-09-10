@@ -53,9 +53,9 @@
                     <div class="product_header"><img src="{{ '/storage/' .$product->image_1}}" alt="" width="100" height="100"></div>
                     <div class="product_body">
                         <div class="left-block"><p class="cat">{{ $product->productCategory->name }}＞{{ $product->productSubcategory->name }}</p></div>
-                        <p class="product_name"><a href="{{route('product.show',['id' => $product->id])}}" >{{$product->name}}</a></p>
+                        <p class="product_name" style="color: black;">{{$product->name}}</p>
                         <p class="product_star">★★★　３</p>
-
+                        {{-- <a href="{{route('product.show',['id' => $product->id])}}" ></a> --}}
                     </div>
                 </li>
             @endforeach

@@ -46,7 +46,7 @@ Route::group(['prefix' => 'product' , 'middleware' => 'auth'],function(){
     Route::get('product/list/{id}', 'ProductController@listAjax');
 
 // 個別詳細ページ（どこのページに帰るか残すためにPOSTでページを送信するからPOSTにした）
-    Route::post('product/show/{id}', 'ProductController@show')->name('product.show');
+    Route::get('product/show/{id}', 'ProductController@show')->name('product.show');
 
 // 商品レビュー一覧ページ
     Route::get('product/review-archive/{id}', 'ProductController@reviewArchive')->name('product.review-archive');
