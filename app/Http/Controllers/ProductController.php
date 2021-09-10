@@ -307,21 +307,6 @@ class ProductController extends Controller
             // 個別ページ
             public function show(Request $request,$id)
             {
-                $back_url = $request->back_url;
-
-                // dump($back_url,$id);
-
-                $request->session()->put('back_url', 'back_url');
-
-                 //セッションから値を取り出す
-                // $back_url = $request->session()->get("back_url");
-
-                //セッションに書き込む（見本）
-                // $input = $request->only($this->formItems);
-                // $request->session()->put("form_input", $input);
-                //セッションから値を取り出す
-                // $input = $request->session()->get("form_input");
-
                 $product = Product::find($id);
 
                 $evaluations = Review::where('product_id',$id)
@@ -331,7 +316,7 @@ class ProductController extends Controller
                 $avg = $evaluations->avg('evaluation');
                 $avg = ceil($avg);
 
-                return view('products.show',compact('product','avg','back_url'));
+                return view('products.show',compact('product','avg'));
             }
 
             // レビュー作成ページ
