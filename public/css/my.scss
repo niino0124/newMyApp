@@ -23,6 +23,11 @@ p {
     font-weight: bold;
 }
 
+.label-w{
+    width: 200px;
+    margin-right: 30px;
+}
+
 @include mq(sm) {
     h1 {
         font-size: 1.3rem !important;

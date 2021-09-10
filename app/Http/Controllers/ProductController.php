@@ -17,6 +17,7 @@ use InterventionImage;
 use Illuminate\Support\Facades\Auth;
 use App\Member;
 use App\Models\UploadImage;
+use Illuminate\Support\Facades\Session;
 
 
 
@@ -231,30 +232,22 @@ class ProductController extends Controller
                 $product_category_id = $request->input('product_category_id');
                 $product_subcategory_id = $request->input('product_subcategory_id');
 
-
-
                  // 検索フォーム
                 $query = Product::query();
-                 // カテゴリnameを別のテーブルから持ってくるため
                 $query->with('productCategory');
                 $query->with('productSubcategory');
-
-                 // どのカラムか
+                $query->with('reviews');
                 $query->select( 'name', 'product_category_id', 'product_subcategory_id','image_1','id');
-
 
                 if($search == null && $product_category_id == null && $product_subcategory_id == null){
                     // dump('全件表示');
                     $query->get();
-
                 }else{
                     // dump('検索表示');
 
-                    // もしカテゴリが選択されていたらAND
                     if($product_category_id !== '0'){
                         $query->where('product_category_id',$product_category_id);
                     };
-
 
                     if($product_subcategory_id !== '0'){
                         $query->where('product_subcategory_id',$product_subcategory_id);
@@ -280,10 +273,16 @@ class ProductController extends Controller
                 $query->orderBy('created_at', 'desc');
                 $products = $query->paginate(10);
 
-                // dump($query->toSql(), $query->getBindings());
+                $back_url = null;
+                $now_route = url()->full();
+                session(['now_route' => $now_route]);
+                $back_url = session('now_route');
+                dump($back_url);
+
                 // カテゴリ検索のためにある
                 $product_categories = ProductCategory::all();
                 $product_subcategories = ProductSubcategory::all();
+
 
                 return view('products.list',compact('product_categories','product_subcategories','products'));
             }
@@ -305,10 +304,19 @@ class ProductController extends Controller
             }
 
             // 個別ページ
-            public function show(Request $request,$id)
-            {
-                $product = Product::find($id);
+            public function show(Request $request, $id){
+                // // 詳細ページへ飛ぶボタンが押されると現在のURLを取得
+                // $prev_url = url()->current();
+                $back_url = $request->session()->get("now_route");
+                dump($back_url);
 
+
+                // session(['prev_url' => $prev_url]);
+                // $value = session('prev_url');
+                // dd($value);
+
+
+                $product = Product::find($id);
                 $evaluations = Review::where('product_id',$id)
                 ->select('evaluation')
                 ->get();
@@ -316,7 +324,10 @@ class ProductController extends Controller
                 $avg = $evaluations->avg('evaluation');
                 $avg = ceil($avg);
 
-                return view('products.show',compact('product','avg'));
+
+
+                
+                return view('products.show',compact('product','avg','back_url'));
             }
 
             // レビュー作成ページ

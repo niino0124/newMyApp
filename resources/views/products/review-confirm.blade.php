@@ -30,13 +30,13 @@
         <form method="post" action="{{ route('product.review-store') }}">
             @csrf
             <div class="element_wrap_str_review">
-                    <label for="evaluation" class="evaluation">商品評価</label>
+                    <label for="evaluation" class="fw-bold label-w">商品評価</label>
                 <p>{{ $input_data['evaluation'] }}</p>
             </div>
 
             <div class="element_wrap_str_review">
-                <label for="comment">商品コメント</label>
-                <div class="content-wrap">
+                <label for="comment" class="fw-bold label-w">商品コメント</label>
+                <div class="content-wrap" style="text-align: left;">
                     {{ $input_data['comment'] }}
                 </div>
             </div>

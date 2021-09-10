@@ -49,6 +49,7 @@
 
         <ul class="product_lists">
             @foreach ($products as $product)
+            <form action="">
                 <li class="product">
                     <div class="product_header"><img src="{{ '/storage/' .$product->image_1}}" alt="" width="100" height="100"></div>
                     <div class="product_body">
@@ -60,6 +61,7 @@
 
                     </div>
                 </li>
+            </form>
             @endforeach
         </ul>
         {{ $products->appends(request()->input())->links() }}
