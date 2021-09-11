@@ -16,9 +16,6 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="man-body-tables">
         <ul class="product_top">
             <li class="product">
@@ -51,15 +48,9 @@
             @endforeach
         </ul>
         {{ $reviews->appends(request()->input())->links() }}
-
-
-
         <div class="btn-wrap">
             <a href="{{route('product.show',['id' => $product['id']])}}" class="btn_b">商品詳細に戻る</a>
         </div>
-
     </div>
 </div>
-
-
 @endsection

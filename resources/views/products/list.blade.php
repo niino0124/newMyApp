@@ -15,9 +15,6 @@
             </div>
         </div>
     </div>
-
-
-
     <div class="man-body-tables">
         <form class="search-wrap" method="GET" action="{{route('product.list')}}">
             @csrf
@@ -38,30 +35,25 @@
                         selected @endif class="add_op">{{$product_subcategory->name}}</option>
                     @endforeach
                 </select>
-
             </label>
             <label for="">フリーワード
                 <input type="search" class="long" name="search">
             </label>
             <button type="submit" class="btn-simple">商品検索</button>
         </form>
-
-
         <ul class="product_lists">
             @foreach ($products as $product)
-            <form action="">
+            {{-- {{dd($product)}} --}}
                 <li class="product">
                     <div class="product_header"><img src="{{ '/storage/' .$product->image_1}}" alt="" width="100" height="100"></div>
                     <div class="product_body">
                         <div class="left-block"><p class="cat">{{ $product->productCategory->name }}＞{{ $product->productSubcategory->name }}</p></div>
                         <a href="{{route('product.show',['id' => $product->id])}}" ><p class="product_name" >{{$product->name}}</p>
                         </a>
-                        <p class="product_star">★★★　３</p>
+                        <p class="product_star">@if($product->getAvgStarAttribute() == 0)評価なし@else @for($i = 0; $i < $product->getAvgStarAttribute(); $i++)★@endfor　{{ $product->getAvgStarAttribute() }}@endif</p>
                         <a href="{{route('product.show',['id' => $product->id])}}" class="blue_btn">詳細</a>
-
                     </div>
                 </li>
-            </form>
             @endforeach
         </ul>
         {{ $products->appends(request()->input())->links() }}

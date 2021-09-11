@@ -44,22 +44,14 @@
     </div>
     <div class="content_wrap">
         <p>■商品レビュー</p>
-        <p>総合評価　@for($i = 0; $i < $avg; $i++)★@endfor {{ $avg }}</p>
+        <p>@if($product->getAvgStarAttribute() == 0)評価なし@else 総合評価　 @for($i = 0; $i < $product->getAvgStarAttribute(); $i++)★@endfor　{{ $product->getAvgStarAttribute() }}@endif</p>
         <p><a href="{{route('product.review-archive',['id' => $product->id])}}"> ＞＞レビューを見る</a></p>
     </div>
 </div>
-
-
-
-
-
-
         <div class="btn-wrap" >
             <a href="{{ route('product.review',['id' => $product->id]) }}" class="blue_btn_md_con">この商品についてのレビューを登録</a>
             <a href="{{ $back_url }}" class="blue_btn_md">商品一覧に戻る</a>
         </div>
     </div>
 </div>
-
-
 @endsection

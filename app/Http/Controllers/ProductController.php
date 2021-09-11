@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Member;
 use App\Product;
-use Illuminate\Support\Facades\DB;
 use App\ProductCategory;
 use App\ProductSubcategory;
 use App\Review;
+
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreProductForm;
 use App\Http\Requests\StoreReviewForm;
 
@@ -15,7 +18,6 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use InterventionImage;
 use Illuminate\Support\Facades\Auth;
-use App\Member;
 use App\Models\UploadImage;
 use Illuminate\Support\Facades\Session;
 
@@ -234,10 +236,9 @@ class ProductController extends Controller
 
                  // 検索フォーム
                 $query = Product::query();
-                $query->with('productCategory');
-                $query->with('productSubcategory');
-                $query->with('reviews');
-                $query->select( 'name', 'product_category_id', 'product_subcategory_id','image_1','id');
+                $query->with(['productCategory', 'productSubcategory','reviews']);
+                $query->get();
+                // $query->select( 'name', 'product_category_id', 'product_subcategory_id','image_1','id');
 
                 if($search == null && $product_category_id == null && $product_subcategory_id == null){
                     // dump('全件表示');
@@ -277,7 +278,14 @@ class ProductController extends Controller
                 $now_route = url()->full();
                 session(['now_route' => $now_route]);
                 $back_url = session('now_route');
-                dump($back_url);
+                // dump($back_url);
+
+                // $product = Product::find($id);
+                // $evaluations = Review::where('product_id',$id)
+                // ->select('evaluation')
+                // ->get();
+                // $avg = $evaluations->avg('evaluation');
+                // $avg = ceil($avg);
 
                 // カテゴリ検索のためにある
                 $product_categories = ProductCategory::all();
