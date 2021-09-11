@@ -86,7 +86,8 @@ form {
 .blue-board {
     padding: 0;
     border: 1px solid black;
-    width: 520px;
+    // width: 520px;
+    width:auto;
     @include mq(sm) {
         width: 100%;
     }
@@ -802,14 +803,15 @@ ul {
 // 掲示板
 .header {
     background: rgba(255, 207, 171, 0.81);
-    height: 65px;
+    height: 50px;
     width: 100%;
-    padding: 0 40px;
+    padding: 0 30px;
     box-sizing: border-box;
-    @include mq(sm) {
-        padding: 0 30px;
-        height: 50px;
-    }
+
+}
+
+.welcome_name{
+    margin-right: 20px;
 }
 
 .man-header {

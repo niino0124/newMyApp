@@ -5,13 +5,16 @@
 <div class="blue-board ">
     <div class="header">
         <div class="simple-wrap_sb">
-            <p>ようこそ{{ Auth::user()->nickname }}様</p>
+            <p class="welcome_name">ようこそ{{ Auth::user()->nickname }}様</p>
 <div class="simple-wrap">
     <a class="btn-simple" href="{{route('product.list')}}">
     商品一覧
     </a>
     <a class="btn-simple" href="{{route('product.index')}}">
     新規商品登録
+    </a>
+    <a class="btn-simple" href="{{route('home.show')}}">
+    マイページ
     </a>
     <a class="btn-simple" href="{{ route('logout') }}"
     onclick="event.preventDefault();

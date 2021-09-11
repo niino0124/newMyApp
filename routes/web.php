@@ -55,4 +55,10 @@ Route::group(['prefix' => 'product' , 'middleware' => 'auth'],function(){
 
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::group(['prefix' => 'home' ,'middleware' => 'auth'],function(){
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('mypage','HomeController@show')->name('home.show');
+    });

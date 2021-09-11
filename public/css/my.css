@@ -81,7 +81,7 @@ form h1 {
 .blue-board {
   padding: 0;
   border: 1px solid black;
-  width: 520px;
+  width: auto;
 }
 
 @media screen and (max-width: 767px) {
@@ -881,18 +881,15 @@ ul {
 
 .header {
   background: rgba(255, 207, 171, 0.81);
-  height: 65px;
+  height: 50px;
   width: 100%;
-  padding: 0 40px;
+  padding: 0 30px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-@media screen and (max-width: 767px) {
-  .header {
-    padding: 0 30px;
-    height: 50px;
-  }
+.welcome_name {
+  margin-right: 20px;
 }
 
 .man-header {
