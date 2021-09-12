@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class HomeController extends Controller
 {
@@ -29,5 +31,18 @@ class HomeController extends Controller
     public function show()
     {
         return view('mypage');
+    }
+
+    public function leaveConfirm()
+    {
+        return view('leave-confirm');
+    }
+
+    public function delete()
+    {
+        $member = Auth::user();
+        $member->delete();
+
+        return redirect()->route('welcome');
     }
 }

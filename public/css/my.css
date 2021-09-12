@@ -11,6 +11,12 @@ p {
   font-weight: bold;
 }
 
+.center {
+  text-align: center;
+  font-size: 1.4rem;
+  display: block;
+}
+
 .label-w {
   width: 200px;
   margin-right: 30px;
@@ -81,7 +87,8 @@ form h1 {
 .blue-board {
   padding: 0;
   border: 1px solid black;
-  width: auto;
+  min-width: 450px;
+  min-height: 300px;
 }
 
 @media screen and (max-width: 767px) {
@@ -106,7 +113,8 @@ form h1 {
 }
 
 .man-body {
-  height: 300px;
+  min-height: 250px;
+  height: inherit;
   background: #ffebc8;
   padding: 40px 25px 50px;
 }
@@ -665,7 +673,7 @@ select {
 .btn, .btn_b {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  width: 210px;
+  min-width: 150px;
   text-decoration: none;
   background: #ff8800;
   color: white;
@@ -1241,30 +1249,6 @@ table .td_title {
   vertical-align: middle;
 }
 
-.sec_com {
-  padding: 40px 120px;
-}
-
-@media screen and (max-width: 767px) {
-  .sec_com {
-    padding: 30px 15px;
-  }
-}
-
-.sec_com form {
-  background: transparent;
-  border: none;
-  padding: 0;
-}
-
-.sec_com form textarea {
-  width: 100%;
-}
-
-.sec_com button {
-  float: right;
-}
-
 h1 {
   margin-bottom: 0;
   font-size: 2rem;
@@ -1293,23 +1277,6 @@ h1 {
   font-size: 1.6rem;
   line-height: 1.7;
   text-align: left;
-}
-
-.bye-ttl {
-  margin-top: 45px;
-}
-
-.bye-lead {
-  font-size: 1.7rem;
-}
-
-.bye {
-  margin-bottom: 50px;
-}
-
-.bye-btn {
-  width: auto;
-  padding: 5px 15px;
 }
 
 a:link {

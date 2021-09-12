@@ -8,10 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 use App\Notifications\CustomResetPassword;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Member extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
+
 
     protected $fillable = [
         'name_sei',
@@ -30,6 +33,7 @@ class Member extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     public function products(){
         return $this->hasMany('App\Product');

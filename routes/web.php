@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
@@ -61,4 +61,6 @@ Route::group(['prefix' => 'product' , 'middleware' => 'auth'],function(){
 Route::group(['prefix' => 'home' ,'middleware' => 'auth'],function(){
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('mypage','HomeController@show')->name('home.show');
+    Route::get('leave','HomeController@leaveConfirm')->name('home.leave');
+    Route::get('delete','HomeController@delete')->name('home.delete');
     });

@@ -42,6 +42,10 @@
             <label>メールアドレス</label>
             <p>{{ Auth::user()->email }}</p>
         </div>
+        {{-- ブルー --}}
+        <div class="btn-wrap">
+            <a href="{{route('home.leave')}}" class="btn_b btn-back_b" type="submit">退会</a>
+        </div>
     </div>
 </div>
 @endsection
