@@ -44,7 +44,7 @@
             <label>パスワード</label>
             <div class="fl_col_start">
                 <p class="tal">セキュリティのため非表示</p>
-            <a href="" class="btn_b" type="submit" style="margin-right: 0;margin-left:0;">パスワード変更</a>
+            <a href="{{route('home.edit-password')}}" class="btn_b" type="submit" style="margin-right: 0;margin-left:0;">パスワード変更</a>
             </div>
         </div>
         <div class="element_wrap_str">

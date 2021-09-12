@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Member;
+use App\Rules\Hankaku;
+use Illuminate\Support\Facades\Hash;
+
+
 
 
 
@@ -21,6 +25,14 @@ class HomeController extends Controller
             'name_mei' =>'required|max:20|string',
             'nickname' =>'required|max:10|string',
             "gender" => "required|integer|in:1,2",
+        ]);
+    }
+
+    protected function validatorPass(array $data)
+    {
+        return Validator::make($data, [
+            'password' => ['required', 'string', new Hankaku, 'min:8','max:20','confirmed'],
+            "password_confirmation" => ['required', 'string', new Hankaku, 'min:8','max:20'],
         ]);
     }
     /**
@@ -104,8 +116,29 @@ class HomeController extends Controller
 
         $member->save();
 
-        // 表示
-        // return view('mypage');
         return redirect()->route('home.show');
+        }
+
+        // パスワードリセット
+        public function editPassword()
+        {
+            return view('edit-password');
+        }
+
+        public function editPasswordStore(Request $request)
+        {
+            // バリデーション
+            $this->validatorPass($request->all())->validate();
+            $input = $request->password;
+            $input = Hash::make($input);
+            // dd($input);
+
+
+            $id = Auth::id();
+            $member = Member::find($id);
+            $member->password = $input;
+            $member->save();
+    
+            return redirect()->route('home.show');
         }
 }

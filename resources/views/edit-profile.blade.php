@@ -42,7 +42,6 @@
     @enderror
     </div>
 </div>
-{{-- value="@if( old('name_sei') != null ){{old('name_sei')}}@else{{ Auth::user()->name_sei }}@endif" --}}
 <div class="element_wrap">
     <label for="gender">性別</label>
     <div class="content-wrap">
@@ -52,9 +51,6 @@
                             <input value='{{ $index }}'
                             type="radio"  class="@error('gender') is-invalid @enderror" name="gender" @if(old('gender') != null && old('gender') == $index) checked @elseif( Auth::user()->gender == $index) checked @endif >
                             @if($index == "1") 男性 @else 女性 @endif
-                            {{-- <input value='{{ $index }}'
-                            type="radio"  class="@error('gender')is-invalid @enderror" name="gender" @if( Auth::user()->gender == $index) checked @endif >
-                            @if($index == "1") 男性 @else 女性 @endif --}}
                     </label>
                     @endforeach
                 </div>

@@ -64,9 +64,16 @@ Route::group(['prefix' => 'home' ,'middleware' => 'auth'],function(){
     Route::get('leave','HomeController@leaveConfirm')->name('home.leave');
     Route::get('delete','HomeController@delete')->name('home.delete');
 
+// 会員情報
     Route::get('edit-profile','HomeController@editProfile')->name('home.edit-profile');
     Route::post('edit-profile-post', 'HomeController@editProfilePost')->name('home.edit-profile-post');
     Route::post('edit-profile-store', 'HomeController@editProfileStore')->name('home.edit-profile-store');
+
+// パスワード
+    Route::get('edit-password','HomeController@editPassword')->name('home.edit-password');
+    Route::post('edit-password-store', 'HomeController@editPasswordStore')->name('home.edit-password-store');
+
+
     
     // Route::get('delete','HomeController@delete')->name('home.delete');
     // Route::get('delete','HomeController@delete')->name('home.delete');
