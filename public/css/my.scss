@@ -34,6 +34,18 @@ p {
     margin-right: 30px;
 }
 
+.fl_col_start{
+    @extend .btn-wrap;
+
+.btn_b{
+    margin-top: 10px;
+}
+}
+
+.tal{
+    text-align: left;
+}
+
 @include mq(sm) {
     h1 {
         font-size: 1.3rem !important;
@@ -620,66 +632,64 @@ select {
 
 // 基本ボタン集
 .btn {
-    box-sizing: border-box;
-    min-width: 150px;
-    text-decoration: none;
-    background: rgb(255, 136, 0);
-    color: white;
-    border-color: orange;
-    border-radius: 10px;
-    font-size: 1.8rem;
-    padding: 8px 20px;
     display: inline-block;
+    min-width:150px;
+    padding:8px 15px;
+    text-decoration: none;
+    background-color: rgb(255, 136, 0);
+    border:rgb(255, 136, 0) solid 1px;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
     margin: 20px auto 0;
-    transition: 0.3s;
+
     &:hover,
     &:focus {
+        background-color: white;
         color: rgb(255, 136, 0);
-        background: white;
-        border: 1px solid rgb(255, 136, 0);
-    }
-    @include mq(sm) {
-        width: 180px;
-        font-size: 1.4rem;
     }
 }
 
-.btn_b {
+.btn_b{
     @extend .btn;
-    background: #486693;
-    border-color: #486693;
+    background-color: #486693;
     font-size: 1.4rem;
-    padding: 8px 20px;
+    border-color:#486693 ;
 
     &:hover,
     &:focus {
         color: #486693;
-        background: white;
-        border: 1px solid #486693;
     }
 }
 
 .btn-back {
-    text-decoration: none;
-    background: white;
+    @extend .btn;
+    background-color: white;
     color: rgb(255, 136, 0);
     border: rgb(255, 136, 0) solid 1px;
+
     &:hover,
     &:focus {
-        background: rgb(255, 136, 0);
+        background-color: rgb(255, 136, 0);
         color: white;
     }
 }
 
 .btn-back_b {
-    @extend .btn-back;
-    color: #486693;
-    border: #486693 solid 1px;
+    @extend .btn;
+    
+    background-color: white;
+    color:#486693;
+    border-color:#486693;
+    font-size: 1.4rem;
 
     &:hover,
     &:focus {
-        background: #486693;
+        background-color: #486693;
+        color: white;
+        border-color:#486693;
     }
+
 }
 
 // 中サイズボタン集
@@ -768,10 +778,7 @@ select {
     display: flex;
     align-items: flex-start;
 }
-.add-wrap-wrap {
-    display: flex;
-    flex-direction: column;
-}
+
 
 .add-wrap {
     display: flex;
@@ -786,10 +793,11 @@ select {
     flex-direction: column;
 }
 
+
+
 // エラーメッセージ
 .content_wrap {
-    display: flex;
-    flex-direction: column;
+    @extend .btn-wrap;
     margin-right: 15px;
 }
 .content_wrap_v {
@@ -880,8 +888,7 @@ ul {
 
 // スレッド作成フォーム
 .content-wrap {
-    display: flex;
-    flex-direction: column;
+@extend .btn-wrap;
 }
 
 textarea {

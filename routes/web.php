@@ -63,4 +63,11 @@ Route::group(['prefix' => 'home' ,'middleware' => 'auth'],function(){
     Route::get('mypage','HomeController@show')->name('home.show');
     Route::get('leave','HomeController@leaveConfirm')->name('home.leave');
     Route::get('delete','HomeController@delete')->name('home.delete');
+
+    Route::get('edit-profile','HomeController@editProfile')->name('home.edit-profile');
+    Route::post('edit-profile-post', 'HomeController@editProfilePost')->name('home.edit-profile-post');
+    Route::post('edit-profile-store', 'HomeController@editProfileStore')->name('home.edit-profile-store');
+    
+    // Route::get('delete','HomeController@delete')->name('home.delete');
+    // Route::get('delete','HomeController@delete')->name('home.delete');
     });

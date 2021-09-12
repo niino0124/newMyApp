@@ -30,22 +30,37 @@
             <label>ニックネーム</label>
             <p>{{ Auth::user()->nickname }}</p>
         </div>
+
         <div class="element_wrap_str">
             <label>性別</label>
-            <p>@if( Auth::user()->gender == "1")男性 @else 女性@endif</p>
+            <div class="fl_col_start">
+                <p class="tal">@if( Auth::user()->gender == "1")男性 @else 女性@endif</p>
+                {{-- ブルー --}}
+                <a href="{{route('home.edit-profile')}}" class="btn_b" type="submit" >会員情報変更</a>
+            </div>
         </div>
+
         <div class="element_wrap_str">
             <label>パスワード</label>
-            <p>セキュリティのため非表示</p>
+            <div class="fl_col_start">
+                <p class="tal">セキュリティのため非表示</p>
+            <a href="" class="btn_b" type="submit" style="margin-right: 0;margin-left:0;">パスワード変更</a>
+            </div>
         </div>
         <div class="element_wrap_str">
             <label>メールアドレス</label>
-            <p>{{ Auth::user()->email }}</p>
+            <div class="fl_col_start">
+            <p class="tal">{{Auth::user()->email}}</p>
+                {{-- ブルー --}}
+                <a href="" class="btn_b" type="submit" >メールアドレス変更</a>
+            </div>
         </div>
+
         {{-- ブルー --}}
         <div class="btn-wrap">
-            <a href="{{route('home.leave')}}" class="btn_b btn-back_b" type="submit">退会</a>
+            <a href="{{route('home.leave')}}" class="btn-back_b" type="submit">退会</a>
         </div>
+
     </div>
 </div>
 @endsection
