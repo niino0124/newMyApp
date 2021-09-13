@@ -7,7 +7,12 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Member;
 use App\Rules\Hankaku;
+use App\Rules\MemberAuthCode;
 use Illuminate\Support\Facades\Hash;
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AuthMail;
+
 
 
 class HomeController extends Controller
@@ -39,12 +44,14 @@ class HomeController extends Controller
         ]);
     }
 
-    // protected function validatorAuth(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         "auth_code" => "required|unique:members|integer",
-    //     ]);
-    // }
+    protected function validatorAuth(array $data)
+    {
+        return Validator::make($data, [
+            "email" =>  [],
+            "auth_code" =>  [],
+            "auth_code_input" =>  ['required', 'integer', 'same:auth_code'],
+        ]);
+    }
 
     /**
      * Create a new controller instance.
@@ -176,6 +183,7 @@ class HomeController extends Controller
             for($i=0;$i<6;$i++){
                 $str.=mt_rand(0,9);
             }
+
             // 会員のauth_codeカラムに登録
             $id = Auth::id();
             $member = Member::find($id);
@@ -183,32 +191,39 @@ class HomeController extends Controller
             $member->save();
 
             // auth_codeを入力されたメールアドレスに送信。
+            Mail::to($email)->send(new AuthMail($str));
+            $auth_code = $member->auth_code;
 
-            // 認証コード入力フォームを表示
-            // return redirect()->route('home.edit-email-complete');
-            return view('edit-email-confirm',compact('email'));
 
+
+
+            return redirect()->route('home.edit-email-complete-form',compact('email','auth_code'));
+        }
+
+        public function editEmailCompleteForm(Request $request){
+            $email = $request->email;
+            $auth_code = $request->auth_code;
+            return view('edit-email-confirm',compact('email','auth_code'));
         }
 
 
         public function  editEmailComplete(Request $request)
         {
+
+            // バリデーション
+            $this->validatorAuth($request->all())->validate();
+            // dd($request->all());
+            // バリデーション通ったら入力値を変数に代入
             $email = $request->email;
-            $input_auth_code = $request->auth_code;
 
 
+
+            // 会員情報の更新
             $id = Auth::id();
             $member = Member::find($id);
-            $auth_code = $member->auth_code;
-
-
-
-            if($input_auth_code == $auth_code){
-                // 新しいメールアドレスに更新
-                $member->email = $email;
-                $member->save();
-            }
-
+            // 新しいメールアドレスに更新
+            $member->email = $email;
+            $member->save();
 
             return redirect()->route('home.show');
         }

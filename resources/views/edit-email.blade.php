@@ -8,6 +8,7 @@
 
         <div class="element_wrap">
             <label>現在のメールアドレス <p style="color: dodgerblue;">　　{{ Auth::user()->email }}</p></label>
+            {{-- <input hidden value="{{ Auth::user()->email }}" name="email-old"> --}}
         </div>
 
         <div class="element_wrap">

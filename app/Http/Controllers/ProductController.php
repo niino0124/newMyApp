@@ -278,14 +278,6 @@ class ProductController extends Controller
                 $now_route = url()->full();
                 session(['now_route' => $now_route]);
                 $back_url = session('now_route');
-                // dump($back_url);
-
-                // $product = Product::find($id);
-                // $evaluations = Review::where('product_id',$id)
-                // ->select('evaluation')
-                // ->get();
-                // $avg = $evaluations->avg('evaluation');
-                // $avg = ceil($avg);
 
                 // カテゴリ検索のためにある
                 $product_categories = ProductCategory::all();
@@ -319,10 +311,6 @@ class ProductController extends Controller
                 dump($back_url);
 
 
-                // session(['prev_url' => $prev_url]);
-                // $value = session('prev_url');
-                // dd($value);
-
 
                 $product = Product::find($id);
                 $evaluations = Review::where('product_id',$id)
@@ -331,10 +319,6 @@ class ProductController extends Controller
 
                 $avg = $evaluations->avg('evaluation');
                 $avg = ceil($avg);
-
-
-
-                
                 return view('products.show',compact('product','avg','back_url'));
             }
 
@@ -356,7 +340,7 @@ class ProductController extends Controller
                 $comment = $request->comment;
                 $evaluation = $request->evaluation;
                 $product_id = $request->product_id;
-                
+
 
                 // 確認画面に表示する値を格納
                 $input_data = [

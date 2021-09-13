@@ -82,6 +82,8 @@ Route::group(['prefix' => 'home' ,'middleware' => 'auth'],function(){
     Route::post('edit-email-send', 'HomeController@editEmailSend')->name('home.edit-email-send');
 
 // auth_codeが一致したらメールアドレスを新しいのに変更。マイページへリダイレクト。
+    Route::get('edit-email-complete-form', 'HomeController@editEmailCompleteForm')->name('home.edit-email-complete-form');
+
     Route::post('edit-email-complete', 'HomeController@editEmailComplete')->name('home.edit-email-complete');
 
 

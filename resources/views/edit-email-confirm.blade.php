@@ -2,6 +2,7 @@
 @section('title', 'メールアドレス変更')
 @section('content')
 <div class="blue-board">
+
     <form method="POST" action="{{route('home.edit-email-complete')}}">
         @csrf
         <h1>メールアドレス変更　認証コード入力</h1>
@@ -15,8 +16,8 @@
         <div class="element_wrap_str">
             <label for="auth_code">　　認証コード</label>
             <div class="content-wrap">
-                <input id="auth_code" type="auth_code" name="auth_code">
-                @error('auth_code')
+                <input id="auth_code_input"  name="auth_code_input">
+                @error('auth_code_input')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -30,7 +31,8 @@
         </div>
 
         <input hidden value="{{$email}}" name="email">
-        
+        <input hidden value="{{$auth_code}}" name="auth_code">
+
     </form>
 </div>
 
