@@ -73,6 +73,10 @@ Route::group(['prefix' => 'home' ,'middleware' => 'auth'],function(){
     Route::get('edit-password','HomeController@editPassword')->name('home.edit-password');
     Route::post('edit-password-store', 'HomeController@editPasswordStore')->name('home.edit-password-store');
 
+// メールアドレス
+    Route::get('edit-email','HomeController@editEmail')->name('home.edit-email');
+    Route::get('edit-email-send', 'HomeController@editEmailSend')->name('home.edit-email-send');
+
 
     
     // Route::get('delete','HomeController@delete')->name('home.delete');

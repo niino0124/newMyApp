@@ -141,4 +141,16 @@ class HomeController extends Controller
     
             return redirect()->route('home.show');
         }
+
+            // メールアドレスリセット
+        public function  editEmail()
+        {
+            return view('edit-email');
+        }
+
+        public function  editEmailSend()
+        {
+
+            return view('edit-email');
+        }
 }

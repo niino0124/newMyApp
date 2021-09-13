@@ -52,7 +52,7 @@
             <div class="fl_col_start">
             <p class="tal">{{Auth::user()->email}}</p>
                 {{-- ブルー --}}
-                <a href="" class="btn_b" type="submit" >メールアドレス変更</a>
+                <a href="{{route('home.edit-email')}}" class="btn_b" type="submit" >メールアドレス変更</a>
             </div>
         </div>
 
