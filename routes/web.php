@@ -73,12 +73,19 @@ Route::group(['prefix' => 'home' ,'middleware' => 'auth'],function(){
     Route::get('edit-password','HomeController@editPassword')->name('home.edit-password');
     Route::post('edit-password-store', 'HomeController@editPasswordStore')->name('home.edit-password-store');
 
-// メールアドレス
+
+
+// メールアドレス変更フォームを表示
     Route::get('edit-email','HomeController@editEmail')->name('home.edit-email');
-    Route::get('edit-email-send', 'HomeController@editEmailSend')->name('home.edit-email-send');
+
+// メールアドレス変更情報をバリデート。auth_codeを登録。
+    Route::post('edit-email-send', 'HomeController@editEmailSend')->name('home.edit-email-send');
+
+// auth_codeが一致したらメールアドレスを新しいのに変更。マイページへリダイレクト。
+    Route::post('edit-email-complete', 'HomeController@editEmailComplete')->name('home.edit-email-complete');
 
 
-    
+
     // Route::get('delete','HomeController@delete')->name('home.delete');
     // Route::get('delete','HomeController@delete')->name('home.delete');
     });

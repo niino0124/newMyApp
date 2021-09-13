@@ -46,4 +46,25 @@ class Member extends Authenticatable
         $this->notify(new CustomResetPassword($token));
     }
 
+        /**
+     * メールアドレス確定メールを送信
+     *
+     * @param [type] $token
+     * 
+     */
+    public function sendEmailResetNotification($auth_code)
+    {
+        $this->notify(new ChangeEmail($auth_code));
+    }
+        /**
+     * 新しいメールアドレスあてにメールを送信する
+     *
+     * @param  \Illuminate\Notifications\Notification  $notification
+     * @return string
+     */
+    public function routeNotificationForMail($notification)
+    {
+        return $this->email;
+    }
+
 }

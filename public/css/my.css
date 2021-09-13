@@ -96,7 +96,7 @@ form h1 {
   padding: 0;
   border: 1px solid black;
   min-width: 450px;
-  min-height: 300px;
+  min-height: 260px;
 }
 
 @media screen and (max-width: 767px) {

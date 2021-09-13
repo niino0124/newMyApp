@@ -10,10 +10,6 @@ use App\Rules\Hankaku;
 use Illuminate\Support\Facades\Hash;
 
 
-
-
-
-
 class HomeController extends Controller
 {
     private $formItems = ['name_sei','name_mei','nickname','gender'];
@@ -35,6 +31,21 @@ class HomeController extends Controller
             "password_confirmation" => ['required', 'string', new Hankaku, 'min:8','max:20'],
         ]);
     }
+
+    protected function validatorEmail(array $data)
+    {
+        return Validator::make($data, [
+            "email" => "required|unique:members|string|max:200|email",
+        ]);
+    }
+
+    // protected function validatorAuth(array $data)
+    // {
+    //     return Validator::make($data, [
+    //         "auth_code" => "required|unique:members|integer",
+    //     ]);
+    // }
+
     /**
      * Create a new controller instance.
      *
@@ -138,9 +149,15 @@ class HomeController extends Controller
             $member = Member::find($id);
             $member->password = $input;
             $member->save();
-    
+
             return redirect()->route('home.show');
         }
+
+
+
+
+
+
 
             // メールアドレスリセット
         public function  editEmail()
@@ -148,9 +165,52 @@ class HomeController extends Controller
             return view('edit-email');
         }
 
-        public function  editEmailSend()
+        public function  editEmailSend(Request $request)
         {
+            // バリデーション
+            $this->validatorEmail($request->all())->validate();
+            $email = $request->email;
 
-            return view('edit-email');
+            // ６桁の乱数を生成
+            $str="";
+            for($i=0;$i<6;$i++){
+                $str.=mt_rand(0,9);
+            }
+            // 会員のauth_codeカラムに登録
+            $id = Auth::id();
+            $member = Member::find($id);
+            $member->auth_code = $str;
+            $member->save();
+
+            // auth_codeを入力されたメールアドレスに送信。
+
+            // 認証コード入力フォームを表示
+            // return redirect()->route('home.edit-email-complete');
+            return view('edit-email-confirm',compact('email'));
+
         }
+
+
+        public function  editEmailComplete(Request $request)
+        {
+            $email = $request->email;
+            $input_auth_code = $request->auth_code;
+
+
+            $id = Auth::id();
+            $member = Member::find($id);
+            $auth_code = $member->auth_code;
+
+
+
+            if($input_auth_code == $auth_code){
+                // 新しいメールアドレスに更新
+                $member->email = $email;
+                $member->save();
+            }
+
+
+            return redirect()->route('home.show');
+        }
+
 }

@@ -12,7 +12,16 @@
 
         <div class="element_wrap">
             <label for="email">変更後のメールアドレス</label>
-            <input id="email" type="email" name="email">
+
+            <div class="content-wrap">
+                <input id="email" type="email" name="email">
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+
         </div>
 
                     <div class="btn-wrap">
