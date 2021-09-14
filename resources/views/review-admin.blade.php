@@ -18,19 +18,22 @@
     <div class="man-body-tables">
         <ul class="product_lists">
             @foreach ($reviews as $review)
-            {{-- {{dd($review)}} --}}
-                <li class="review">
+{{-- {{dd($review)}} --}}
+                <li class="product">
                     <div class="product_header"><img src="{{ '/storage/' .$review->product->image_1}}" alt="" width="100" height="100"></div>
                     <div class="product_body">
-                        <div class="left-block"><p class="cat">{{ $review->product->name }}＞{{ $review->product->name }}</p></div>
-                        <a href="" ><p class="product_name" >{{$review->name}}</p>
+                        <div class="left-block"><p class="cat">{{ $review->product->productCategory->name }}＞{{ $review->product->productSubcategory->name }}</p></div>
+                        <a href="" ><p class="product_name" >{{$review->product->name}}</p>
                         </a>
-                        <p class="product_star">★★★　３</p>
-                        <p>とてもいい</p>
-                        <a href="" class="blue_btn">レビュー編集</a>
-                        <a href="" class="blue_btn">レビュー削除</a>
+                        <p class="product_star">@if($review->evaluation == 0)評価なし@else @for($i = 0; $i < $review->evaluation; $i++)★@endfor　{{$review->evaluation}}</p>
+                        <p class="product_comment">{{$review->comment}}@endif</p>
+                        <div class="product_category" style="justify-content: flex-start">
+                            <a href="{{route('home.review-edit',['id' => $review->id])}}" class="blue_btn">レビュー編集</a>
+                            <a href="" class="blue_btn">レビュー削除</a>
+                        </div>
                     </div>
                 </li>
+
             @endforeach
         </ul>
         {{ $reviews->appends(request()->input())->links() }}

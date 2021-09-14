@@ -284,8 +284,14 @@ form {
             }
             .product_star {
                 text-align: left;
-                margin-top: 15px;
+                margin-top: 10px;
                 color: black;
+            }
+            .product_comment {
+                text-align: left;
+                margin-top: 0px;
+                color: black;
+                margin-bottom: 10px;
             }
         }
     }
@@ -561,6 +567,9 @@ select {
 
 .product_category {
     display: flex;
+    a{
+        margin-right: 7px;
+    }
 }
 
 .element_wrap_v {
@@ -710,20 +719,21 @@ select {
 
 .blue_btn {
     border: solid rgb(0, 66, 165) 1px;
-    border-radius: 7px;
-    display: block;
-    width: 75px;
-    padding: 4px 5px;
+    border-radius: 5px;
+    display: inline-block;
+    // width: 75px;
+    padding: 5px 6px;
     line-height: 1;
     background: rgb(0, 66, 165);
     color: white;
     font-weight: bold;
-    font-size: 1.3rem;
-    margin-left: auto;
+    font-size: 1.2rem;
+    // margin-left: auto;
 
     &:hover {
         opacity: 0.7;
     }
+
 }
 
 .blue_btn_md {

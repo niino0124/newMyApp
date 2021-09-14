@@ -21,13 +21,13 @@
                 <div class="product_body">
                     <div class="left-block">
                         <p class="product_name" style="color: black;">{{ $input_data['name'] }}</p>
-                        <p class="product_star">総合評価　★★★　３</p>
+                        <p class="product_star">@if($input_data['avg_evaluation'] == 0)評価なし @else 総合評価　@for($i = 0; $i < $input_data['avg_evaluation']; $i++ )★@endfor　{{ $input_data['avg_evaluation'] }}@endif</p>
                     </div>
                 </div>
             </li>
         </ul>
 
-        <form method="post" action="{{ route('product.review-store') }}">
+        <form method="post" action="{{ route('home.review-edit-store') }}">
             @csrf
             <div class="element_wrap_str_review">
                     <label for="evaluation" class="fw-bold label-w">商品評価</label>
@@ -45,6 +45,8 @@
             <input hidden value="{{ $input_data['product_id'] }}" name="product_id">
             <input hidden value="{{$input_data['comment']}}" name="comment">
             <input hidden value="{{$input_data['evaluation']}}" name="evaluation">
+            
+            <input hidden value="{{$input_data['id']}}" name="id">
             {{-- ブルー --}}
             <div class="btn-wrap" >
                 <input href="" class="btn_b" value="更新する" type="submit">

@@ -10,6 +10,9 @@ use App\Review;
 use App\Rules\Hankaku;
 use Illuminate\Support\Facades\Hash;
 
+use App\Http\Requests\StoreReviewForm;
+
+
 use Illuminate\Support\Facades\Mail;
 use App\Mail\AuthMail;
 
@@ -149,9 +152,6 @@ class HomeController extends Controller
             $this->validatorPass($request->all())->validate();
             $input = $request->password;
             $input = Hash::make($input);
-            // dd($input);
-
-
             $id = Auth::id();
             $member = Member::find($id);
             $member->password = $input;
@@ -219,11 +219,66 @@ class HomeController extends Controller
         public function  reviewAdmin()
         {
             $id = Auth::id();
-
             $reviews = Review::where('member_id',$id)
-            ->with('product')
-            ->paginate(2);
-
+            ->with('product.productCategory.productSubcategory')
+            ->paginate(5);
             return view('review-admin',compact('reviews'));
         }
+
+        public function  reviewEdit($id)
+        {
+            $infos = Review::where('id',$id)
+            ->with('product')
+            ->get();
+            return view('review-edit',compact('infos'));
+        }
+
+        public function reviewEditConfirm(StoreReviewForm $request)
+        {
+            $comment = $request->comment;
+            $evaluation = $request->evaluation;
+
+            $name = $request->name;
+            $image_1 = $request->image_1;
+            $avg_evaluation = $request->avg_evaluation;
+            $product_id = $request->product_id;
+            // レビューID
+            $id = $request->id;
+
+
+            // 確認画面に表示する値を格納
+            $input_data = [
+                'comment' => $comment,
+                'evaluation' => $evaluation,
+                'name' => $name,
+                'image_1' => $image_1,
+                'avg_evaluation' => $avg_evaluation,
+                'product_id' => $product_id,
+                'id' => $id
+            ];
+            return view('review-edit-confirm',compact('input_data'));
+        }
+
+        public function reviewEditStore(Request $request)
+            {
+                $id = $request->id;
+
+                if ($request->get('back')) {
+                    return redirect()->route('home.review-edit', ['id' => $id])
+                    ->withInput();
+                }
+
+                $review = Review::where('id',$id)
+                ->first();
+
+                // dd($review);
+                $review->evaluation = $request->evaluation;
+                $review->comment = $request->comment;
+
+                $review->save();
+
+                return redirect()->route('home.review-admin');
+
+            }
+
 }

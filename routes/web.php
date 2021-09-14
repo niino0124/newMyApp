@@ -54,35 +54,34 @@ Route::group(['prefix' => 'product' , 'middleware' => 'auth'],function(){
 
 
 
-
-
-
+// 会員マイページ
 Route::group(['prefix' => 'home' ,'middleware' => 'auth'],function(){
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('mypage','HomeController@show')->name('home.show');
     Route::get('leave','HomeController@leaveConfirm')->name('home.leave');
     Route::get('delete','HomeController@delete')->name('home.delete');
 
-// 会員情報
+// 会員情報変更
     Route::get('edit-profile','HomeController@editProfile')->name('home.edit-profile');
     Route::post('edit-profile-post', 'HomeController@editProfilePost')->name('home.edit-profile-post');
     Route::post('edit-profile-store', 'HomeController@editProfileStore')->name('home.edit-profile-store');
 
-// パスワード
+// パスワード変更
     Route::get('edit-password','HomeController@editPassword')->name('home.edit-password');
     Route::post('edit-password-store', 'HomeController@editPasswordStore')->name('home.edit-password-store');
 
-
-
-// メールアドレス変更フォームを表示
+// メールアドレス変更
     Route::get('edit-email','HomeController@editEmail')->name('home.edit-email');
-// メールアドレス変更情報をバリデート。auth_codeを登録。
     Route::post('edit-email-send', 'HomeController@editEmailSend')->name('home.edit-email-send');
-// auth_codeが一致したらメールアドレスを新しいのに変更。マイページへリダイレクト。
     Route::get('edit-email-complete-form', 'HomeController@editEmailCompleteForm')->name('home.edit-email-complete-form');
     Route::post('edit-email-complete', 'HomeController@editEmailComplete')->name('home.edit-email-complete');
 
 
+    // レビュー編集
     Route::get('review-admin','HomeController@reviewAdmin')->name('home.review-admin');
+    Route::get('review-edit/{id}','HomeController@reviewEdit')->name('home.review-edit');
+    Route::post('review-edit/confirm', 'HomeController@reviewEditConfirm')->name('home.review-edit-confirm');
+    Route::post('review-edit/store', 'HomeController@reviewEditStore')->name('home.review-edit-store');
+
 
     });

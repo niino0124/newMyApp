@@ -308,8 +308,15 @@ form h1 {
 
 .product_lists .product .product_body .product_star, .product_top .product .product_body .product_star {
   text-align: left;
-  margin-top: 15px;
+  margin-top: 10px;
   color: black;
+}
+
+.product_lists .product .product_body .product_comment, .product_top .product .product_body .product_comment {
+  text-align: left;
+  margin-top: 0px;
+  color: black;
+  margin-bottom: 10px;
 }
 
 .product_top {
@@ -598,6 +605,10 @@ select {
   display: flex;
 }
 
+.product_category a {
+  margin-right: 7px;
+}
+
 .element_wrap_v {
   margin-bottom: 50px;
   display: -webkit-box;
@@ -746,16 +757,14 @@ select {
 
 .blue_btn {
   border: solid #0042a5 1px;
-  border-radius: 7px;
-  display: block;
-  width: 75px;
-  padding: 4px 5px;
+  border-radius: 5px;
+  display: inline-block;
+  padding: 5px 6px;
   line-height: 1;
   background: #0042a5;
   color: white;
   font-weight: bold;
-  font-size: 1.3rem;
-  margin-left: auto;
+  font-size: 1.2rem;
 }
 
 .blue_btn:hover {
