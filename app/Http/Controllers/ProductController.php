@@ -238,7 +238,7 @@ class ProductController extends Controller
                 $query = Product::query();
                 $query->with(['productCategory', 'productSubcategory','reviews']);
                 $query->get();
-                // $query->select( 'name', 'product_category_id', 'product_subcategory_id','image_1','id');
+
 
                 if($search == null && $product_category_id == null && $product_subcategory_id == null){
                     // dump('全件表示');

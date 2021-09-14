@@ -29,7 +29,7 @@
                         <p class="product_comment">{{$review->comment}}@endif</p>
                         <div class="product_category" style="justify-content: flex-start">
                             <a href="{{route('home.review-edit',['id' => $review->id])}}" class="blue_btn">レビュー編集</a>
-                            <a href="" class="blue_btn">レビュー削除</a>
+                            <a href="{{route('home.review-delete',['id' => $review->id])}}" class="blue_btn">レビュー削除</a>
                         </div>
                     </div>
                 </li>

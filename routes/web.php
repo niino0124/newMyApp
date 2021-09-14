@@ -79,9 +79,14 @@ Route::group(['prefix' => 'home' ,'middleware' => 'auth'],function(){
 
     // レビュー編集
     Route::get('review-admin','HomeController@reviewAdmin')->name('home.review-admin');
+
     Route::get('review-edit/{id}','HomeController@reviewEdit')->name('home.review-edit');
     Route::post('review-edit/confirm', 'HomeController@reviewEditConfirm')->name('home.review-edit-confirm');
     Route::post('review-edit/store', 'HomeController@reviewEditStore')->name('home.review-edit-store');
+
+    Route::get('review-delete/{id}','HomeController@reviewDelete')->name('home.review-delete');
+    Route::post('review-delete/complete', 'HomeController@reviewDeleteComplete')->name('home.review-delete-complete');
+
 
 
     });

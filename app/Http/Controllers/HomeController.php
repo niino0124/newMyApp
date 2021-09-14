@@ -221,16 +221,26 @@ class HomeController extends Controller
             $id = Auth::id();
             $reviews = Review::where('member_id',$id)
             ->with('product.productCategory.productSubcategory')
+            ->orderBy('created_at', 'desc')
             ->paginate(5);
+
+            $back_url = null;
+            $now_route = url()->full();
+            session(['now_route' => $now_route]);
+            $back_url = session('now_route');
+            // dump($back_url);
+
             return view('review-admin',compact('reviews'));
         }
 
-        public function  reviewEdit($id)
+        public function  reviewEdit(Request $request,$id)
         {
+            $back_url = $request->session()->get("now_route");
+
             $infos = Review::where('id',$id)
             ->with('product')
             ->get();
-            return view('review-edit',compact('infos'));
+            return view('review-edit',compact('infos','back_url'));
         }
 
         public function reviewEditConfirm(StoreReviewForm $request)
@@ -262,7 +272,6 @@ class HomeController extends Controller
         public function reviewEditStore(Request $request)
             {
                 $id = $request->id;
-
                 if ($request->get('back')) {
                     return redirect()->route('home.review-edit', ['id' => $id])
                     ->withInput();
@@ -270,15 +279,31 @@ class HomeController extends Controller
 
                 $review = Review::where('id',$id)
                 ->first();
-
-                // dd($review);
                 $review->evaluation = $request->evaluation;
                 $review->comment = $request->comment;
-
                 $review->save();
-
                 return redirect()->route('home.review-admin');
 
+            }
+
+            public function  reviewDelete(Request $request ,$id)
+            {
+                $back_url = $request->session()->get("now_route");
+
+                $infos = Review::where('id',$id)
+                ->with('product')
+                ->get();
+
+                return view('review-delete-confirm',compact('infos','back_url'));
+            }
+
+            public function  reviewDeleteComplete(Request $request)
+            {
+                $id = $request->id;
+
+                Review::find($id)->delete();
+
+                return redirect()->route('home.review-admin');
             }
 
 }

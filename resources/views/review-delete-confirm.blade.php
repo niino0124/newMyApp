@@ -12,48 +12,46 @@
         </div>
     </div>
 
+    @foreach ($infos as $info)
     <div class="man-body-tables" style="padding-top:5px;">
-
-
         <ul class="product_lists" style="border-top:none;">
             <li class="product" style="align-items:flex-start;">
-                <div class="product_header"><img src="{{ '/storage/' . $input_data['image_1']}}" alt="" width="100" height="100"></div>
+                <div class="product_header"><img src="{{ '/storage/' .$info->product->image_1}}" alt="" width="100"
+                        height="100"></div>
                 <div class="product_body">
                     <div class="left-block">
-                        <p class="product_name" style="color: black;">{{ $input_data['name'] }}</p>
-                        <p class="product_star">総合評価　★★★　３</p>
+                        <p class="product_name" style="color: black;">{{ $info->product->name }}</p>
+                        <p class="product_star">@if($info->product->getAvgStarAttribute() == 0)評価なし@else 総合評価　 @for($i =
+                            0; $i < $info->product->getAvgStarAttribute();
+                                $i++)★@endfor　{{ $info->product->getAvgStarAttribute() }}@endif</p>
                     </div>
                 </div>
             </li>
         </ul>
 
-        <form method="post" action="{{ route('product.review-store') }}">
+        <form method="post" action="{{ route('home.review-delete-complete') }}">
             @csrf
             <div class="element_wrap_str_review">
                     <label for="evaluation" class="fw-bold label-w">商品評価</label>
-                <p>{{ $input_data['evaluation'] }}</p>
+                <p>{{ $info->evaluation }}</p>
             </div>
 
             <div class="element_wrap_str_review">
                 <label for="comment" class="fw-bold label-w">商品コメント</label>
                 <div class="content-wrap" style="text-align: left;">
-                    {{ $input_data['comment'] }}
+                    {{ $info->comment }}
                 </div>
             </div>
-            <input hidden value="{{$input_data['image_1']}}" name="image_1">
-            <input hidden value="{{ $input_data['name'] }}" name="name">
-            <input hidden value="{{ $input_data['product_id'] }}" name="product_id">
-            <input hidden value="{{$input_data['comment']}}" name="comment">
-            <input hidden value="{{$input_data['evaluation']}}" name="evaluation">
+
+            <input hidden value="{{ $info->id }}" name="id">
             {{-- ブルー --}}
             <div class="btn-wrap" >
                 <input href="" class="btn_b" value="レビューを削除" type="submit">
-                <input href="{{url()->previous()}}" class="btn_b btn-back_b" name="back" value="前に戻る" type="submit">
+                <a href="{{$back_url}}" class="btn_b btn-back_b" name="back" >前に戻る</a>
             </div>
         </form>
 
     </div>
+    @endforeach
 </div>
-
-
 @endsection

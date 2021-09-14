@@ -73,7 +73,7 @@
             {{-- ブルー --}}
             <div class="btn-wrap">
                 <input class="btn_b" type="submit" value="商品レビュー編集確認">
-                <a href="{{route('home.review-admin')}}" class="btn_b btn-back_b">レビュー管理に戻る</a>
+                <a href="{{$back_url}}" class="btn_b btn-back_b">レビュー管理に戻る</a>
             </div>
         </form>
     </div>
