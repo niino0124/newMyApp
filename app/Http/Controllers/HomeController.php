@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use App\Member;
+use App\Review;
 use App\Rules\Hankaku;
-use App\Rules\MemberAuthCode;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Facades\Mail;
@@ -162,10 +162,6 @@ class HomeController extends Controller
 
 
 
-
-
-
-
             // メールアドレスリセット
         public function  editEmail()
         {
@@ -193,10 +189,6 @@ class HomeController extends Controller
             // auth_codeを入力されたメールアドレスに送信。
             Mail::to($email)->send(new AuthMail($str));
             $auth_code = $member->auth_code;
-
-
-
-
             return redirect()->route('home.edit-email-complete-form',compact('email','auth_code'));
         }
 
@@ -209,23 +201,29 @@ class HomeController extends Controller
 
         public function  editEmailComplete(Request $request)
         {
-
             // バリデーション
             $this->validatorAuth($request->all())->validate();
-            // dd($request->all());
             // バリデーション通ったら入力値を変数に代入
             $email = $request->email;
-
-
-
             // 会員情報の更新
             $id = Auth::id();
             $member = Member::find($id);
             // 新しいメールアドレスに更新
             $member->email = $email;
             $member->save();
-
             return redirect()->route('home.show');
         }
 
+
+// 商品レビュー管理
+        public function  reviewAdmin()
+        {
+            $id = Auth::id();
+
+            $reviews = Review::where('member_id',$id)
+            ->with('product')
+            ->paginate(2);
+
+            return view('review-admin',compact('reviews'));
+        }
 }

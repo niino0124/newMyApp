@@ -309,14 +309,10 @@ class ProductController extends Controller
                 // $prev_url = url()->current();
                 $back_url = $request->session()->get("now_route");
                 dump($back_url);
-
-
-
                 $product = Product::find($id);
                 $evaluations = Review::where('product_id',$id)
                 ->select('evaluation')
                 ->get();
-
                 $avg = $evaluations->avg('evaluation');
                 $avg = ceil($avg);
                 return view('products.show',compact('product','avg','back_url'));
@@ -339,6 +335,7 @@ class ProductController extends Controller
                 $image_4 = $request->image_4;
                 $comment = $request->comment;
                 $evaluation = $request->evaluation;
+                $avg_evaluation = $request->avg_evaluation;
                 $product_id = $request->product_id;
 
 
@@ -351,6 +348,7 @@ class ProductController extends Controller
                     'image_4' => $image_4,
                     'comment' => $comment,
                     'evaluation' => $evaluation,
+                    'avg_evaluation' => $avg_evaluation,
                     'product_id' => $product_id
                 ];
 
@@ -385,14 +383,11 @@ class ProductController extends Controller
             public function reviewArchive($id)
             {
                 $product = Product::find($id);
-
                 $reviews = Review::where('product_id',$id)
                 ->with('member')
                 ->paginate(5);
-
                 $avg = $reviews->avg('evaluation');
                 $avg = ceil($avg);
-
                 return view('products.review-archive',compact('product','avg','reviews'));
             }
 

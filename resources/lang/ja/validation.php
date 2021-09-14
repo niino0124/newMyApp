@@ -44,7 +44,7 @@ return [
     'file'                 => '※:attributeにはファイルを指定してください。',
     'filled'               => '※:attributeには空でない値を指定してください。',
     'image'                => '※:attributeには画像ファイルを指定してください。',
-    'in'                   => '※:attributeには男性と女性、いずれかの値を指定してください。',
+    'in'                   => '※:attributeには範囲内の値を指定してください。',
     'in_array'             => '※:attributeが:otherに含まれていません。',
     'integer'              => '※:attributeには整数を指定してください。',
     'ip'                   => '※:attributeには正しい形式のIPアドレスを指定してください。',
@@ -104,7 +104,14 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'evaluation' => [
+            'in' => '五段階評価です',
+        ],
+        'gender' => [
+            'in' => '性別を男性と女性からお選びください'
+        ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -117,6 +124,8 @@ return [
     |
     */
 // 以下に自分で付け加えることができる
+
+
     'attributes' => [
         'password' => 'パスワード',
         'name_sei' => '氏名（姓）',
@@ -134,7 +143,8 @@ return [
         'image_4'=> '画像',
         'auth_code'=> '新しいメールアドレスへ送信された認証コード',
         'auth_code_input'=> '入力した認証コード',
-
+        'comment'=> '商品コメント',
+        'evaluation'=> '商品評価',
     ],
 
 ];

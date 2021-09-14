@@ -1,13 +1,13 @@
 @extends('layouts.app')
-@section('title', '商品レビュー登録確認')
+@section('title', '商品レビュー編集確認')
 @section('content')
 
 <div class="blue-board ">
     <div class="header">
         <div class="simple-wrap_sb">
-            <p class="fw-bold">商品レビュー登録確認</p>
+            <p class="fw-bold">商品レビュー編集確認</p>
             <div class="simple-wrap">
-                <a href="/home" class="btn-simple" >トップに戻る</a>
+                <a href="{{route('home')}}" class="btn-simple" >トップに戻る</a>
             </div>
         </div>
     </div>
@@ -21,8 +21,7 @@
                 <div class="product_body">
                     <div class="left-block">
                         <p class="product_name" style="color: black;">{{ $input_data['name'] }}</p>
-                        {{-- <p class="product_star">総合評価　★★★　{{$input_data['avg_evaluation']}}</p> --}}
-                        <p class="product_star">@if($input_data['avg_evaluation'] == 0)評価なし@else 総合評価　 @for($i = 0; $i < $input_data['avg_evaluation']; $i++)★@endfor　{{ $input_data['avg_evaluation'] }}@endif</p>
+                        <p class="product_star">総合評価　★★★　３</p>
                     </div>
                 </div>
             </li>
@@ -48,7 +47,7 @@
             <input hidden value="{{$input_data['evaluation']}}" name="evaluation">
             {{-- ブルー --}}
             <div class="btn-wrap" >
-                <input href="" class="btn_b" value="登録する" type="submit">
+                <input href="" class="btn_b" value="更新する" type="submit">
                 <input href="{{url()->previous()}}" class="btn_b btn-back_b" name="back" value="前に戻る" type="submit">
             </div>
         </form>

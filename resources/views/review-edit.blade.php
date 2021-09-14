@@ -1,13 +1,13 @@
 @extends('layouts.app')
-@section('title', '商品レビュー登録')
+@section('title', '商品レビュー編集')
 @section('content')
 
 <div class="blue-board ">
     <div class="header">
         <div class="simple-wrap_sb">
-            <p class="fw-bold">商品レビュー登録</p>
+            <p class="fw-bold">商品レビュー編集</p>
             <div class="simple-wrap">
-                <a href="/home" class="btn-simple" >トップに戻る</a>
+                <a href="{{route('home')}}" class="btn-simple" >トップに戻る</a>
             </div>
         </div>
     </div>
@@ -24,34 +24,30 @@
                 </div>
             </li>
         </ul>
-        <form method="POST" action="{{ route('product.review-confirm') }}">
+        <form method="POST" action="">
             @csrf
             <div class="element_wrap_str_review">
                     <label for="evaluation" class="evaluation">商品評価</label>
 
-                    <div class="content-wrap">
-                        <div class="cp_ipselect cp_sl02">
-                            <select required name="evaluation">
-                                <option value="" hidden>選択してください</option>
-                                <option value="5" @if(old('evaluation')=='5') selected  @endif>5</option>
-                                <option value="4" @if(old('evaluation')=='4') selected  @endif>4</option>
-                                <option value="3" @if(old('evaluation')=='3') selected  @endif>3</option>
-                                <option value="2" @if(old('evaluation')=='2') selected  @endif>2</option>
-                                <option value="1" @if(old('evaluation')=='1') selected  @endif>1</option>
-                            </select>
-
-                        </div>
-                        @error('evaluation')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                        @enderror
-
+                    <div class="cp_ipselect cp_sl02">
+                        <select required name="evaluation">
+                            <option value="" hidden>選択してください</option>
+                            <option value="5" @if(old('evaluation')=='5') selected  @endif>5</option>
+                            <option value="4" @if(old('evaluation')=='4') selected  @endif>4</option>
+                            <option value="3" @if(old('evaluation')=='3') selected  @endif>3</option>
+                            <option value="2" @if(old('evaluation')=='2') selected  @endif>2</option>
+                            <option value="1" @if(old('evaluation')=='1') selected  @endif>1</option>
+                        </select>
                     </div>
 
+                            @error('evaluation')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
             </div>
             <div class="element_wrap_fill_no_margin">
-                <label for="comment" style="margin-right:15px;">商品コメント</label>
+                <label for="comment">商品コメント</label>
                 <div class="content-wrap">
                     <textarea id="comment" type="text" class=" @error('comment') is-invalid @enderror"
                         name="comment" style="height: 90px">{{ old('comment') }}</textarea>
@@ -65,11 +61,10 @@
             <input hidden value="{{$product->image_1}}" name="image_1">
             <input hidden value="{{$product->name}}" name="name">
             <input hidden value="{{$product->id}}" name="product_id">
-            <input hidden value="{{$product->getAvgStarAttribute()}}" name="avg_evaluation">
             {{-- ブルー --}}
             <div class="btn-wrap" >
-                <input  class="btn_b" type="submit" value="商品レビュー登録確認">
-                <a href="{{url()->previous()}}" class="btn_b btn-back_b">商品詳細に戻る</a>
+                <input  class="btn_b" type="submit" value="商品レビュー編集確認">
+                <a href="{{url()->previous()}}" class="btn_b btn-back_b">レビュー管理に戻る</a>
             </div>
         </form>
     </div>

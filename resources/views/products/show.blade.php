@@ -49,7 +49,9 @@
     </div>
 </div>
         <div class="btn-wrap" >
+            @auth
             <a href="{{ route('product.review',['id' => $product->id]) }}" class="blue_btn_md_con">この商品についてのレビューを登録</a>
+            @endauth
             <a href="{{ $back_url }}" class="blue_btn_md">商品一覧に戻る</a>
         </div>
     </div>

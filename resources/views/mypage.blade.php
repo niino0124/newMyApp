@@ -56,6 +56,14 @@
             </div>
         </div>
 
+        <div class="element_wrap_str">
+            <label></label>
+            <div class="fl_col_start">
+                {{-- ブルー --}}
+                <a href="{{route('home.review-admin')}}" class="btn_b" type="submit" >商品レビュー管理</a>
+            </div>
+        </div>
+
         {{-- ブルー --}}
         <div class="btn-wrap">
             <a href="{{route('home.leave')}}" class="btn-back_b" type="submit">退会</a>

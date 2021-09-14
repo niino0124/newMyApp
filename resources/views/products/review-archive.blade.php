@@ -24,7 +24,8 @@
                 <div class="product_body">
                     <div class="left-block" >
                         <p class="product_name" style="color: black;">{{ $product['name'] }}</p>
-                        <p class="product_star" >総合評価　@for($i = 0; $i < $avg; $i++)★@endfor {{$avg}}</p>
+                        {{-- <p class="product_star" >総合評価　@for($i = 0; $i < $avg; $i++)★@endfor {{$avg}}</p> --}}
+                        <p class="product_star" >総合評価　@for($i = 0; $i < $product->getAvgStarAttribute(); $i++)★@endfor {{$product->getAvgStarAttribute()}}</p>
                     </div>
                 </div>
             </li>
