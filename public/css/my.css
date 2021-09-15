@@ -47,7 +47,7 @@ a {
   text-decoration: none;
 }
 
-form h1 {
+form h1, .form_blue h1 {
   margin-bottom: 20px;
 }
 
@@ -73,7 +73,7 @@ form h1 {
   }
 }
 
-form {
+form, .form_blue {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   text-align: center;
@@ -82,14 +82,18 @@ form {
   max-width: 810px;
 }
 
-form h1 {
+form h1, .form_blue h1 {
   font-weight: bold;
 }
 
 @media screen and (max-width: 767px) {
-  form {
+  form, .form_blue {
     width: 95%;
   }
+}
+
+.form_blue {
+  background: aliceblue;
 }
 
 .blue-board {

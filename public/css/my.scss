@@ -101,6 +101,12 @@ form {
     }
 }
 
+.form_blue{
+    @extend form;
+    background: aliceblue;
+
+}
+
 .blue-board {
     padding: 0;
     border: 1px solid black;
@@ -926,6 +932,7 @@ input[name="title"] {
     padding: 20px 40px;
     max-width: 550px;
 }
+
 .block-a {
     width: 100%;
     justify-content: flex-start;

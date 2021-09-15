@@ -87,6 +87,9 @@ Route::group(['prefix' => 'home' ,'middleware' => 'auth'],function(){
     Route::get('review-delete/{id}','HomeController@reviewDelete')->name('home.review-delete');
     Route::post('review-delete/complete', 'HomeController@reviewDeleteComplete')->name('home.review-delete-complete');
 
+    // 管理画面
+    // Route::get('admin/login','AdminController@login')->name('login');
+
 
 
     });

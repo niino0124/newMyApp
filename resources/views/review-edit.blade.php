@@ -37,11 +37,12 @@
                     <div class="cp_ipselect cp_sl02">
                         <select required name="evaluation">
                             <option value="" hidden>選択してください</option>
-                            <option value="5" @if(old('evaluation') =='5') selected @elseif($info->evaluation =='5') selected @endif>5</option>
-                            <option value="4" @if(old('evaluation') =='4') selected @elseif($info->evaluation =='4') selected @endif>4</option>
-                            <option value="3" @if(old('evaluation') =='3') selected @elseif($info->evaluation =='3') selected @endif>3</option>
-                            <option value="2" @if(old('evaluation') =='2') selected @elseif($info->evaluation =='2') selected @endif>2</option>
-                            <option value="1" @if(old('evaluation') =='1') selected @elseif($info->evaluation =='1') selected @endif>1</option>
+
+                            <option value="5" @if(old('evaluation') == null && $info->evaluation =='5')selected @elseif(old('evaluation') != null && old('evaluation') =='5')  selected @endif>5</option>
+                            <option value="4" @if(old('evaluation') == null && $info->evaluation =='4')selected @elseif(old('evaluation') != null && old('evaluation') =='4')  selected @endif>4</option>
+                            <option value="3" @if(old('evaluation') == null && $info->evaluation =='3')selected @elseif(old('evaluation') != null && old('evaluation') =='3')  selected @endif>3</option>
+                            <option value="2" @if(old('evaluation') == null && $info->evaluation =='2')selected @elseif(old('evaluation') != null && old('evaluation') =='2')  selected @endif>2</option>
+                            <option value="1" @if(old('evaluation') == null && $info->evaluation =='1')selected @elseif(old('evaluation') != null && old('evaluation') =='1')  selected @endif>1</option>
                         </select>
                     </div>
                     @error('evaluation')
