@@ -36,7 +36,7 @@
 
             <div class="element_wrap_str_review">
                 <label for="comment" class="fw-bold label-w">商品コメント</label>
-                <div class="content-wrap" style="text-align: left;">
+                <div class="content-wrap" style="text-align: left; width:300px;">
                     {{ $input_data['comment'] }}
                 </div>
             </div>
@@ -45,7 +45,7 @@
             <input hidden value="{{ $input_data['product_id'] }}" name="product_id">
             <input hidden value="{{$input_data['comment']}}" name="comment">
             <input hidden value="{{$input_data['evaluation']}}" name="evaluation">
-            
+
             <input hidden value="{{$input_data['id']}}" name="id">
             {{-- ブルー --}}
             <div class="btn-wrap" >

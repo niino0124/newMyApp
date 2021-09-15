@@ -25,8 +25,9 @@
                         <div class="left-block"><p class="cat">{{ $review->product->productCategory->name }}＞{{ $review->product->productSubcategory->name }}</p></div>
                         <a href="" ><p class="product_name" >{{$review->product->name}}</p>
                         </a>
+
                         <p class="product_star">@if($review->evaluation == 0)評価なし@else @for($i = 0; $i < $review->evaluation; $i++)★@endfor　{{$review->evaluation}}</p>
-                        <p class="product_comment">{{$review->comment}}@endif</p>
+                        <p class="product_comment">{{ Str::limit($review->comment,32) }} @endif </p>
                         <div class="product_category" style="justify-content: flex-start">
                             <a href="{{route('home.review-edit',['id' => $review->id])}}" class="blue_btn">レビュー編集</a>
                             <a href="{{route('home.review-delete',['id' => $review->id])}}" class="blue_btn">レビュー削除</a>
