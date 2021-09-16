@@ -136,6 +136,12 @@ form {
     background: #ffebc8;
     padding: 40px 25px 50px;
 }
+
+.man-body_b {
+    @extend .man-body;
+    background: aliceblue;
+}
+
 .man-body-tables {
     background: #ffebc8;
     height: auto;
@@ -446,6 +452,7 @@ input[name="pref_name"] {
 
 input[name="nickname"],
 input[name="password"],
+input[name="login_id"],
 input[name="password_confirmation"],
 input[name="email"] {
     width: 220px;
@@ -839,6 +846,11 @@ ul {
     width: 100%;
     padding: 0 30px;
     box-sizing: border-box;
+}
+
+.header_b {
+    @extend .header;
+    background: gainsboro;
 
 }
 

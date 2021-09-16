@@ -124,11 +124,15 @@ form h1, .form_blue h1 {
   }
 }
 
-.man-body {
+.man-body, .man-body_b {
   min-height: 250px;
   height: inherit;
   background: #ffebc8;
   padding: 40px 25px 50px;
+}
+
+.man-body_b {
+  background: aliceblue;
 }
 
 .man-body-tables {
@@ -477,6 +481,7 @@ input[name="pref_name"] {
 
 input[name="nickname"],
 input[name="password"],
+input[name="login_id"],
 input[name="password_confirmation"],
 input[name="email"] {
   width: 220px;
@@ -485,6 +490,7 @@ input[name="email"] {
 @media screen and (max-width: 767px) {
   input[name="nickname"],
   input[name="password"],
+  input[name="login_id"],
   input[name="password_confirmation"],
   input[name="email"] {
     width: 200px;
@@ -879,13 +885,17 @@ ul {
   display: block;
 }
 
-.header {
+.header, .header_b {
   background: rgba(255, 207, 171, 0.81);
   height: 50px;
   width: 100%;
   padding: 0 30px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+.header_b {
+  background: gainsboro;
 }
 
 .welcome_name {

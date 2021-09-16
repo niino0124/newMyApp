@@ -86,29 +86,26 @@ Route::group(['prefix' => 'home' ,'middleware' => 'auth'],function(){
 
     Route::get('review-delete/{id}','HomeController@reviewDelete')->name('home.review-delete');
     Route::post('review-delete/complete', 'HomeController@reviewDeleteComplete')->name('home.review-delete-complete');
-
-
+    });
 
 
 // 管理者
-Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
-
-    // ログイン認証関連
-    Auth::routes([
-        'register' => true,
-        'reset'    => false,
-        'verify'   => false
-    ]);
-
-    // ログイン認証後
-    Route::middleware('auth:admin')->group(function () {
-
-        // TOPページ
-        Route::resource('home', 'HomeController', ['only' => 'index']);
-
-    });
-
+/*
+|--------------------------------------------------------------------------
+| 3) Admin 認証不要
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix' => 'admin'], function() {
+    Route::get('/',         function () { return redirect('/admin/home'); });
+    Route::get('login','Admin\Auth\LoginController@showLoginForm')->name('admin.login');
+    Route::post('login','Admin\Auth\LoginController@login');
 });
-
-
-    });
+/*
+|--------------------------------------------------------------------------
+| 4) Admin ログイン後
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
+    Route::post('logout', 'Admin\Auth\LoginController@logout')->name('admin.logout');
+    Route::get('home','Admin\HomeController@index')->name('admin.home');
+});
