@@ -113,8 +113,14 @@ form {
     min-width: 450px;
     min-height: 260px;
     @include mq(sm) {
-        width: 100%;
+        width: 96%;
     }
+}
+
+.blue-board_admin{
+  @extend .blue-board;
+  min-width: 550px;
+
 }
 
 .board {

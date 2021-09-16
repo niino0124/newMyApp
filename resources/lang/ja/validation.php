@@ -145,6 +145,7 @@ return [
         'auth_code_input'=> '入力した認証コード',
         'comment'=> '商品コメント',
         'evaluation'=> '商品評価',
+        'login_id'=> 'ログインID',
     ],
 
 ];

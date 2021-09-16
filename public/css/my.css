@@ -96,7 +96,7 @@ form h1, .form_blue h1 {
   background: aliceblue;
 }
 
-.blue-board {
+.blue-board, .blue-board_admin {
   padding: 0;
   border: 1px solid black;
   min-width: 450px;
@@ -104,9 +104,13 @@ form h1, .form_blue h1 {
 }
 
 @media screen and (max-width: 767px) {
-  .blue-board {
-    width: 100%;
+  .blue-board, .blue-board_admin {
+    width: 96%;
   }
+}
+
+.blue-board_admin {
+  min-width: 550px;
 }
 
 .board {
