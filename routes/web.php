@@ -87,9 +87,28 @@ Route::group(['prefix' => 'home' ,'middleware' => 'auth'],function(){
     Route::get('review-delete/{id}','HomeController@reviewDelete')->name('home.review-delete');
     Route::post('review-delete/complete', 'HomeController@reviewDeleteComplete')->name('home.review-delete-complete');
 
-    // 管理画面
-    // Route::get('admin/login','AdminController@login')->name('login');
 
+
+
+// 管理者
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
+
+    // ログイン認証関連
+    Auth::routes([
+        'register' => true,
+        'reset'    => false,
+        'verify'   => false
+    ]);
+
+    // ログイン認証後
+    Route::middleware('auth:admin')->group(function () {
+
+        // TOPページ
+        Route::resource('home', 'HomeController', ['only' => 'index']);
+
+    });
+
+});
 
 
     });
