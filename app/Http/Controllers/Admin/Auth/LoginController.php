@@ -12,6 +12,12 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
+// 追加(1937)
+    public function username()
+    {
+        return 'login_id';
+    }
+
     // protected $redirectTo = RouteServiceProvider::ADMIN_HOME;
     protected $redirectTo = '/admin/home'; // 変更
 
