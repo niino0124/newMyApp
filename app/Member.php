@@ -50,7 +50,7 @@ class Member extends Authenticatable
      * メールアドレス確定メールを送信
      *
      * @param [type] $token
-     * 
+     *
      */
     public function sendEmailResetNotification($auth_code)
     {
@@ -66,5 +66,15 @@ class Member extends Authenticatable
     {
         return $this->email;
     }
+
+    public function order($select){
+    if($select == 'asc'){
+        return $this->orderBy('created_at', 'asc')->get();
+    } elseif($select == 'desc') {
+        return $this->orderBy('created_at', 'desc')->get();
+    } else {
+        return $this->all();
+    }
+}
 
 }

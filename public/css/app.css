@@ -605,7 +605,7 @@ pre code {
   .container-md,
   .container-sm,
   .container {
-    max-width: 960px;
+    /* max-width: 960px; */
   }
 }
 

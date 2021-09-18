@@ -77,8 +77,7 @@ form, .form_blue {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   text-align: center;
-  background: #ffebc8;
-  padding: 40px 40px;
+  padding: 0px 40px 40px 40px;
   max-width: 810px;
 }
 
@@ -111,6 +110,7 @@ form h1, .form_blue h1 {
 
 .blue-board_admin {
   min-width: 550px;
+  max-width: 610px;
 }
 
 .board {
@@ -229,6 +229,7 @@ form h1, .form_blue h1 {
   background: rgba(211, 207, 207, 0.712);
   font-weight: normal;
   height: 20px !important;
+  width: auto;
 }
 
 .tabletest td {
@@ -237,12 +238,16 @@ form h1, .form_blue h1 {
   vertical-align: middle;
 }
 
+.tabletest .t_id {
+  width: 5%;
+}
+
 .tabletest .t_gender {
   width: 7.5%;
 }
 
-.tabletest .t_name {
-  width: 20%;
+.tabletest .t_created_at {
+  width: 12%;
 }
 
 .tabletest .t_id,
@@ -258,10 +263,23 @@ form h1, .form_blue h1 {
   height: inherit;
 }
 
-.tabletest .t_id {
-  width: 7%;
-  padding-left: 5px;
-  text-align: left !important;
+.form_sp {
+  background: transparent;
+  position: absolute;
+  display: inline-block;
+  border: none;
+  width: 13px !important;
+  height: 13px;
+  margin: 0;
+  padding: 0;
+  bottom: 8px;
+  right: 7px;
+}
+
+.form_sp input[name="asc"],
+.form_sp input[name="desc"] {
+  background: transparent;
+  border: none;
 }
 
 .edit {

@@ -23,26 +23,26 @@ p {
     font-weight: bold;
 }
 
-.center{
+.center {
     text-align: center;
     font-size: 1.4rem;
     display: block;
 }
 
-.label-w{
+.label-w {
     width: 200px;
     margin-right: 30px;
 }
 
-.fl_col_start{
+.fl_col_start {
     @extend .btn-wrap;
 
-.btn_b{
-    margin-top: 10px;
-}
+    .btn_b {
+        margin-top: 10px;
+    }
 }
 
-.tal{
+.tal {
     text-align: left;
 }
 
@@ -89,8 +89,8 @@ form {
 form {
     box-sizing: border-box;
     text-align: center;
-    background: rgb(255, 235, 200);
-    padding: 40px 40px;
+    // background: rgb(255, 235, 200);
+    padding: 0px 40px 40px 40px;
     max-width: 810px;
 
     h1 {
@@ -101,10 +101,9 @@ form {
     }
 }
 
-.form_blue{
+.form_blue {
     @extend form;
     background: aliceblue;
-
 }
 
 .blue-board {
@@ -117,10 +116,10 @@ form {
     }
 }
 
-.blue-board_admin{
-  @extend .blue-board;
-  min-width: 550px;
-
+.blue-board_admin {
+    @extend .blue-board;
+    min-width: 550px;
+    max-width: 610px;
 }
 
 .board {
@@ -180,7 +179,7 @@ form {
 
         .img_wrap_item {
             margin-right: 10px;
-            img{
+            img {
                 object-fit: cover;
             }
         }
@@ -188,7 +187,6 @@ form {
 
     .content_wrap {
         margin-top: 20px;
-
 
         p + p {
             margin-top: 10px;
@@ -223,6 +221,7 @@ form {
         background: rgba(211, 207, 207, 0.712);
         font-weight: normal;
         height: 20px !important;
+        width: auto;
     }
     td {
         background: white;
@@ -230,11 +229,22 @@ form {
         vertical-align: middle;
     }
 
+    .t_id {
+        width: 5%;
+        // padding-left: 5px;
+        // text-align: left !important;
+        // margin: 0;
+    }
+    .t_name {
+        // width: 20%;
+    }
+
     .t_gender {
         width: 7.5%;
     }
-    .t_name {
-        width: 20%;
+
+    .t_created_at {
+        width: 12%;
     }
 
     .t_id,
@@ -248,12 +258,54 @@ form {
             height: inherit;
         }
     }
-    .t_id {
-        width: 7%;
-        padding-left: 5px;
-        text-align: left !important;
-        // margin: 0;
+}
+
+.form_sp {
+    background: transparent;
+    position: absolute;
+    display: inline-block;
+    border: none;
+    width: 13px !important;
+    height: 13px;
+    margin: 0;
+    padding: 0;
+    bottom: 8px;
+    right: 7px;
+    input[name="asc"],
+    input[name="desc"] {
+        background: transparent;
+        border: none;
     }
+
+    // .label {
+    //     margin-left: 5px;
+    //     position: relative;
+    //     margin-bottom: 0;
+    //     display: inline-block;
+    //     width: 15px;
+    //     height: 15px;
+    //     &::after {
+    //         position: absolute;
+    //         top: 0;
+    //         left: 0;
+    //         content: "▼";
+    //         width: 15px;
+    //         height: 15px;
+    //     }
+    // }
+    // input[type="checkbox"]:checked + label {
+    //     &::after {
+    //         position: absolute;
+    //         content: "▲";
+    //         top: 0;
+    //         left: 0;
+    //         width: 20px;
+    //         height: 20px;
+    //     }
+    // }
+    // .label:hover {
+    //     opacity: 0.6; /* マウスオーバー時の背景色を指定する */
+    // }
 }
 
 .edit {
@@ -321,7 +373,7 @@ form {
     border: none;
     margin-top: 0px;
     .product {
-        border-bottom:none;
+        border-bottom: none;
         padding: 0px;
 
         .product_body {
@@ -341,9 +393,8 @@ form {
         }
     }
 
-
     .product_star,
-    .product_name{
+    .product_name {
         font-size: 1.8rem;
     }
 }
@@ -504,15 +555,15 @@ input[type="file"] {
     width: 100%;
 }
 
-.pics_wrap{
-    margin-left:30px;
+.pics_wrap {
+    margin-left: 30px;
 }
 
 .view_box {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
-    img{
+    img {
         object-fit: cover;
     }
 }
@@ -587,7 +638,7 @@ select {
 
 .product_category {
     display: flex;
-    a{
+    a {
         margin-right: 7px;
     }
 }
@@ -662,11 +713,11 @@ select {
 // 基本ボタン集
 .btn {
     display: inline-block;
-    min-width:150px;
-    padding:8px 15px;
+    min-width: 150px;
+    padding: 8px 15px;
     text-decoration: none;
     background-color: rgb(255, 136, 0);
-    border:rgb(255, 136, 0) solid 1px;
+    border: rgb(255, 136, 0) solid 1px;
     border-radius: 8px;
     color: white;
     font-weight: bold;
@@ -679,11 +730,11 @@ select {
     }
 }
 
-.btn_b{
+.btn_b {
     @extend .btn;
     background-color: #486693;
     font-size: 1.4rem;
-    border-color:#486693 ;
+    border-color: #486693;
 
     &:hover,
     &:focus {
@@ -708,17 +759,16 @@ select {
     @extend .btn;
 
     background-color: white;
-    color:#486693;
-    border-color:#486693;
+    color: #486693;
+    border-color: #486693;
     font-size: 1.4rem;
 
     &:hover,
     &:focus {
         background-color: #486693;
         color: white;
-        border-color:#486693;
+        border-color: #486693;
     }
-
 }
 
 // 中サイズボタン集
@@ -753,7 +803,6 @@ select {
     &:hover {
         opacity: 0.7;
     }
-
 }
 
 .blue_btn_md {
@@ -809,7 +858,6 @@ select {
     align-items: flex-start;
 }
 
-
 .add-wrap {
     display: flex;
     flex-wrap: nowrap;
@@ -822,8 +870,6 @@ select {
     display: flex;
     flex-direction: column;
 }
-
-
 
 // エラーメッセージ
 .content_wrap {
@@ -857,10 +903,9 @@ ul {
 .header_b {
     @extend .header;
     background: gainsboro;
-
 }
 
-.welcome_name{
+.welcome_name {
     margin-right: 20px;
 }
 
@@ -923,7 +968,7 @@ ul {
 
 // スレッド作成フォーム
 .content-wrap {
-@extend .btn-wrap;
+    @extend .btn-wrap;
 }
 
 textarea {
@@ -1146,8 +1191,6 @@ table {
     vertical-align: middle;
 }
 
-
-
 h1 {
     margin-bottom: 0;
     font-size: 2rem;
@@ -1177,8 +1220,6 @@ h1 {
     line-height: 1.7;
     text-align: left;
 }
-
-
 
 // テスト用。確認後削除
 a:link {
