@@ -7,7 +7,7 @@
         <div class="simple-wrap_sb">
             <p class="fw-bold">会員一覧</p>
             <div class="simple-wrap">
-                <a class="btn-simple" href="{{ route('admin.home') }}" >
+                <a class="btn-simple" href="{{ route('admin.home') }}">
                     トップへ戻る
                 </a>
             </div>
@@ -16,7 +16,7 @@
     <div class="man-body_b ">
 
         <div>
-            <form  class="search_container search_container_mem" method="GET" action="{{route('admin.members')}}">
+            <form class="search_container search_container_mem" method="GET" action="{{route('admin.members')}}">
                 @csrf
                 <table class="mem-search">
                     <tr>
@@ -54,8 +54,9 @@
                 <th class="t_id">ID
                     {{-- action="{{route('admin.members')}}" --}}
                     <form class="form_sp" method="get" action="">
-                            {{-- <input type="submit" name='asc' id="asc" value="▲" class="asc" > --}}
-                            {{-- <input type="submit" name='asc' id="asc" class="asc" value="降順" data-id='asc' > --}}
+                        <input type="submit" name='order' id="asc" value="昇順" class="asc">
+                        <input type="submit" name='order' id="desc" class="desc" value="降順" data-id='desc'>
+                    </form>
 
                     </form>
                 </th>
@@ -65,7 +66,7 @@
                 <th class="t_created_at">登録日時 <form class="form_sp" method="get">
                         {{-- <input type="submit" name='desc' id="desc" value="昇順"> --}}
                         {{-- <input type="submit" name='asc' id="asc" value="降順"> --}}
-                        <input type="submit" name='asc' id="asc" value="▲" class="asc">
+                        <input type="submit" value="▲" class="asc">
                     </form>
                 </th>
                 {{-- <th class="t_gender">編集</th>
@@ -77,7 +78,7 @@
                 <td>{{$member->name_sei}}　{{$member->name_mei}}</td>
                 <td><a href="" class="edit">{{$member->email}}</a></td>
                 <td>@if ($member->gender == 1)男性 @else 女性
-                @endif</td>
+                    @endif</td>
                 <td>{{$member->created_at->format('Y/n/j')}}</td>
                 {{-- <td><a href="" class="edit">編集</a></td>
                     <td><a href="" class="edit">詳細</a></td> --}}

@@ -62,29 +62,41 @@ class HomeController extends Controller
                 }
             };
         }
+
+        // セッションを取り出す
+        $order = $request->session()->get("order");
+
         $query->orderBy('id', 'desc');
         $members = $query->paginate(5);
 
         return view('admin.member-archive',compact('members'));
     }
 
-    function fetch_data(Request $request)
-    {
-     if($request->ajax())
-     {
-      $sort_by = $request->get('sortby');
-      $sort_type = $request->get('sorttype');
-            $query = $request->get('query');
-            $query = str_replace(" ", "%", $query);
-      $data = DB::table('post')
-                    ->where('id', 'like', '%'.$query.'%')
-                    ->orWhere('post_title', 'like', '%'.$query.'%')
-                    ->orWhere('post_description', 'like', '%'.$query.'%')
-                    ->orderBy($sort_by, $sort_type)
-                    ->paginate(5);
-      return view('pagination_data', compact('data'))->render();
-     }
-    }
+    // public function showMemberArchiveOrder(Request $request){
+    //     $order = $request->order;
+    //       //セッションに書き込む
+    //     $request->session()->put("order", $order);
+    //     return $order = $request->session()->get("order");
+
+    // }
+
+    // function fetch_data(Request $request)
+    // {
+    //  if($request->ajax())
+    //  {
+    //   $sort_by = $request->get('sortby');
+    //   $sort_type = $request->get('sorttype');
+    //         $query = $request->get('query');
+    //         $query = str_replace(" ", "%", $query);
+    //   $data = DB::table('post')
+    //                 ->where('id', 'like', '%'.$query.'%')
+    //                 ->orWhere('post_title', 'like', '%'.$query.'%')
+    //                 ->orWhere('post_description', 'like', '%'.$query.'%')
+    //                 ->orderBy($sort_by, $sort_type)
+    //                 ->paginate(5);
+    //   return view('pagination_data', compact('data'))->render();
+    //  }
+    // }
 
 
 }
