@@ -53,24 +53,17 @@
             <tr>
                 <th class="t_id">ID
                     {{-- action="{{route('admin.members')}}" --}}
-                    <form class="form_sp" method="get" action="">
+                    {{-- <form class="form_sp" method="get" action="">
                         <input type="submit" name='order' id="asc" value="昇順" class="asc">
                         <input type="submit" name='order' id="desc" class="desc" value="降順" data-id='desc'>
-                    </form>
-
-                    </form>
+                    </form> --}}
                 </th>
                 <th class="t_name">氏名</th>
                 <th class="t_email">メールアドレス</th>
                 <th class="t_gender">性別</th>
-                <th class="t_created_at">登録日時 <form class="form_sp" method="get">
-                        {{-- <input type="submit" name='desc' id="desc" value="昇順"> --}}
-                        {{-- <input type="submit" name='asc' id="asc" value="降順"> --}}
-                        <input type="submit" value="▲" class="asc">
-                    </form>
+                <th class="t_created_at">登録日時
+
                 </th>
-                {{-- <th class="t_gender">編集</th>
-                    <th class="t_gender">詳細</th> --}}
             </tr>
             @foreach ($members as $member)
             <tr>
@@ -80,8 +73,6 @@
                 <td>@if ($member->gender == 1)男性 @else 女性
                     @endif</td>
                 <td>{{$member->created_at->format('Y/n/j')}}</td>
-                {{-- <td><a href="" class="edit">編集</a></td>
-                    <td><a href="" class="edit">詳細</a></td> --}}
             </tr>
             @endforeach
         </table>
@@ -90,21 +81,4 @@
         </div>
     </div>
 </div>
-{{-- jQuery --}}
-{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script>
-        $(document).ready(function () {
-            var asc = '<input type="submit" name="asc" id="asc" value="▲" class="asc">',
-                desc = '<input type="submit" name="desc" id="desc"  value="▼" class="desc">';
-            $("#id_order").on('submit', function(e){
-                $(".asc").hide();
-                $(".form_sp").append(desc);
-        });
-            $(".desc").on('submit', function(e){
-                $(".desc").hide();
-                $(".form_sp").append(asc);
-        });
-    });
-    </script> --}}
 @endsection
