@@ -4,7 +4,7 @@
 <div class="blue-board">
     <div class="header">
     </div>
-    <form method="POST" action="{{ route('password.update') }}">
+    <form method="POST" action="{{ route('password.update') }}" class="">
         @csrf
 
         <input type="hidden" name="token" value="{{ $token }}">

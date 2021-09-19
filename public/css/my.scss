@@ -95,7 +95,7 @@ form {
     h1 {
         font-weight: bold;
     }
-    
+
     @include mq(sm) {
         width: 95%;
     }
@@ -1053,6 +1053,9 @@ input[name="title"] {
     }
     input[type="text"] {
         width: 50%;
+    }
+    input[type="email"] {
+        width: 70%;
     }
 }
 

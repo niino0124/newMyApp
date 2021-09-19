@@ -2,7 +2,7 @@
 @section('title', 'ログイン')
 @section('content')
 
-<form method="post" action="{{ route('login') }}" class="block-b">
+<form method="post" action="{{ route('login') }}" class="block-b yellow">
 	@csrf
 <h1>ログイン</h1>
 <div class="element_wrap">

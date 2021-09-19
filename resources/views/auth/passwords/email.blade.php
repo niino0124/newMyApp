@@ -5,8 +5,7 @@
 <div class="blue-board">
     <div class="header">
     </div>
-    <form class="" method="POST" action="{{ route('password.email') }}" class="forget_form">
-        
+    <form class="forget_form man-body" method="POST" action="{{ route('password.email') }}">
         @if (session('status'))
             <div class="alert alert-success" role="alert">
                 {{ session('status') }}

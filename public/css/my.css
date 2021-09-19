@@ -1103,6 +1103,10 @@ input[name="title"] {
   width: 50%;
 }
 
+.forget_form input[type="email"] {
+  width: 70%;
+}
+
 .results {
   padding: 70px;
 }
