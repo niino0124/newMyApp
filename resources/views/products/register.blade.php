@@ -2,7 +2,7 @@
 @section('title', '商品登録')
 @section('content')
 
-<form method="post" action="{{route('product.create')}}" enctype="multipart/form-data" class="block-b">
+<form method="post" action="{{route('product.create')}}" enctype="multipart/form-data" class="block-b yellow">
     @csrf
     <h1>商品登録</h1>
     <div class="element_wrap">

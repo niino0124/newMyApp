@@ -2,7 +2,7 @@
 @section('title', '会員登情報確認フォーム')
 @section('content')
 
-<form method="post" action="{{route('product.store')}}" class="block-b">
+<form method="post" action="{{route('product.store')}}" class="block-b yellow">
 	@csrf
 	<h1>会員登情報確認フォーム</h1>
 
