@@ -21,24 +21,22 @@ class HomeController extends Controller
 
     public function showMemberArchive(Request $request)
     {
-        dump($request);
+        // dump($request);
         $id = $request->input('id');
         $gender = $request->input('gender');
         $search = $request->input('search');
 
-        $asc = $request->input('asc');
-        $desc = $request->input('desc');
-
-
         $query = Member::query();
-        $query->get();
+
+
+        // $query = Member::query();
+        // $query->get();
 
         if($id == null && $gender == null && $search == null){
             dump('全件表示');
-            $query->get();
+                // $query->get();
         }else{
             dump('検索表示');
-
             if($id != 0){
                 $query->where('id',$id);
             };
@@ -63,11 +61,7 @@ class HomeController extends Controller
             };
         }
 
-        // セッションを取り出す
-        $order = $request->session()->get("order");
-
-        $query->orderBy('id', 'desc');
-        $members = $query->paginate(5);
+        $members = $query->sortable()->orderBy('id', 'desc')->paginate(5);
 
         return view('admin.member-archive',compact('members'));
     }

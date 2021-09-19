@@ -18,6 +18,7 @@
         }
     </style>
     <!-- Styles -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/my.css') }}" rel="stylesheet">
 </head>
@@ -29,7 +30,7 @@
             </main>
         </div>
     </div>
-    
+
 </body>
 
 </html>

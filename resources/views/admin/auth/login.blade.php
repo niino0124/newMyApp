@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="man-body_b">
-        <form method="post" action="" class="block-b form_blue">
+        <form method="post" action="" class="blue">
             @csrf
             <h1>管理画面</h1>
             <div class="element_wrap">

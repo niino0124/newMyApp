@@ -89,20 +89,19 @@ form {
 form {
     box-sizing: border-box;
     text-align: center;
-    // background: rgb(255, 235, 200);
-    padding: 0px 40px 40px 40px;
+    padding:  0px 40px;
     max-width: 810px;
 
     h1 {
         font-weight: bold;
     }
+    
     @include mq(sm) {
         width: 95%;
     }
 }
 
-.form_blue {
-    @extend form;
+.blue {
     background: aliceblue;
 }
 
@@ -995,6 +994,11 @@ input[name="title"] {
 .block-b {
     padding: 20px 40px;
     max-width: 550px;
+    border:1px solid black;
+}
+
+.yellow{
+   background-color: rgb(255, 235, 200);
 }
 
 .block-a {

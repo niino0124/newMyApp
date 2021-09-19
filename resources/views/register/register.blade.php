@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', '会員登録フォーム')
 @section('content')
-<form method="post" action="{{ route('user.resister_post') }}" class="block-b">
+<form method="post" action="{{ route('user.resister_post') }}" class="block-b yellow">
     @csrf
 <h1>会員登録画面</h1>
 <div class="element_wrap">

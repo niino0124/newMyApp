@@ -10,11 +10,13 @@ use App\Notifications\CustomResetPassword;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Kyslik\ColumnSortable\Sortable;//追記
+
 class Member extends Authenticatable
 {
     use Notifiable;
     use SoftDeletes;
-
+    use Sortable;//追記
 
     protected $fillable = [
         'name_sei',
@@ -25,6 +27,9 @@ class Member extends Authenticatable
         'password_confirmation',
         'email',
     ];
+
+
+	public $sortable = ['id','created_at'];//追記(ソートに使うカラムを指定
 
     protected $hidden = [
         'password', 'remember_token',

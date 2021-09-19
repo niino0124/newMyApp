@@ -51,19 +51,11 @@
 
         <table class="tabletest">
             <tr>
-                <th class="t_id">ID
-                    {{-- action="{{route('admin.members')}}" --}}
-                    {{-- <form class="form_sp" method="get" action="">
-                        <input type="submit" name='order' id="asc" value="昇順" class="asc">
-                        <input type="submit" name='order' id="desc" class="desc" value="降順" data-id='desc'>
-                    </form> --}}
-                </th>
+                <th>@sortablelink('id', 'ID')</th>
                 <th class="t_name">氏名</th>
                 <th class="t_email">メールアドレス</th>
                 <th class="t_gender">性別</th>
-                <th class="t_created_at">登録日時
-
-                </th>
+                <th>@sortablelink('created_at', '登録日時')</th>
             </tr>
             @foreach ($members as $member)
             <tr>
@@ -78,6 +70,9 @@
         </table>
         <div class="wrap" style="width: 130px;  margin-left:auto; ">
             {{ $members->appends(request()->input())->links() }}
+
+            {{-- {{!! $members->links() !!}}
+{{ $members->appends(request()->query())->links() }} --}}
         </div>
     </div>
 </div>
