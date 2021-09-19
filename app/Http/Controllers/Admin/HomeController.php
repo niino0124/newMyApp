@@ -61,7 +61,7 @@ class HomeController extends Controller
             };
         }
 
-        $members = $query->sortable()->orderBy('id', 'desc')->paginate(5);
+        $members = $query->sortable()->orderBy('id', 'desc')->paginate(10);
 
         return view('admin.member-archive',compact('members'));
     }

@@ -51,11 +51,11 @@
 
         <table class="tabletest">
             <tr>
-                <th>@sortablelink('id', 'ID')</th>
+                <th class="t_id">@sortablelink('id', 'ID')</th>
                 <th class="t_name">氏名</th>
                 <th class="t_email">メールアドレス</th>
                 <th class="t_gender">性別</th>
-                <th>@sortablelink('created_at', '登録日時')</th>
+                <th class="t_created_at">@sortablelink('created_at', '登録日時')</th>
             </tr>
             @foreach ($members as $member)
             <tr>
