@@ -69,13 +69,21 @@ class HomeController extends Controller
 
         $members = $query->sortable()->orderBy('id', 'desc')->paginate(10);
 
+        $back_url = null;
+        $now_route = url()->full();
+        session(['now_route' => $now_route]);
+        $back_url = session('now_route');
+
         return view('admin.member-archive',compact('members'));
     }
 
-    public function memberEditShowForm($id){
+    public function memberEditShowForm(Request $request, $id){
+
         $member_info = Member::where('id',$id)->get();
+        $back_url = $request->session()->get("now_route");
+
         // dd($member);
-        return view('admin.member-edit',compact('member_info'));
+        return view('admin.member-edit',compact('member_info','back_url'));
     }
 
 
@@ -83,15 +91,15 @@ class HomeController extends Controller
     public function memberEditConfirm(Request $request){
         // バリデーション
         $validator = $request->validate([
-            'name_sei' =>'max:19|string',
-            'name_mei' =>'max:19|string',
-            'nickname' =>'max:9|string',
+            'name_sei' =>'max:20|string',
+            'name_mei' =>'max:20|string',
+            'nickname' =>'max:10|string',
             "gender" => "integer|in:1,2",
             "password" => ['nullable','string', new Hankaku, 'min:8','max:20','confirmed'],
             "password_confirmation" => ['nullable','string', new Hankaku, 'min:8','max:20'],
             "email" => [
                 'string',
-                'max:199',
+                'max:200',
                 'email',
                 Rule::unique('members')->ignore($request->id),
                 ],
@@ -124,7 +132,6 @@ class HomeController extends Controller
     }
 
     public function memberEditComplete(Request $request){
-        // dd($request);
         $id = $request->id;
 
         if ($request->get('back')) {
@@ -145,8 +152,10 @@ class HomeController extends Controller
 
 
 
-    public function memberRegisterShowForm(){
-        return view('admin.member-register');
+    public function memberRegisterShowForm(Request $request){
+        $back_url = $request->session()->get("now_route");
+        $member_info = null;
+        return view('admin.member-edit',compact('back_url','member_info'));
     }
 
 
@@ -164,6 +173,7 @@ class HomeController extends Controller
 
             // 確認画面に表示する値を格納
             $input = [
+                'id' => null,
                 'name_sei' => $name_sei,
                 'name_mei' => $name_mei,
                 'gender' => $gender,

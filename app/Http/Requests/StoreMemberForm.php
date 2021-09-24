@@ -26,13 +26,13 @@ class StoreMemberForm extends FormRequest
     public function rules()
     {
         return [
-            'name_sei' =>'required|max:19|string',
-            'name_mei' =>'required|max:19|string',
-            'nickname' =>'required|max:9|string',
+            'name_sei' =>'required|max:20|string',
+            'name_mei' =>'required|max:20|string',
+            'nickname' =>'required|max:10|string',
             "gender" => "required|integer|in:1,2",
             "password" => ['required','string', new Hankaku, 'min:8','max:20','confirmed'],
             "password_confirmation" => ['required','string', new Hankaku, 'min:8','max:20'],
-            "email" => "required|required|unique:members|string|max:199|email",
+            "email" => "required|required|unique:members|string|max:200|email",
         ];
     }
 }

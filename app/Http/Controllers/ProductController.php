@@ -308,7 +308,6 @@ class ProductController extends Controller
                 // // 詳細ページへ飛ぶボタンが押されると現在のURLを取得
                 // $prev_url = url()->current();
                 $back_url = $request->session()->get("now_route");
-                // dump($back_url);
                 $product = Product::find($id);
                 $evaluations = Review::where('product_id',$id)
                 ->select('evaluation')

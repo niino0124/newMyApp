@@ -242,8 +242,17 @@ form h1 {
   width: 5%;
 }
 
+.tabletest .t_name {
+  text-align: center;
+}
+
 .tabletest .t_gender {
   width: 7.5%;
+  text-align: center;
+}
+
+.tabletest .t_email {
+  text-align: center;
 }
 
 .tabletest .t_created_at {
