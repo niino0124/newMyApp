@@ -14,8 +14,12 @@
         </div>
     </div>
     <div class="man-body_b ">
-
+        {{-- <a class="btn_b" name="search_btn" href="">会員登録</a> --}}
         <div>
+            <div class="btn_form">
+                <a class="btn_b admin_regist" href="{{ route('admin.member-register') }}">会員登録</a>
+            </div>
+
             <form class="search_container search_container_mem" method="GET" action="{{route('admin.members')}}">
                 @csrf
                 <table class="mem-search">
@@ -56,6 +60,7 @@
                 <th class="t_email">メールアドレス</th>
                 <th class="t_gender">性別</th>
                 <th class="t_created_at">@sortablelink('created_at', '登録日時')</th>
+                <th class="t_gender">編集</th>
             </tr>
             @foreach ($members as $member)
             <tr>
@@ -65,6 +70,7 @@
                 <td>@if ($member->gender == 1)男性 @else 女性
                     @endif</td>
                 <td>{{$member->created_at->format('Y/n/j')}}</td>
+                <td><a href="{{route('admin.member-edit',['id' => $member->id])}}">編集</a></td>
             </tr>
             @endforeach
         </table>
@@ -72,7 +78,7 @@
             {{ $members->appends(request()->input())->links() }}
 
             {{-- {{!! $members->links() !!}}
-{{ $members->appends(request()->query())->links() }} --}}
+            {{ $members->appends(request()->query())->links() }} --}}
         </div>
     </div>
 </div>

@@ -833,9 +833,9 @@ select {
 
 .admin_regist {
   display: block;
-  margin-left: 52px;
-  width: 120px;
-  padding: 4px 8px;
+  margin: 0 0 20px 40px;
+  width: 60px;
+  padding: 5px 5px;
 }
 
 @media screen and (max-width: 767px) {

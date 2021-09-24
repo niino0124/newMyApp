@@ -5,6 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Member;
+use App\Http\Requests\StoreMemberForm;
+use App\Rules\Hankaku;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
+
+
 
 class HomeController extends Controller
 {
@@ -66,31 +72,126 @@ class HomeController extends Controller
         return view('admin.member-archive',compact('members'));
     }
 
-    // public function showMemberArchiveOrder(Request $request){
-    //     $order = $request->order;
-    //       //セッションに書き込む
-    //     $request->session()->put("order", $order);
-    //     return $order = $request->session()->get("order");
-
-    // }
-
-    // function fetch_data(Request $request)
-    // {
-    //  if($request->ajax())
-    //  {
-    //   $sort_by = $request->get('sortby');
-    //   $sort_type = $request->get('sorttype');
-    //         $query = $request->get('query');
-    //         $query = str_replace(" ", "%", $query);
-    //   $data = DB::table('post')
-    //                 ->where('id', 'like', '%'.$query.'%')
-    //                 ->orWhere('post_title', 'like', '%'.$query.'%')
-    //                 ->orWhere('post_description', 'like', '%'.$query.'%')
-    //                 ->orderBy($sort_by, $sort_type)
-    //                 ->paginate(5);
-    //   return view('pagination_data', compact('data'))->render();
-    //  }
-    // }
+    public function memberEditShowForm($id){
+        $member_info = Member::where('id',$id)->get();
+        // dd($member);
+        return view('admin.member-edit',compact('member_info'));
+    }
 
 
+
+    public function memberEditConfirm(Request $request){
+        // バリデーション
+        $validator = $request->validate([
+            'name_sei' =>'max:19|string',
+            'name_mei' =>'max:19|string',
+            'nickname' =>'max:9|string',
+            "gender" => "integer|in:1,2",
+            "password" => ['nullable','string', new Hankaku, 'min:8','max:20','confirmed'],
+            "password_confirmation" => ['nullable','string', new Hankaku, 'min:8','max:20'],
+            "email" => [
+                'string',
+                'max:199',
+                'email',
+                Rule::unique('members')->ignore($request->id),
+                ],
+        ]);
+
+            // 取り出し
+            $name_sei = $request->name_sei;
+            $name_mei = $request->name_mei;
+            $gender = $request->gender;
+            $nickname = $request->nickname;
+            $email = $request->email;
+            $password = $request->password;
+            $gender = $request->gender;
+            $id = $request->id;
+
+
+            // 確認画面に表示する値を格納
+            $input = [
+                'name_sei' => $name_sei,
+                'name_mei' => $name_mei,
+                'gender' => $gender,
+                'nickname' => $nickname,
+                'email' => $email,
+                'password' => $password,
+                'gender' => $gender,
+                'id' => $id
+            ];
+
+        return view('admin.member-edit-confirm', compact('input') );
+    }
+
+    public function memberEditComplete(Request $request){
+        // dd($request);
+        $id = $request->id;
+
+        if ($request->get('back')) {
+            return redirect()->route('admin.member-edit', ['id' => $id])
+            ->withInput();
+        }
+
+        $member = Member::where('id',$id)->first();
+        $member->name_sei = $request->name_sei;
+        $member->name_mei = $request->name_mei;
+        $member->nickname = $request->nickname;
+        $member->gender = $request->gender;
+        $member->email = $request->email;
+        $member->password = bcrypt($request->password);
+        $member->save();
+        return redirect()->route('admin.home');
+    }
+
+
+
+    public function memberRegisterShowForm(){
+        return view('admin.member-register');
+    }
+
+
+    public function memberRegisterConfirm(StoreMemberForm $request){
+
+            // 取り出し
+            $name_sei = $request->name_sei;
+            $name_mei = $request->name_mei;
+            $gender = $request->gender;
+            $nickname = $request->nickname;
+            $email = $request->email;
+            $password = $request->password;
+            $gender = $request->gender;
+
+
+            // 確認画面に表示する値を格納
+            $input = [
+                'name_sei' => $name_sei,
+                'name_mei' => $name_mei,
+                'gender' => $gender,
+                'nickname' => $nickname,
+                'email' => $email,
+                'password' => $password,
+                'gender' => $gender,
+            ];
+
+        return view('admin.member-edit-confirm', compact('input') );
+    }
+
+    public function memberRegisterComplete(Request $request){
+
+
+        if ($request->get('back')) {
+            return redirect()->route('admin.member-register')
+            ->withInput();
+        }
+
+        $member = new Member;
+        $member->name_sei = $request->name_sei;
+        $member->name_mei = $request->name_mei;
+        $member->nickname = $request->nickname;
+        $member->gender = $request->gender;
+        $member->email = $request->email;
+        $member->password = bcrypt($request->password);
+        $member->save();
+        return redirect()->route('admin.home');
+    }
 }

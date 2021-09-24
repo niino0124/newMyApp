@@ -109,7 +109,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::post('logout', 'Admin\Auth\LoginController@logout')->name('admin.logout');
     Route::get('home','Admin\HomeController@index')->name('admin.home');
     Route::get('members','Admin\HomeController@showMemberArchive')->name('admin.members');
-    // Route::post('members-order','Admin\HomeController@showMemberArchiveOrder')->name('admin.members-order');
-    // Route::get('members', 'Admin\HomeController@showMemberArchiveAjax');
+
+
+    Route::get('member/edit/{id}','Admin\HomeController@memberEditShowForm')->name('admin.member-edit');
+    Route::post('member/edit','Admin\HomeController@memberEditConfirm')->name('admin.member-edit-confirm');
+    Route::post('member/edit/complete','Admin\HomeController@memberEditComplete')->name('admin.member-edit-complete');
+
+
+    Route::get('member/register','Admin\HomeController@memberRegisterShowForm')->name('admin.member-register');
+    Route::post('member/register/confirm','Admin\HomeController@memberRegisterConfirm')->name('admin.member-register-confirm');
+    Route::post('member/complete','Admin\HomeController@memberRegisterComplete')->name('admin.member-register-complete');
+
 
 });
