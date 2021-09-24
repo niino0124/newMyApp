@@ -120,5 +120,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::post('member/register/confirm','Admin\HomeController@memberRegisterConfirm')->name('admin.member-register-confirm');
     Route::post('member/complete','Admin\HomeController@memberRegisterComplete')->name('admin.member-register-complete');
 
+    Route::get('member/{id}','Admin\HomeController@memberShow')->name('admin.member-show');
 
+    Route::get('member/delete/{id}','Admin\HomeController@memberDelete')->name('admin.member-delete');
 });

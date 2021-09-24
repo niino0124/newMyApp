@@ -14,7 +14,6 @@
         </div>
     </div>
     <div class="man-body_b ">
-        {{-- <a class="btn_b" name="search_btn" href="">会員登録</a> --}}
         <div>
             <div class="btn_form">
                 <a class="btn_b admin_regist" href="{{ route('admin.member-register') }}">会員登録</a>
@@ -61,16 +60,18 @@
                 <th class="t_gender">性別</th>
                 <th class="t_created_at">@sortablelink('created_at', '登録日時')</th>
                 <th class="t_gender">編集</th>
+                <th class="t_gender">詳細</th>
             </tr>
             @foreach ($members as $member)
             <tr>
                 <td>{{$member->id}}</td>
-                <td>{{$member->name_sei}}　{{$member->name_mei}}</td>
-                <td><a href="" class="edit">{{$member->email}}</a></td>
+                <td><a href="{{route('admin.member-show',['id' => $member->id])}}">{{$member->name_sei}}　{{$member->name_mei}}</a></td>
+                <td>{{$member->email}}</td>
                 <td>@if ($member->gender == 1)男性 @else 女性
                     @endif</td>
                 <td>{{$member->created_at->format('Y/n/j')}}</td>
                 <td><a href="{{route('admin.member-edit',['id' => $member->id])}}">編集</a></td>
+                <td><a href="{{route('admin.member-show',['id' => $member->id])}}">詳細</a></td>
             </tr>
             @endforeach
         </table>

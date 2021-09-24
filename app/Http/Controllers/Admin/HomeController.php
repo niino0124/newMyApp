@@ -204,4 +204,19 @@ class HomeController extends Controller
         $member->save();
         return redirect()->route('admin.home');
     }
+
+    public function memberShow(Request $request,$id){
+        $member_info = Member::where('id',$id)->get();
+
+        $back_url = $request->session()->get("now_route");
+
+        return view('admin.member-show', compact('member_info','back_url') );
+    }
+
+    public function memberDelete($id){
+        Member::find($id)->delete();
+        return redirect()->route('admin.members');
+    }
+
+
 }
