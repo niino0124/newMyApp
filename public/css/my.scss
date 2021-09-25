@@ -244,6 +244,11 @@ form {
         text-align: center;
     }
 
+    .t_category{
+        text-align: center;
+        width: 15%;
+    }
+
     .t_created_at {
         width: 12%;
     }
@@ -259,6 +264,11 @@ form {
             height: inherit;
         }
     }
+}
+
+.tabletest_category{
+    @extend .tabletest;
+    width: 95%;
 }
 
 .form_sp {
@@ -770,6 +780,11 @@ select {
         color: white;
         border-color: #486693;
     }
+}
+
+.btn-back_b_left{
+    @extend .btn;
+    margin-right:auto;
 }
 
 // 中サイズボタン集

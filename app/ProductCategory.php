@@ -4,8 +4,23 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Kyslik\ColumnSortable\Sortable;
+
+
 class ProductCategory extends Model
 {
+
+    use SoftDeletes;
+    use Sortable;
+
+    public $sortable = ['id','created_at'];
+    
+    protected $fillable = [
+        'name',
+    ];
+
+
     public function productSubcategory(){
         return $this->hasMany('App\ProductSubcategory');
     }

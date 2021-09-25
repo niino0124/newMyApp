@@ -19,9 +19,10 @@
             </div>
         </div>
     </div>
-    <div class="man-body_b ">
-        <div class="tal">
-            <a href="{{route('admin.members')}}" class="btn_b btn-back_b"   type="submit" style="text-align: center;">会員一覧</a>
+    <div class="man-body_b">
+        <div class=" btn-wrap">
+            <a href="{{route('admin.members')}}" class="btn_b btn-back_b" style="margin:0;margin-right: auto">会員一覧</a>
+            <a href="{{route('admin.categories')}}" class="btn_b btn-back_b" style="margin:0;margin-right: auto;margin-top:15px;">商品カテゴリ一覧</a>
         </div>
     </div>
 </div>

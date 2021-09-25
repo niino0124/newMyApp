@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Member;
+use App\Product;
 use App\Http\Requests\StoreMemberForm;
 use App\Rules\Hankaku;
 use Illuminate\Validation\Rule;
@@ -25,18 +26,15 @@ class HomeController extends Controller
         return view('admin.home');
     }
 
+    
+    // 会員一覧
     public function showMemberArchive(Request $request)
     {
-        // dump($request);
         $id = $request->input('id');
         $gender = $request->input('gender');
         $search = $request->input('search');
 
         $query = Member::query();
-
-
-        // $query = Member::query();
-        // $query->get();
 
         if($id == null && $gender == null && $search == null){
             dump('全件表示');
@@ -78,15 +76,10 @@ class HomeController extends Controller
     }
 
     public function memberEditShowForm(Request $request, $id){
-
         $member_info = Member::where('id',$id)->get();
         $back_url = $request->session()->get("now_route");
-
-        // dd($member);
         return view('admin.member-edit',compact('member_info','back_url'));
     }
-
-
 
     public function memberEditConfirm(Request $request){
         // バリデーション
@@ -216,6 +209,55 @@ class HomeController extends Controller
     public function memberDelete($id){
         Member::find($id)->delete();
         return redirect()->route('admin.members');
+    }
+
+
+
+// 商品一覧
+    public function showProductArchive(Request $request){
+        $id = $request->input('id');
+        $gender = $request->input('gender');
+        $search = $request->input('search');
+
+        $query = Product::query();
+
+        if($id == null && $gender == null && $search == null){
+            dump('全件表示');
+                // $query->get();
+        }else{
+            dump('検索表示');
+            if($id != 0){
+                $query->where('id',$id);
+            };
+
+            if($gender != 0){
+                $query->where('gender',$gender);
+            };
+
+            if($search != null){
+            //全角スペースを半角に
+                $search_split = mb_convert_kana($search,'s');
+            //空白で区切る
+                $search_split2 = preg_split('/[\s]+/', $search_split,-1,PREG_SPLIT_NO_EMPTY);
+
+            //単語をループで回す
+                foreach($search_split2 as $value)
+                {
+                $query->where('name_sei','LIKE','%'.$value.'%')
+                ->orWhere('name_mei', 'LIKE','%'.$value.'%')
+                ->orWhere('email', 'LIKE','%'.$value.'%');
+                }
+            };
+        }
+
+        $products = $query->sortable()->orderBy('id', 'desc')->paginate(10);
+
+        $back_url = null;
+        $now_route = url()->full();
+        session(['now_route' => $now_route]);
+        $back_url = session('now_route');
+
+        return view('admin.product-archive',compact('products'));
     }
 
 
