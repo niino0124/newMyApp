@@ -26,7 +26,6 @@ class HomeController extends Controller
         return view('admin.home');
     }
 
-    
     // 会員一覧
     public function showMemberArchive(Request $request)
     {
@@ -78,7 +77,7 @@ class HomeController extends Controller
     public function memberEditShowForm(Request $request, $id){
         $member_info = Member::where('id',$id)->get();
         $back_url = $request->session()->get("now_route");
-        return view('admin.member-edit',compact('member_info','back_url'));
+        return view('admin.member-register-edit',compact('member_info','back_url'));
     }
 
     public function memberEditConfirm(Request $request){
@@ -121,7 +120,7 @@ class HomeController extends Controller
                 'id' => $id
             ];
 
-        return view('admin.member-edit-confirm', compact('input') );
+        return view('admin.member-register-edit-confirm', compact('input') );
     }
 
     public function memberEditComplete(Request $request){
@@ -148,7 +147,7 @@ class HomeController extends Controller
     public function memberRegisterShowForm(Request $request){
         $back_url = $request->session()->get("now_route");
         $member_info = null;
-        return view('admin.member-edit',compact('back_url','member_info'));
+        return view('admin.member-register-edit',compact('back_url','member_info'));
     }
 
 
@@ -176,7 +175,7 @@ class HomeController extends Controller
                 'gender' => $gender,
             ];
 
-        return view('admin.member-edit-confirm', compact('input') );
+        return view('admin.member-register-edit-confirm', compact('input') );
     }
 
     public function memberRegisterComplete(Request $request){

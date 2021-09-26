@@ -16,7 +16,7 @@
     <div class="man-body_b ">
         <div>
             <div class="btn_form">
-                <a class="btn_b admin_regist" href="">商品カテゴリ登録</a>
+                <a class="btn_b admin_regist" href="{{route('admin.category-register')}}">商品カテゴリ登録</a>
             </div>
 
             <form class="search_container search_container_mem" method="GET" action="">
@@ -37,7 +37,6 @@
             </form>
         </div>
 
-
         <table class="tabletest_category">
             <tr>
                 <th class="t_id">@sortablelink('id', 'ID')</th>
@@ -46,13 +45,14 @@
                 <th class="t_gender">編集</th>
                 <th class="t_gender">詳細</th>
             </tr>
-
+{{-- {{dd($categories)}} --}}
             @foreach ($categories as $category)
+
             <tr>
                 <td>{{$category->id}}</td>
                 <td><a href="">{{$category->name}}</a></td>
                 <td>{{$category->created_at->format('Y/n/j')}}</td>
-                <td><a href="">編集</a></td>
+                <td><a href="{{route('admin.category-edit',['id' => $category->id])}}">編集</a></td>
                 <td><a href="">詳細</a></td>
             </tr>
             @endforeach

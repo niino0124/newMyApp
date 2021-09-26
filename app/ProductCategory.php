@@ -15,15 +15,18 @@ class ProductCategory extends Model
     use Sortable;
 
     public $sortable = ['id','created_at'];
-    
+
     protected $fillable = [
-        'name',
+        'name','product_category_id'
     ];
 
 
-    public function productSubcategory(){
+    public function productSubcategories(){
         return $this->hasMany('App\ProductSubcategory');
     }
+
+
+
     public function products(){
         return $this->hasMany('App\Product');
     }

@@ -4,7 +4,9 @@
 <div class="blue-board_admin">
     <div class="header_b">
         <div class="simple-wrap_sb">
-            <p class="fw-bold">会員編集</p>
+            <p class="fw-bold">@if($input["id"] != null)
+                会員登録
+            @else 会員編集 @endif</p>
             <div class="simple-wrap">
                 <a class="btn-simple" href="{{route('admin.home')}}">
                     一覧へ戻る

@@ -544,6 +544,10 @@ input[type="file"] {
   height: auto;
 }
 
+.sub_name + .sub_name {
+  margin-top: 10px;
+}
+
 .originalFileBtn {
   border: 2px solid #ff8800;
   border-radius: 8px;
@@ -695,7 +699,7 @@ select {
 
 .element_wrap_str label, .element_wrap_str_review label {
   display: inline-block;
-  width: 100px;
+  width: auto;
   text-align: left;
   margin-right: 50px;
 }
