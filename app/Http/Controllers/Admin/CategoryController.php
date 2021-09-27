@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryForm;
 use Illuminate\Http\Request;
 
 use App\ProductCategory;
@@ -58,8 +59,6 @@ class CategoryController extends Controller
             };
         }
         $categories = $query->sortable()->orderBy('id', 'desc')->paginate(10);
-        // dd($categories);
-
         $back_url = null;
         $now_route = url()->full();
         session(['now_route' => $now_route]);
@@ -82,30 +81,17 @@ class CategoryController extends Controller
         return view('admin.category-register-edit',compact('category','subcategory','back_url','id'));
     }
 
-    // public function categoryRegisterShowForm(Request $request){
-    //     $back_url = $request->session()->get("now_route");
-    //     $category_info = null;
-    //     return view('admin.category-register-edit',compact('back_url','category_info'));
-    // }
+    public function categoryRegisterShowForm(Request $request){
+        $back_url = $request->session()->get("now_route");
+        $category = null;
+        return view('admin.category-register-edit',compact('back_url','category'));
+    }
 
 
 
 
-// バリデーション
-    public function categoryEditConfirm(Request $request){
-        $validator = $request->validate([
-            'name' =>'required|max:20|string',
-            'sub_name0' =>'required|max:20|string',
-            'sub_name1' =>'nullable|max:20|string',
-            'sub_name2' =>'nullable|max:20|string',
-            'sub_name3' =>'nullable|max:20|string',
-            'sub_name4' =>'nullable|max:20|string',
-            'sub_name5' =>'nullable|max:20|string',
-            'sub_name6' =>'nullable|max:20|string',
-            'sub_name7' =>'nullable|max:20|string',
-            'sub_name8' =>'nullable|max:20|string',
-            'sub_name9' =>'nullable|max:20|string',
-        ]);
+    public function categoryEditConfirm(StoreCategoryForm $request){
+
             // 取り出し
             $id = $request->id;
             $name = $request->name;
@@ -140,13 +126,38 @@ class CategoryController extends Controller
         return view('admin.category-register-edit-confirm', compact('input') );
     }
 
-    //     public function memberRegisterConfirm(StoreMemberForm $request){
-//         $nickname = $request->nickname;
-//         $input = [
-//             'nickname' => $nickname,
-//         ];
-//     return view('admin.member-register-edit-confirm', compact('input') );
-// }
+        public function memberRegisterConfirm(StoreCategoryForm $request){
+            // 取り出し
+            $name = $request->name;
+            $sub_name0 = $request->sub_name0;
+            $sub_name1 = $request->sub_name1;
+            $sub_name2 = $request->sub_name2;
+            $sub_name3 = $request->sub_name3;
+            $sub_name4 = $request->sub_name4;
+            $sub_name5 = $request->sub_name5;
+            $sub_name6 = $request->sub_name6;
+            $sub_name7 = $request->sub_name7;
+            $sub_name8 = $request->sub_name8;
+            $sub_name9 = $request->sub_name9;
+
+
+            // 確認画面に表示する値を格納
+            $input = [
+                'name' => $name,
+                'sub_name0' => $sub_name0,
+                'sub_name1' => $sub_name1,
+                'sub_name2' => $sub_name2,
+                'sub_name3' => $sub_name3,
+                'sub_name4' => $sub_name4,
+                'sub_name5' => $sub_name5,
+                'sub_name6' => $sub_name6,
+                'sub_name7' => $sub_name7,
+                'sub_name8' => $sub_name8,
+                'sub_name9' => $sub_name9,
+            ];
+
+    return view('admin.member-register-edit-confirm', compact('input') );
+}
 
 
     public function categoryEditComplete(Request $request){

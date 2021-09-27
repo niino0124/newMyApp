@@ -30,7 +30,6 @@
             <div class="element_wrap_str">
                 <label>商品小カテゴリ</label>
                 <div class="content-wrap">
-
                     <p class="sub_name tal">{{ $input["sub_name0"] }}</p>
 
                     @if ($input["sub_name1"])
@@ -65,7 +64,6 @@
             </div>
 
 
-
             <input value="{{ $input["id"] }}" name="id" hidden>
             <input value="{{ $input["name"] }}" name="name" hidden>
             <input value="{{ $input["sub_name0"] }}" name="sub_name0" hidden>
@@ -79,14 +77,16 @@
             <input value="{{ $input["sub_name8"] }}" name="sub_name8" hidden>
             <input value="{{ $input["sub_name9"] }}" name="sub_name9" hidden>
 
-
+            {{-- ↑nullが紛れている。コントローラでnull以外！みたいな強力なものがあるかな？ --}}
             <div class="btn-wrap">
                 <input type="submit" class="btn-back_b" value="編集完了" />
                 <input href="" class="btn_b" name="back" value="前に戻る" type="submit">
             </div>
-
         </form>
+
+
         @else
+        {{-- actionに関して@if @else で書き換えできると思うけど --}}
         <form method="post" action="{{route('admin.category-register-complete')}}">
             @csrf
             <div class="element_wrap_str">
