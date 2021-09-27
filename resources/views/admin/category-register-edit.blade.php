@@ -248,17 +248,7 @@
                     </span>
                     @enderror
 
-                    <input type="text" class=" @error('sub_name10') is-invalid @enderror long" name="sub_name10"
-                        value="{{ old('sub_name10') }}">
-                    @error('sub_name10')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                    @enderror
-
                 </div>
-                {{-- <div class="content-wrap">
-                </div> --}}
             </div>
 
             <div class="btn-wrap">

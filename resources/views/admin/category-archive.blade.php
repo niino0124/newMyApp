@@ -50,10 +50,10 @@
 
             <tr>
                 <td>{{$category->id}}</td>
-                <td><a href="">{{$category->name}}</a></td>
+                <td><a href="{{route('admin.category-show',['id' => $category->id])}}">{{$category->name}}</a></td>
                 <td>{{$category->created_at->format('Y/n/j')}}</td>
                 <td><a href="{{route('admin.category-edit',['id' => $category->id])}}">編集</a></td>
-                <td><a href="">詳細</a></td>
+                <td><a href="{{route('admin.category-show',['id' => $category->id])}}">詳細</a></td>
             </tr>
             @endforeach
         </table>

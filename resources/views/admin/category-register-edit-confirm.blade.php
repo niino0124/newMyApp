@@ -60,18 +60,24 @@
                     @if ($input["sub_name9"])
                     <p class="sub_name tal">{{ $input["sub_name9"] }}</p>
                     @endif
-                    @if ($input["sub_name10"])
-                    <p class="sub_name tal">{{ $input["sub_name10"] }}</p>
-                    @endif
                 </div>
 
             </div>
 
 
 
-            {{-- <input value="{{ $input["original_id"] }}" name="original_id" hidden>
+            <input value="{{ $input["id"] }}" name="id" hidden>
             <input value="{{ $input["name"] }}" name="name" hidden>
-            <input value="{{ $input["sub_name"] }}" name="sub_name" hidden> --}}
+            <input value="{{ $input["sub_name0"] }}" name="sub_name0" hidden>
+            <input value="{{ $input["sub_name1"] }}" name="sub_name1" hidden>
+            <input value="{{ $input["sub_name2"] }}" name="sub_name2" hidden>
+            <input value="{{ $input["sub_name3"] }}" name="sub_name3" hidden>
+            <input value="{{ $input["sub_name4"] }}" name="sub_name4" hidden>
+            <input value="{{ $input["sub_name5"] }}" name="sub_name5" hidden>
+            <input value="{{ $input["sub_name6"] }}" name="sub_name6" hidden>
+            <input value="{{ $input["sub_name7"] }}" name="sub_name7" hidden>
+            <input value="{{ $input["sub_name8"] }}" name="sub_name8" hidden>
+            <input value="{{ $input["sub_name9"] }}" name="sub_name9" hidden>
 
 
             <div class="btn-wrap">

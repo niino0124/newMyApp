@@ -126,9 +126,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::get('category/edit/{id}','Admin\CategoryController@categoryEditShowForm')->name('admin.category-edit');
     Route::post('category/edit','Admin\CategoryController@categoryEditConfirm')->name('admin.category-edit-confirm');
     Route::post('category/edit/complete','Admin\CategoryController@categoryEditComplete')->name('admin.category-edit-complete');
-    
+
     Route::get('category/register','Admin\CategoryController@categoryRegisterShowForm')->name('admin.category-register');
     Route::post('category/register/confirm','Admin\CategoryController@categoryRegisterConfirm')->name('admin.category-register-confirm');
     Route::post('category/complete','Admin\CategoryController@categoryRegisterComplete')->name('admin.category-register-complete');
+
+    Route::get('category/{id}','Admin\CategoryController@categoryShow')->name('admin.category-show');
+    Route::get('category/delete/{id}','Admin\CategoryController@categoryDelete')->name('admin.category-delete');
+
 
 });
