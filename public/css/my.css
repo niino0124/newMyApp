@@ -548,6 +548,10 @@ input[type="file"] {
   margin-top: 10px;
 }
 
+.sub_name_b {
+  padding-bottom: 10px;
+}
+
 .originalFileBtn {
   border: 2px solid #ff8800;
   border-radius: 8px;

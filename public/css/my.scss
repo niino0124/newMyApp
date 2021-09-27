@@ -89,7 +89,7 @@ form {
 form {
     box-sizing: border-box;
     text-align: center;
-    padding:  0px 40px;
+    padding: 0px 40px;
     max-width: 810px;
 
     h1 {
@@ -240,11 +240,11 @@ form {
         text-align: center;
     }
 
-    .t_email{
+    .t_email {
         text-align: center;
     }
 
-    .t_category{
+    .t_category {
         text-align: center;
         width: 15%;
     }
@@ -266,7 +266,7 @@ form {
     }
 }
 
-.tabletest_category{
+.tabletest_category {
     @extend .tabletest;
     width: 95%;
 }
@@ -502,10 +502,13 @@ input[type="file"] {
     height: auto;
 }
 
-.sub_name{
+.sub_name {
     &+&{
         margin-top: 10px;
     }
+}
+.sub_name_b {
+    padding-bottom: 10px;
 }
 
 .originalFileBtn {
@@ -748,9 +751,9 @@ select {
     }
 }
 
-.btn-back_b_left{
+.btn-back_b_left {
     @extend .btn;
-    margin-right:auto;
+    margin-right: auto;
 }
 
 // 中サイズボタン集
@@ -818,7 +821,7 @@ select {
 
 .admin_regist {
     display: block;
-margin:0 0 20px 40px;
+    margin: 0 0 20px 40px;
     width: 60px;
     padding: 5px 5px;
     @include mq(sm) {
@@ -976,11 +979,11 @@ input[name="title"] {
 .block-b {
     padding: 20px 40px;
     max-width: 550px;
-    border:1px solid black;
+    border: 1px solid black;
 }
 
-.yellow{
-   background-color: rgb(255, 235, 200);
+.yellow {
+    background-color: rgb(255, 235, 200);
 }
 
 .block-a {

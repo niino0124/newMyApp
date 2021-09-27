@@ -105,10 +105,13 @@ return [
             'rule-name' => 'custom-message',
         ],
         'evaluation' => [
-            'in' => '五段階評価です',
+            'in' => '※五段階評価です',
         ],
         'gender' => [
-            'in' => '性別を男性と女性からお選びください'
+            'in' => '※性別を男性と女性からお選びください'
+        ],
+        'sub_name0' => [
+            'required' => '※最低でも１つの商品小カテゴリを設定してください。'
         ],
     ],
 
@@ -133,7 +136,7 @@ return [
         'nickname' => 'ニックネーム',
         'email' => 'メールアドレス',
         'gender' => '性別',
-        'name' => '商品名',
+        'name' => '商品大カテゴリ',
         'product_content' => '商品説明',
         'product_category_id'=> '商品カテゴリー',
         'product_subcategory_id'=> '商品サブカテゴリー',
@@ -146,6 +149,16 @@ return [
         'comment'=> '商品コメント',
         'evaluation'=> '商品評価',
         'login_id'=> 'ログインID',
+        'sub_name0'=>'商品小カテゴリ',
+        'sub_name1'=>'商品小カテゴリ',
+        'sub_name2'=>'商品小カテゴリ',
+        'sub_name3'=>'商品小カテゴリ',
+        'sub_name4'=>'商品小カテゴリ',
+        'sub_name5'=>'商品小カテゴリ',
+        'sub_name6'=>'商品小カテゴリ',
+        'sub_name7'=>'商品小カテゴリ',
+        'sub_name8'=>'商品小カテゴリ',
+        'sub_name9'=>'商品小カテゴリ',
     ],
 
 ];

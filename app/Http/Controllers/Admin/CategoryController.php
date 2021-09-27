@@ -83,8 +83,7 @@ class CategoryController extends Controller
 
     public function categoryRegisterShowForm(Request $request){
         $back_url = $request->session()->get("now_route");
-        $category = null;
-        return view('admin.category-register-edit',compact('back_url','category'));
+        return view('admin.category-register-edit',compact('back_url'));
     }
 
 
@@ -126,7 +125,7 @@ class CategoryController extends Controller
         return view('admin.category-register-edit-confirm', compact('input') );
     }
 
-        public function memberRegisterConfirm(StoreCategoryForm $request){
+        public function categoryRegisterConfirm(StoreCategoryForm $request){
             // 取り出し
             $name = $request->name;
             $sub_name0 = $request->sub_name0;
@@ -156,8 +155,8 @@ class CategoryController extends Controller
                 'sub_name9' => $sub_name9,
             ];
 
-    return view('admin.member-register-edit-confirm', compact('input') );
-}
+            return view('admin.category-register-edit-confirm', compact('input') );
+        }
 
 
     public function categoryEditComplete(Request $request){
@@ -242,6 +241,84 @@ class CategoryController extends Controller
         return redirect()->route('admin.home');
     }
 
+    public function categoryRegisterComplete(Request $request){
+
+        if ($request->get('back')) {
+            return redirect()->route('admin.category-register')
+            ->withInput();
+        }
+
+        // 商品大カテゴリのnameを更新
+        $new_category = new ProductCategory;
+        $new_category->name = $request->name;
+        $new_category->save();
+
+        $id = ProductCategory::pluck('id')->last();
+        // dd($id);
+
+        $new_subcategory0 = new ProductSubcategory;
+        $new_subcategory0->product_category_id = $id;
+        $new_subcategory0->name = $request->sub_name0;
+        $new_subcategory0->save();
+
+        if(isset($request->sub_name1)){
+            $new_subcategory1 = new ProductSubcategory;
+            $new_subcategory1->product_category_id = $id;
+            $new_subcategory1->name = $request->sub_name1;
+            $new_subcategory1->save();
+        }
+        if(isset($request->sub_name2)){
+            $new_subcategory2 = new ProductSubcategory;
+            $new_subcategory2->product_category_id = $id;
+            $new_subcategory2->name = $request->sub_name2;
+            $new_subcategory2->save();
+        }
+        if(isset($request->sub_name3)){
+            $new_subcategory3 = new ProductSubcategory;
+            $new_subcategory3->product_category_id = $id;
+            $new_subcategory3->name = $request->sub_name3;
+            $new_subcategory3->save();
+        }
+        if(isset($request->sub_name4)){
+            $new_subcategory4 = new ProductSubcategory;
+            $new_subcategory4->product_category_id = $id;
+            $new_subcategory4->name = $request->sub_name4;
+            $new_subcategory4->save();
+        }
+        if(isset($request->sub_name5)){
+            $new_subcategory5 = new ProductSubcategory;
+            $new_subcategory5->product_category_id = $id;
+            $new_subcategory5->name = $request->sub_name5;
+            $new_subcategory5->save();
+        }
+        if(isset($request->sub_name6)){
+            $new_subcategory6 = new ProductSubcategory;
+            $new_subcategory6->product_category_id = $id;
+            $new_subcategory6->name = $request->sub_name6;
+            $new_subcategory6->save();
+        }
+        if(isset($request->sub_name7)){
+            $new_subcategory7 = new ProductSubcategory;
+            $new_subcategory7->product_category_id = $id;
+            $new_subcategory7->name = $request->sub_name7;
+            $new_subcategory7->save();
+        }
+        if(isset($request->sub_name8)){
+            $new_subcategory8 = new ProductSubcategory;
+            $new_subcategory8->product_category_id = $id;
+            $new_subcategory8->name = $request->sub_name8;
+            $new_subcategory8->save();
+        }
+        if(isset($request->sub_name9)){
+            $new_subcategory9 = new ProductSubcategory;
+            $new_subcategory9->product_category_id = $id;
+            $new_subcategory9->name = $request->sub_name9;
+            $new_subcategory9->save();
+        }
+
+        return redirect()->route('admin.home');
+    }
+
 
 
     // 詳細ページ
@@ -255,7 +332,7 @@ class CategoryController extends Controller
 
     public function categoryDelete($id){
         ProductCategory::find($id)->delete();
-        return redirect()->route('admin.category');
+        return redirect()->route('admin.categories');
     }
 
 }

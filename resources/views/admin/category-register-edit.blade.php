@@ -5,7 +5,7 @@
     <div class="header_b">
         <div class="simple-wrap_sb">
             <p class="fw-bold">
-                @if ($category != null )
+                @if (isset($category))
                 商品カテゴリ編集 @else 商品カテゴリ登録 @endif</p>
             <div class="simple-wrap">
                 <a class="btn-simple" href="{{ $back_url }}">
@@ -14,8 +14,9 @@
             </div>
         </div>
     </div>
+
     <div class="man-body_b ">
-        @if ($category != null )
+        @if (isset($category))
         <form method="post" action="{{route('admin.category-edit-confirm')}}">
             @csrf
             <div class="element_wrap_str">
@@ -165,6 +166,14 @@
                 <label for="name">商品小カテゴリ</label>
                 <div class="content-wrap">
 
+                    <input type="text" class=" @error('sub_name0') is-invalid @enderror long sub_name" name="sub_name0"
+                        value="{{ old('sub_name0') }}">
+                    @error('sub_name0')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+
                     <input type="text" class=" @error('sub_name1') is-invalid @enderror long sub_name" name="sub_name1"
                         value="{{ old('sub_name1') }}">
                     @error('sub_name1')
@@ -249,7 +258,4 @@
 
     </div>
 </div>
-
-
-
 @endsection
