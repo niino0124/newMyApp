@@ -51,7 +51,6 @@ class CategoryController extends Controller
                 foreach($search_split2 as $value)
                 {
                     $query->where('name','LIKE','%'.$value.'%');
-                    // ここ！
                     $query->orWhereHas('productSubcategories', function($query) use ($value) {
                         $query->where('name','like','%'.$value.'%');
                     });
@@ -160,7 +159,6 @@ class CategoryController extends Controller
 
 
     public function categoryEditComplete(Request $request){
-        // dd($request);
         $id = $request->id;
 
         if ($request->get('back')) {
@@ -168,14 +166,13 @@ class CategoryController extends Controller
             ->withInput();
         }
 
-
         // 商品大カテゴリのnameを更新
         $new_category = ProductCategory::find($id);
         $new_category->name = $request->name;
         $new_category->save();
 
-
         $subcategory = ProductSubcategory::where('product_category_id',$id);
+        // 物理削除
         $subcategory->delete();
 
         $new_subcategory0 = new ProductSubcategory;
@@ -242,7 +239,6 @@ class CategoryController extends Controller
     }
 
     public function categoryRegisterComplete(Request $request){
-
         if ($request->get('back')) {
             return redirect()->route('admin.category-register')
             ->withInput();
@@ -254,7 +250,6 @@ class CategoryController extends Controller
         $new_category->save();
 
         $id = ProductCategory::pluck('id')->last();
-        // dd($id);
 
         $new_subcategory0 = new ProductSubcategory;
         $new_subcategory0->product_category_id = $id;
@@ -330,6 +325,7 @@ class CategoryController extends Controller
         return view('admin.category-show', compact('category','sub_categories','back_url') );
     }
 
+    // 削除
     public function categoryDelete($id){
         ProductCategory::find($id)->delete();
         return redirect()->route('admin.categories');
