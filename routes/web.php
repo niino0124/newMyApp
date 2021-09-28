@@ -109,6 +109,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::post('logout', 'Admin\Auth\LoginController@logout')->name('admin.logout');
     Route::get('home','Admin\HomeController@index')->name('admin.home');
 
+    // 会員一覧
     Route::get('members','Admin\HomeController@showMemberArchive')->name('admin.members');
     Route::get('member/edit/{id}','Admin\HomeController@memberEditShowForm')->name('admin.member-edit');
     Route::post('member/edit','Admin\HomeController@memberEditConfirm')->name('admin.member-edit-confirm');
@@ -120,7 +121,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::get('member/delete/{id}','Admin\HomeController@memberDelete')->name('admin.member-delete');
 
 
-
+    // カテゴリ一覧
     Route::get('categories','Admin\CategoryController@showCategoryArchive')->name('admin.categories');
 
     Route::get('category/edit/{id}','Admin\CategoryController@categoryEditShowForm')->name('admin.category-edit');
@@ -133,6 +134,24 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 
     Route::get('category/{id}','Admin\CategoryController@categoryShow')->name('admin.category-show');
     Route::get('category/delete/{id}','Admin\CategoryController@categoryDelete')->name('admin.category-delete');
+
+
+    // 商品一覧
+    Route::get('products','Admin\ProductController@showProductArchive')->name('admin.products');
+    
+    Route::get('product/edit/{id}','Admin\ProductController@productEditShowForm')->name('admin.product-edit');
+    Route::post('product/edit','Admin\ProductController@productEditConfirm')->name('admin.product-edit-confirm');
+    Route::post('product/edit/complete','Admin\ProductController@productEditComplete')->name('admin.product-edit-complete');
+
+    Route::get('product/register','Admin\ProductController@productRegisterShowForm')->name('admin.product-register');
+    Route::post('product/register/confirm','Admin\ProductController@productRegisterConfirm')->name('admin.product-register-confirm');
+    Route::post('product/complete','Admin\ProductController@productRegisterComplete')->name('admin.product-register-complete');
+
+    Route::get('product/{id}','Admin\ProductController@productShow')->name('admin.product-show');
+    Route::get('product/delete/{id}','Admin\ProductController@productDelete')->name('admin.product-delete');
+
+
+
 
 
 });

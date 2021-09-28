@@ -23,6 +23,7 @@
         <div class=" btn-wrap">
             <a href="{{route('admin.members')}}" class="btn_b btn-back_b" style="margin:0;margin-right: auto">会員一覧</a>
             <a href="{{route('admin.categories')}}" class="btn_b btn-back_b" style="margin:0;margin-right: auto;margin-top:15px;">商品カテゴリ一覧</a>
+            <a href="{{route('admin.products')}}" class="btn_b btn-back_b" style="margin:0;margin-right: auto;margin-top:15px;">商品一覧</a>
         </div>
     </div>
 </div>
