@@ -138,7 +138,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 
     // 商品一覧
     Route::get('products','Admin\ProductController@showProductArchive')->name('admin.products');
-    
+    Route::get('product/index/{id}', 'Admin\ProductController@ajax');
+
     Route::get('product/edit/{id}','Admin\ProductController@productEditShowForm')->name('admin.product-edit');
     Route::post('product/edit','Admin\ProductController@productEditConfirm')->name('admin.product-edit-confirm');
     Route::post('product/edit/complete','Admin\ProductController@productEditComplete')->name('admin.product-edit-complete');

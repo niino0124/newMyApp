@@ -77,9 +77,6 @@ class ProductController extends Controller
             ->where('product_category_id',$id)
             ->get();
         }
-
-
-
         return response()->json($product_subcategories);
     }
 
