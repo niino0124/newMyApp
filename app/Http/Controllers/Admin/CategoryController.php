@@ -37,9 +37,9 @@ class CategoryController extends Controller
         $query = ProductCategory::query();
 
         if($id == null && $search == null){
-            dump('全件表示');
+            // dump('全件表示');
         }else{
-            dump('検索表示');
+            // dump('検索表示');
             if($id != 0){
                 $query->where('id',$id);
             };
