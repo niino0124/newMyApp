@@ -36,10 +36,10 @@ class HomeController extends Controller
         $query = Member::query();
 
         if($id == null && $gender == null && $search == null){
-            dump('全件表示');
+            // dump('全件表示');
                 // $query->get();
         }else{
-            dump('検索表示');
+            // dump('検索表示');
             if($id != 0){
                 $query->where('id',$id);
             };
@@ -221,10 +221,10 @@ class HomeController extends Controller
         $query = Product::query();
 
         if($id == null && $gender == null && $search == null){
-            dump('全件表示');
+            // dump('全件表示');
                 // $query->get();
         }else{
-            dump('検索表示');
+            // dump('検索表示');
             if($id != 0){
                 $query->where('id',$id);
             };

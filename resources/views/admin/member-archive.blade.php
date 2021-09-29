@@ -43,7 +43,6 @@
                         <th>フリーワード</th>
                         <td><input type="search" name="search" value=""></td>
                     </tr>
-
                 </table>
                 <button type="submit" class="btn btn-back_b" name="search_btn" value="検索する">検索する</button>
             </form>
@@ -52,7 +51,7 @@
 
         <!-- 何のsessionが保存されているかを確認 -->
 
-        <table class="tabletest">
+        <table class="tabletest_category">
             <tr>
                 <th class="t_id">@sortablelink('id', 'ID')</th>
                 <th class="t_name">氏名</th>

@@ -58,23 +58,24 @@
                         </div>
 
                         <div class="btn-wrap">
-                            <select name="product_subcategory_id" id="product_subcategory_id">
-                                <option value="" class="op_aj" id="children">選択してください</option>
-                                {{-- で、ここにappendchildでadd_opが来ると。登録の方の理論はわかった。別々ならわかりやすい。一元化しなければならないならもっと考える必要がある。(1125) --}}
-                            </select>
-                            {{-- 編集の場合。$old_product_subcategory_infoを書き直す必要があるかも --}}
-                            @if (isset($product) && is_null(old('product_subcategory_id')))
+
+                            @if(isset($product) && is_null(old('product_subcategory_id')))
                             <select name="product_subcategory_id">
                                 <option value="" class="op_aj" id="children">選択してください</option>
 
                                 @foreach ($product_subcategory_infos as $product_subcategory_info)
-
                                 <option value="{{ $product_subcategory_info->id }}" class="op_aj" id="children" @if(
                                     $product->product_subcategory_id == $product_subcategory_info->id)
                                     selected
                                     @endif>{{ $product_subcategory_info->name }}</option>
-
                                 @endforeach
+                                
+                            </select>
+
+                            @elseif(is_null($product))
+                            <select name="product_subcategory_id" id="product_subcategory_id">
+                                <option value="" class="op_aj" id="children">選択してください</option>
+                                {{-- で、ここにappendchildでadd_opが来ると。登録の方の理論はわかった。別々ならわかりやすい。一元化しなければならないならもっと考える必要がある。(1125) --}}
                             </select>
 
                             @elseif(isset(old('product_subcategory_id')))

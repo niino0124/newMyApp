@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Member;
 
 class MembersTableSeeder extends Seeder
 {
@@ -11,6 +12,7 @@ class MembersTableSeeder extends Seeder
      */
     public function run()
     {
+        factory(Member::class, 50)->create(); //50個のダミーデータを生成
 
         DB::table('members')->insert([
             [
