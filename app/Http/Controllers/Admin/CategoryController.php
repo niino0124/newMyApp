@@ -235,7 +235,7 @@ class CategoryController extends Controller
             $new_subcategory9->save();
         }
 
-        return redirect()->route('admin.home');
+        return redirect()->route('admin.categories');
     }
 
     public function categoryRegisterComplete(Request $request){
@@ -311,7 +311,7 @@ class CategoryController extends Controller
             $new_subcategory9->save();
         }
 
-        return redirect()->route('admin.home');
+        return redirect()->route('admin.categories');
     }
 
 
