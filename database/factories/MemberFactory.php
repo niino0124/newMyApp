@@ -13,7 +13,7 @@ $factory->define(Member::class, function (Faker $faker) {
         'nickname' => $faker->firstKanaName,
         'gender' => $faker->randomElement(['1','2']),
         'email' => $faker->unique()->safeEmail,
-        'password' => $faker->password,
+        'password' => $faker->password(8),
         'created_at' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+2 week'),
     ];
 });

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Product;
+use App\Review;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -191,12 +192,12 @@ class ProductsTableSeeder extends Seeder
             ],
             ]);
 
-            factory(Product::class, 50)->create();
+            factory(Product::class, 50)->create()
+            ->each(function(Product $product) {
+                $product->reviews()->saveMany(factory(Review::class, rand(0, 3))->make());
+            });
 
-        //     ->each(function () {
-        //         factory(App\Review::class, 5)->make();
-        //     }
-        // );
+
 
     }
 }

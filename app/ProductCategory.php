@@ -17,7 +17,7 @@ class ProductCategory extends Model
     public $sortable = ['id','created_at'];
 
     protected $fillable = [
-        'name','product_category_id'
+        'name'
     ];
 
 

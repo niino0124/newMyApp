@@ -19,6 +19,13 @@ class AdminsTableSeeder extends Seeder
                 'created_at' => new DateTime(),
                 'updated_at' => new DateTime(),
             ],
+            [
+                'name' => '管理者B',
+                'login_id' => 'pass8888',
+                'password' => Hash::make('pass0000'),
+                'created_at' => new DateTime(),
+                'updated_at' => new DateTime(),
+            ],
         ]);
     }
 }
