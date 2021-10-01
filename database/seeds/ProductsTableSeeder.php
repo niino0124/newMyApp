@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Product;
 
-class ProductSeeder extends Seeder
+class ProductsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -189,6 +190,13 @@ class ProductSeeder extends Seeder
                 'updated_at' => new DateTime(),
             ],
             ]);
+
+            factory(Product::class, 50)->create();
+
+        //     ->each(function () {
+        //         factory(App\Review::class, 5)->make();
+        //     }
+        // );
 
     }
 }

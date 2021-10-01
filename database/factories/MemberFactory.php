@@ -15,6 +15,5 @@ $factory->define(Member::class, function (Faker $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $faker->password,
         'created_at' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+2 week'),
-
     ];
 });

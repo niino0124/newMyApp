@@ -41,6 +41,8 @@ class Product extends Model
         return $this->hasMany('App\Review');
     }
 
+
+    // 総合評価平均取得
     public function getAvgStarAttribute()
     {
         return $this->attributes['avg_score'] = ceil($this->reviews->avg('evaluation'));
