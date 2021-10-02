@@ -194,7 +194,7 @@ class ProductsTableSeeder extends Seeder
 
             factory(Product::class, 50)->create()
             ->each(function(Product $product) {
-                $product->reviews()->saveMany(factory(Review::class, rand(0, 3))->make());
+                $product->reviews()->saveMany(factory(Review::class, rand(1, 10))->make());
             });
 
 

@@ -73,11 +73,10 @@ class ProductController extends Controller
             if($id != 0){
                 $product_subcategories = ProductSubcategory::where('product_category_id',$id)->get();
             }
-            
+
         return response()->json($product_subcategories);
     }
 
-// メソッドも編集・登録共通でいいのかもp？？？⇨いや、別々にした方がわかりやすいか。
     public function productRegisterShowForm(Request $request){
         $product_categories = ProductCategory::all();
         // $product_subcategories = ProductSubcategory::all();

@@ -11,7 +11,9 @@ use App\Rules\Hankaku;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
-
+// テストのために追加
+use App\ProductCategory;
+use App\ProductSubcategory;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,11 @@ class HomeController extends Controller
 
     public function index()
     {
+        // ちょいテスト
+       
+
+
+
         return view('admin.home');
     }
 
