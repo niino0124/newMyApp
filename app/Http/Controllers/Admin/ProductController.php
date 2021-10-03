@@ -9,13 +9,11 @@ use App\Product;
 use App\ProductCategory;
 use App\ProductSubcategory;
 
+use Illuminate\Support\Facades\DB;
+
+
 use App\Http\Requests\StoreProductForm;
 
-use App\Rules\Hankaku;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
-
-use Illuminate\Database\Eloquent\Builder;
 
 
 
@@ -64,27 +62,35 @@ class ProductController extends Controller
 
         // このメソッドをAjaxから実行したい
         public function ajax($id) {
-            // カテゴリが選択されていなければ、全サブカテゴリを表示
             if($id == 0){
                 $product_subcategories = '';
             }
-
-           // 何らかのカテゴリが選択されてれば、特定のサブカテゴリを表示
             if($id != 0){
                 $product_subcategories = ProductSubcategory::where('product_category_id',$id)->get();
             }
-
         return response()->json($product_subcategories);
     }
 
     public function productRegisterShowForm(Request $request){
         $product_categories = ProductCategory::all();
-        // $product_subcategories = ProductSubcategory::all();
-
+        $product_subcategories = ProductSubcategory::all();
 
 
         $back_url = $request->session()->get("now_route");
-        return view('admin.product-register-edit',compact('product_categories','back_url'));
+
+        // 確認画面から戻ってくる場合
+        if (null !== old('product_category_id') ){
+            $product_category_id = old('product_category_id');
+
+            $old_product_subcategory_infos= DB::table('product_subcategories')
+            ->where('product_category_id',$product_category_id)
+            ->select('id','product_category_id','name')
+            ->get();
+
+            return view('admin.product-register-edit',compact('product_categories','product_subcategories','old_product_subcategory_infos','back_url'));
+        }
+
+        return view('admin.product-register-edit',compact('product_categories','product_subcategories','back_url'));
     }
 
     // public function productEditShowForm(){
@@ -180,19 +186,95 @@ class ProductController extends Controller
             'product_content' => $product_content,
         );
 
-
-        // $category =  DB::table('product_categories')
-        // ->where('id',$product_category_id)->value('name');
-        $category =  ProductCategory::find($product_category_id)->select('name')->get();
-
-        // $sub_category = DB::table('product_subcategories')
-        // ->where('id',$product_subcategory_id)->value('name');
-        $sub_category =ProductSubcategory::find($product_subcategory_id)->select('name')->get();
-
+        $category =  ProductCategory::find($product_category_id)->first();
+        $sub_category =ProductSubcategory::find($product_subcategory_id)->first();
         $request->session()->put('data', $data);
 
         return view('admin.product-register-edit-confirm', compact('data','category','sub_category') );
     }
+
+    // DBへあたい登録
+    public function productRegisterComplete(Request $request)
+        {
+            //セッションから値を取り出す
+            $data = $request->session()->get("data");
+
+
+            //セッションに値が無い時はフォームに戻る
+            if(!$data){
+            return redirect()->action("admin.product-register");
+            }
+            // 戻るボタン
+            if($request->has("back")){
+                return redirect()->route("admin.product-register")
+                ->withInput($data);
+            }
+
+                // データベースへ登録
+                $post = new Product;
+
+                // 現在認証している管理者ユーザーのIDを代入???
+                $post->member_id =  auth()->id();
+                $post->name = $data['name'];
+                $post->product_category_id = $data['product_category_id'];
+                $post->product_subcategory_id = $data['product_subcategory_id'];
+                $post->product_content = $data['product_content'];
+                $post->image_1 = $data['path1'];
+                $post->image_2 = $data['path2'];
+                $post->image_3 = $data['path3'];
+                $post->image_4 = $data['path4'];
+
+
+                $post->save();
+
+                $request->session()->forget("form_input");
+
+                // 商品一覧へ戻る
+                return redirect()->route("admin.products");
+            }
+
+
+    // DBへあたい登録
+    // public function productEditComplete(Request $request)
+    //     {
+    //         //セッションから値を取り出す
+    //         $data = $request->session()->get("data");
+
+    //         //セッションに値が無い時はフォームに戻る
+    //         if(!$data){
+    //         return redirect()->action("ProductController@index");
+    //         }
+
+    //         // 戻るボタン
+    //         if($request->has("back")){
+    //             return redirect()->action("ProductController@index")
+    //             ->withInput($data);
+    //         }
+
+    //             // データベースへ登録
+    //             $post = new Product;
+
+    //             // 現在認証しているユーザーのIDを代入
+    //             $post->member_id =  auth()->id();
+    //             $post->name = $data['name'];
+    //             $post->product_category_id = $data['product_category_id'];
+    //             $post->product_subcategory_id = $data['product_subcategory_id'];
+    //             $post->product_content = $data['product_content'];
+    //             $post->image_1 = $data['path1'];
+    //             $post->image_2 = $data['path2'];
+    //             $post->image_3 = $data['path3'];
+    //             $post->image_4 = $data['path4'];
+
+
+    //             $post->save();
+
+    //             $request->session()->forget("form_input");
+
+    //             // 商品一覧へ戻る
+    //             return redirect()->action("ProductController@list");
+
+    //         }
+
 
 
 }

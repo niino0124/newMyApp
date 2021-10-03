@@ -149,9 +149,6 @@ class ProductController extends Controller
             // dump($path4);
         }
 
-
-
-
         $name = $input['name'];
         $product_category_id = $input['product_category_id'];
         $product_subcategory_id = $input['product_subcategory_id'];

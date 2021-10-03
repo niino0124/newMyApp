@@ -214,4 +214,110 @@
         </form>
     </div>
 </div>
+
+{{-- jQuery --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+{{-- 画像読み込み --}}
+<script>
+    $(document).ready(function () {
+
+        $(".file").on('change', function(){
+            // もともと画像やエラーが入っていたら削除
+            var img_view = $(this).parent().siblings('.img_label').find('.img_view');
+            img_view.remove();
+
+            // 選択したファイルの情報を取得
+        var fileprop = $(this).prop('files')[0],
+            find_img = $(this).parent().siblings('.img_view').find('img'),
+            find_img_2 = $(this).parent().siblings('.img_label').find('img'),
+            filereader = new FileReader(),
+            img_label = $(this).parent().siblings('.img_label');
+
+        var type = fileprop.type,
+            size = fileprop.size;
+
+            // バリデーションメッセージ
+        var error1 = '<strong class="error1">ファイルの上限サイズ10MBを超えています</strong>',
+            error2 = '<strong class="error2">.jpg、.gif、.png、.jpegのいずれかのファイルのみ許可されています</strong>';
+
+            // バリデーション
+            if (size > 10000000) {
+                $(this).parent().siblings('.j_message').append(error1);
+            // 作業打ち切り！
+                return false;
+            }else{
+                $(this).parent().siblings('.j_message').find('.error1').remove();
+            }
+
+            //画像でない場合は処理終了
+            if(type.indexOf("image") < 0){
+            $(this).parent().siblings('.j_message').append(error2);
+            return false;
+            }else{
+            $(this).parent().siblings('.j_message').find('.error2').remove();
+            }
+
+
+        var img = '<div class="img_view"><img alt="" class="img"  width="150" height="150"></div>';
+
+        img_label.append(img);
+
+        filereader.onload = function() {
+            img_label.find('img').attr('src', filereader.result);
+        }
+        filereader.readAsDataURL(fileprop);
+    });
+
+});
+</script>
+
+{{-- カテゴリ・サブカテゴリ --}}
+<script>
+    $(function() {
+        // 初期状態ではサブカテゴリ欄は隠しておく
+        $('#product_subcategory_id').hide();
+
+        // カテゴリ欄に変更があった時の処理
+        $('#product_category_id').change(function() {
+
+        // もし前に選択したサブカテゴリの選択肢群があれば削除
+        $('.add_op').remove();
+
+        // OLDのサブカテゴリ欄が残っていれば消す
+        $('#product_subcategory_id_old').remove();
+
+        //選択したカテゴリIDを取得
+        let id = $('option:selected').val();
+
+
+        // IDをもとに、サブカテゴリ欄を表示、選択肢群を追加
+        $.ajax({
+
+        type: 'GET',
+        url:"/admin/product/index/" + id ,
+        dataType: 'json',
+
+        }).done(function (data) {
+            // もしも「選択してください」が選択されたら
+            if(data == ''){
+                console.log('nullです');
+                return $('#product_subcategory_id').hide();
+            }
+
+            // 「選択してください」以外が選択されたら
+            $('#product_subcategory_id').show();
+                $.each(data, function (index, value) {
+                let id = value.id;
+                let name = value.name;
+                $('#product_subcategory_id').append($('<option>').text(name).attr({value: id,class:'add_op'}));
+                })
+
+            }).fail(function () {
+                console.log('どんまい！!');
+            });
+    });
+    });
+</script>
 @endsection

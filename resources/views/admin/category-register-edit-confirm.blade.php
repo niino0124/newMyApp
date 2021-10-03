@@ -73,12 +73,16 @@
             </div>
 
 
-            <div class="btn-wrap">
+            {{-- <div class="btn-wrap">
                 @if(isset($input["id"]))<input type="submit" class="btn-back_b" value="編集完了" />@else<input type="submit" class="btn-back_b" value="登録完了" /> @endif
+                <input href="" class="btn_b" name="back" value="前に戻る" type="">
+            </div> --}}
+
+            <div class="btn-wrap">
+                <input type="submit" class="btn-back_b" value="登録完了" />
                 <input href="{{url()->previous()}}" class="btn_b" name="back" value="前に戻る" type="submit">
+
             </div>
-
-
 
         </form>
     </div>
