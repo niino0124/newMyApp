@@ -17,6 +17,10 @@
         <form method="post" action="{{route('admin.product-register-complete')}}">
             @csrf
             <div class="element_wrap_str">
+                <label>ID</label>
+                <p>登録後に自動採番</p>
+            </div>
+            <div class="element_wrap_str">
                 <label>商品名</label>
                 <p>{{ $data["name"] }}</p>
             </div>
@@ -78,6 +82,10 @@
         @else
         <form method="post" action="{{route('admin.product-edit-complete')}}">
             @csrf
+            <div class="element_wrap_str">
+                <label>ID</label>
+                <p>{{ $data["id"] }}</p>
+            </div>
             <div class="element_wrap_str">
                 <label>商品名</label>
                 <p>{{ $data["name"] }}</p>

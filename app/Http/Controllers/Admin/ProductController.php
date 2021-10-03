@@ -97,11 +97,20 @@ class ProductController extends Controller
 
         $product_id = $product->product_category_id;
 
-
         $product_categories = ProductCategory::all();
         $product_subcategories_edit = ProductSubcategory::where('product_category_id',$product_id)->select('id','name')->get();
 
         $back_url = $request->session()->get("now_route");
+
+                // 確認画面から戻ってくる場合
+                if (null !== old('product_category_id') ){
+                    $product_category_id = old('product_category_id');
+                    $old_product_subcategory_infos= DB::table('product_subcategories')
+                    ->where('product_category_id',$product_category_id)
+                    ->select('id','product_category_id','name')
+                    ->get();
+                    return view('admin.product-register-edit',compact('product_categories','old_product_subcategory_infos','back_url'));
+                }
         return view('admin.product-register-edit',compact('product','product_categories','product_subcategories_edit','back_url'));
     }
 
@@ -226,7 +235,6 @@ class ProductController extends Controller
             $path1 = \Storage::put('/public', $image_1);
             $path1 = explode('/', $path1);
             $path1 = $path1[1];
-            // dump($path1);
         }
 
         // ２
@@ -238,7 +246,6 @@ class ProductController extends Controller
             $path2 = \Storage::put('/public', $image_2);
             $path2 = explode('/', $path2);
             $path2 = $path2[1];
-            // dump($path2);
         }
 
         // ３
@@ -250,7 +257,6 @@ class ProductController extends Controller
             $path3 = \Storage::put('/public', $image_3);
             $path3 = explode('/', $path3);
             $path3 = $path3[1];
-            // dump($path3);
         }
 
         // ４
@@ -262,7 +268,6 @@ class ProductController extends Controller
             $path4 = \Storage::put('/public', $image_4);
             $path4 = explode('/', $path4);
             $path4 = $path4[1];
-            // dump($path4);
         }
 
         $id = $input['id'];
@@ -284,8 +289,8 @@ class ProductController extends Controller
             'product_content' => $product_content,
         );
 
-        $category =  ProductCategory::find($product_category_id)->first();
-        $sub_category =ProductSubcategory::find($product_subcategory_id)->first();
+        $category =  ProductCategory::where('id',$product_category_id)->first();
+        $sub_category =ProductSubcategory::where('id',$product_subcategory_id)->first();
         $request->session()->put('data', $data);
 
         return view('admin.product-register-edit-confirm', compact('data','category','sub_category') );
