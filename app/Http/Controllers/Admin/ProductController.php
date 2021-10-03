@@ -234,46 +234,21 @@ class ProductController extends Controller
             }
 
 
-    // DBへあたい登録
-    // public function productEditComplete(Request $request)
-    //     {
-    //         //セッションから値を取り出す
-    //         $data = $request->session()->get("data");
-
-    //         //セッションに値が無い時はフォームに戻る
-    //         if(!$data){
-    //         return redirect()->action("ProductController@index");
-    //         }
-
-    //         // 戻るボタン
-    //         if($request->has("back")){
-    //             return redirect()->action("ProductController@index")
-    //             ->withInput($data);
-    //         }
-
-    //             // データベースへ登録
-    //             $post = new Product;
-
-    //             // 現在認証しているユーザーのIDを代入
-    //             $post->member_id =  auth()->id();
-    //             $post->name = $data['name'];
-    //             $post->product_category_id = $data['product_category_id'];
-    //             $post->product_subcategory_id = $data['product_subcategory_id'];
-    //             $post->product_content = $data['product_content'];
-    //             $post->image_1 = $data['path1'];
-    //             $post->image_2 = $data['path2'];
-    //             $post->image_3 = $data['path3'];
-    //             $post->image_4 = $data['path4'];
 
 
-    //             $post->save();
+    // 詳細ページ
+    public function productShow(Request $request,$id){
+        $product = Product::where('id',$id)->with(['productCategory', 'productSubcategory','reviews'])->first();
+        // dd($product);
+        $back_url = $request->session()->get("now_route");
+        return view('admin.product-show', compact('product','back_url'));
+    }
 
-    //             $request->session()->forget("form_input");
-
-    //             // 商品一覧へ戻る
-    //             return redirect()->action("ProductController@list");
-
-    //         }
+    // 削除
+    public function productDelete($id){
+        Product::find($id)->delete();
+        return redirect()->route('admin.products');
+    }
 
 
 
