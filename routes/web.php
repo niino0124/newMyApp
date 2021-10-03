@@ -139,14 +139,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     // 商品一覧
     Route::get('products','Admin\ProductController@showProductArchive')->name('admin.products');
     Route::get('product/index/{id}', 'Admin\ProductController@ajax');
+    // 登録
+    Route::get('product/register','Admin\ProductController@productRegisterShowForm')->name('admin.product-register');
+    Route::post('product/register/confirm','Admin\ProductController@productRegisterConfirm')->name('admin.product-register-confirm');
+    Route::post('product/complete','Admin\ProductController@productRegisterComplete')->name('admin.product-register-complete');
 
+    // 編集
     Route::get('product/edit/{id}','Admin\ProductController@productEditShowForm')->name('admin.product-edit');
     Route::post('product/edit','Admin\ProductController@productEditConfirm')->name('admin.product-edit-confirm');
     Route::post('product/edit/complete','Admin\ProductController@productEditComplete')->name('admin.product-edit-complete');
 
-    Route::get('product/register','Admin\ProductController@productRegisterShowForm')->name('admin.product-register');
-    Route::post('product/register/confirm','Admin\ProductController@productRegisterConfirm')->name('admin.product-register-confirm');
-    Route::post('product/complete','Admin\ProductController@productRegisterComplete')->name('admin.product-register-complete');
 
     Route::get('product/{id}','Admin\ProductController@productShow')->name('admin.product-show');
     Route::get('product/delete/{id}','Admin\ProductController@productDelete')->name('admin.product-delete');

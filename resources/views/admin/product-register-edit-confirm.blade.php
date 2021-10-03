@@ -25,42 +25,41 @@
                 <p>{{ $category->name }} ＞ {{ $sub_category->name }}</p>
             </div>
 
-        @if($data['path1'] !== NULL || $data['path2'] !== NULL|| $data['path3'] !== NULL|| $data['path4'] !== NULL)
+            @if($data['path1'] !== NULL || $data['path2'] !== NULL|| $data['path3'] !== NULL|| $data['path4'] !== NULL)
 
-            <div class="element_wrap_str">
-                <label>商品写真</label>
-                <div class="">
-                    @if($data['path1'] !== NULL)
-                    <div class="view_box">
-                        <label class="image_label">写真１</label>
-                        <img src="{{ '/storage/' . $data['path1']}}" class=''  width="150" height="150"/>
-                    </div>
-                    @endif
+                <div class="element_wrap_str">
+                    <label>商品写真</label>
+                    <div class="">
+                        @if($data['path1'] !== NULL)
+                        <div class="view_box">
+                            <label class="image_label">写真１</label>
+                            <img src="{{ '/storage/' . $data['path1']}}" class=''  width="150" height="150"/>
+                        </div>
+                        @endif
 
-                    @if($data['path2'] !== NULL)
-                    <div class="view_box">
-                        <label class="image_label">写真２</label>
-                        <img src="{{ '/storage/' . $data['path2']}}" class=''  width="150" height="150"/>
-                    </div>
-                    @endif
+                        @if($data['path2'] !== NULL)
+                        <div class="view_box">
+                            <label class="image_label">写真２</label>
+                            <img src="{{ '/storage/' . $data['path2']}}" class=''  width="150" height="150"/>
+                        </div>
+                        @endif
 
-                    @if($data['path3'] !== NULL)
-                    <div class="view_box">
-                        <label class="image_label">写真３</label>
-                        <img src="{{ '/storage/' . $data['path3']}}" class=''  width="150" height="150"/>
-                    </div>
-                    @endif
+                        @if($data['path3'] !== NULL)
+                        <div class="view_box">
+                            <label class="image_label">写真３</label>
+                            <img src="{{ '/storage/' . $data['path3']}}" class=''  width="150" height="150"/>
+                        </div>
+                        @endif
 
-                    @if($data['path4'] !== NULL)
-                    <div class="view_box">
-                        <label class="image_label">写真４</label>
-                        <img src="{{ '/storage/' . $data['path4']}}" class=''  width="150" height="150"/>
+                        @if($data['path4'] !== NULL)
+                        <div class="view_box">
+                            <label class="image_label">写真４</label>
+                            <img src="{{ '/storage/' . $data['path4']}}" class=''  width="150" height="150"/>
+                        </div>
+                        @endif
                     </div>
-                    @endif
                 </div>
-            </div>
-
-        @endif
+            @endif
 
 
 
