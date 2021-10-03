@@ -105,7 +105,7 @@ class ProductController extends Controller
         return view('admin.product-register-edit',compact('product','product_categories','product_subcategories_edit','back_url'));
     }
 
-    // 確認画面以降前のバリデーションなど(// 編集確認)
+    // 確認画面以降前のバリデーションなど(// 登録確認)
     public function productRegisterConfirm(StoreProductForm $request){
         $input = $request->except('image_1','image_2','image_3','image_4');
         $image_1 = $request->image_1;
@@ -180,13 +180,13 @@ class ProductController extends Controller
 
 
         $data = array(
+            'name' => $name,
+            'product_category_id' => $product_category_id,
+            'product_subcategory_id' => $product_subcategory_id,
             'path1' => $path1,
             'path2' => $path2,
             'path3' => $path3,
             'path4' => $path4,
-            'name' => $name,
-            'product_category_id' => $product_category_id,
-            'product_subcategory_id' => $product_subcategory_id,
             'product_content' => $product_content,
         );
 
@@ -265,6 +265,7 @@ class ProductController extends Controller
             // dump($path4);
         }
 
+        $id = $input['id'];
         $name = $input['name'];
         $product_category_id = $input['product_category_id'];
         $product_subcategory_id = $input['product_subcategory_id'];
@@ -272,6 +273,7 @@ class ProductController extends Controller
 
 
         $data = array(
+            'id' => $id,
             'name' => $name,
             'product_category_id' => $product_category_id,
             'product_subcategory_id' => $product_subcategory_id,
@@ -339,7 +341,7 @@ class ProductController extends Controller
             }
             // 戻るボタン
             if($request->has("back")){
-                return redirect()->route("admin.product-edit")
+                return redirect()->route('admin.product-edit', ['id' => $id])
                 ->withInput($data);
             }
 

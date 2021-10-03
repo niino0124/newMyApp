@@ -60,6 +60,10 @@
                     @endif
                 </div>
             </div>
+            <div class="element_wrap_str">
+                <label>商品説明</label>
+                <p>{{ $product->product_content }}</p>
+            </div>
             @endif
             <div class="">
                 <a href="{{route('admin.product-edit',['id' => $product->id])}}" class="btn-back_b">編集</a>

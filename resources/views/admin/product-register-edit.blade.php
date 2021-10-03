@@ -222,6 +222,7 @@
                 <label for="id">ID</label>
                 <div class="content-wrap">
                     {{$product->id}}
+                    <input name="id" value="{{$product->id}}" hidden>
                 </div>
             </div>
             <div class="element_wrap_str">
