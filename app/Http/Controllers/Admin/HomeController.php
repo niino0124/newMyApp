@@ -55,6 +55,10 @@ class HomeController extends Controller
                 $query->where('gender',$gender2);
             }
 
+            if($gender1 == 1 && $gender2 == 2){
+                // dump('両性選択された。sqlには響かない');
+            };
+
             if($search != null){
             //全角スペースを半角に
                 $search_split = mb_convert_kana($search,'s');
@@ -70,12 +74,6 @@ class HomeController extends Controller
                 }
             };
 
-            if($gender1 == 1 && $gender2 == 2){
-                // dump('両性選択された');
-                $query->where('gender',$gender1)
-                ->orWhere('gender',$gender2);
-            };
-
         }
 
         $members = $query->sortable()->orderBy('id', 'desc')->paginate(10);
@@ -85,7 +83,7 @@ class HomeController extends Controller
         session(['now_route' => $now_route]);
         $back_url = session('now_route');
 
-        // dump($query->toSql(), $query->getBindings());
+        dump($query->toSql(), $query->getBindings());
 
         return view('admin.member-archive',compact('members'));
     }
