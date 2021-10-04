@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Product;
+use App\Review;
 use App\ProductCategory;
 use App\ProductSubcategory;
 
@@ -374,9 +375,18 @@ class ProductController extends Controller
     // 詳細ページ
     public function productShow(Request $request,$id){
         $product = Product::where('id',$id)->with(['productCategory', 'productSubcategory','reviews'])->first();
-        // dd($product);
+
+        $reviews = Review::where('product_id',$product->id)
+        ->with('member')
+        ->paginate(3);
+
+        $avg = $reviews->avg('evaluation');
+        $avg = ceil($avg);
+
+
+
         $back_url = $request->session()->get("now_route");
-        return view('admin.product-show', compact('product','back_url'));
+        return view('admin.product-show', compact('product','avg','reviews','back_url'));
     }
 
     // 削除

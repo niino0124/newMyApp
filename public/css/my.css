@@ -11,6 +11,10 @@ p {
   font-weight: bold;
 }
 
+.fw-light {
+  font-weight: 200;
+}
+
 .center {
   text-align: center;
   font-size: 1.4rem;
@@ -308,6 +312,10 @@ form h1 {
   color: blue;
 }
 
+.edit:hover {
+  opacity: .7;
+}
+
 .product_lists, .product_top {
   border-top: 1px solid;
   margin-top: 15px;
@@ -371,6 +379,16 @@ form h1 {
   margin-bottom: 10px;
 }
 
+.product_body_b {
+  background: lightgray;
+  padding: 10px 0;
+  border-top: solid 2px;
+  border-bottom: solid 2px;
+  margin-left: calc(((608px - 100%) / 2) * -1);
+  margin-right: calc(((608px - 100%) / 2) * -1);
+  text-align: center;
+}
+
 .product_top {
   border: none;
   margin-top: 0px;
@@ -413,7 +431,7 @@ form h1 {
 }
 
 .comment_header {
-  width: 130px;
+  width: 150px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -992,7 +1010,7 @@ ul {
           align-items: center;
 }
 
-.btn-simple {
+.btn-simple, .btn-simple_sm {
   border: solid 1px black;
   color: black;
   display: inline-block;
@@ -1004,17 +1022,30 @@ ul {
   transition: 0.3s;
 }
 
-.btn-simple + .btn-simple {
+.btn-simple + .btn-simple, .btn-simple_sm + .btn-simple, .btn-simple + .btn-simple_sm, .btn-simple_sm + .btn-simple_sm {
   margin-left: 20px;
 }
 
-.btn-simple:hover {
+.btn-simple:hover, .btn-simple_sm:hover {
   opacity: 0.7;
 }
 
 @media screen and (max-width: 767px) {
-  .btn-simple {
+  .btn-simple, .btn-simple_sm {
     padding: 4px 8px;
+    font-size: 1rem;
+  }
+}
+
+.btn-simple_sm {
+  padding: 4px 8px;
+  font-size: 1rem;
+  width: 130px;
+}
+
+@media screen and (max-width: 767px) {
+  .btn-simple_sm {
+    padding: 2px 5px;
     font-size: 1rem;
   }
 }
