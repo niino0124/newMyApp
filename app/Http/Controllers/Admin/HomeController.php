@@ -9,11 +9,7 @@ use App\Product;
 use App\Http\Requests\StoreMemberForm;
 use App\Rules\Hankaku;
 use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
 
-// テストのために追加
-use App\ProductCategory;
-use App\ProductSubcategory;
 
 class HomeController extends Controller
 {
@@ -26,10 +22,6 @@ class HomeController extends Controller
     public function index()
     {
         // ちょいテスト
-       
-
-
-
         return view('admin.home');
     }
 
@@ -37,12 +29,14 @@ class HomeController extends Controller
     public function showMemberArchive(Request $request)
     {
         $id = $request->input('id');
-        $gender = $request->input('gender');
+        $gender1 = $request->input('gender1');
+        $gender2 = $request->input('gender2');
+        // $gender = $request->input('gender');
         $search = $request->input('search');
 
         $query = Member::query();
 
-        if($id == null && $gender == null && $search == null){
+        if($id == null && $gender1 == null && $gender2 == null && $search == null){
             // dump('全件表示');
                 // $query->get();
         }else{
@@ -51,9 +45,15 @@ class HomeController extends Controller
                 $query->where('id',$id);
             };
 
-            if($gender != 0){
-                $query->where('gender',$gender);
-            };
+            if($gender1 == 1 && $gender2 != 2){
+                // dump('男性だけ選択された');
+                $query->where('gender',$gender1);
+            }
+
+            if($gender1 != 1 && $gender2 == 2){
+                // dump('女性だけ選択された');
+                $query->where('gender',$gender2);
+            }
 
             if($search != null){
             //全角スペースを半角に
@@ -69,6 +69,13 @@ class HomeController extends Controller
                 ->orWhere('email', 'LIKE','%'.$value.'%');
                 }
             };
+
+            if($gender1 == 1 && $gender2 == 2){
+                // dump('両性選択された');
+                $query->where('gender',$gender1)
+                ->orWhere('gender',$gender2);
+            };
+
         }
 
         $members = $query->sortable()->orderBy('id', 'desc')->paginate(10);
@@ -77,6 +84,8 @@ class HomeController extends Controller
         $now_route = url()->full();
         session(['now_route' => $now_route]);
         $back_url = session('now_route');
+
+        dump($query->toSql(), $query->getBindings());
 
         return view('admin.member-archive',compact('members'));
     }
