@@ -85,7 +85,7 @@ class HomeController extends Controller
         session(['now_route' => $now_route]);
         $back_url = session('now_route');
 
-        dump($query->toSql(), $query->getBindings());
+        // dump($query->toSql(), $query->getBindings());
 
         return view('admin.member-archive',compact('members'));
     }

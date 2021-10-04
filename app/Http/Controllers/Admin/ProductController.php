@@ -32,9 +32,9 @@ class ProductController extends Controller
         $query = Product::query();
 
         if($id == null && $search == null){
-            dump('全件表示');
+            // dump('全件表示');
         }else{
-            dump('検索表示');
+            // dump('検索表示');
             if($id != 0){
                 $query->where('id',$id);
             };
@@ -51,7 +51,7 @@ class ProductController extends Controller
             };
         }
         // dump($query->toSql());
-        dump($query->toSql(), $query->getBindings());
+        // dump($query->toSql(), $query->getBindings());
         $products = $query->sortable()->orderBy('id', 'desc')->paginate(10);
         $back_url = null;
         $now_route = url()->full();
