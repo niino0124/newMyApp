@@ -10,6 +10,9 @@ use App\Review;
 use App\ProductCategory;
 use App\ProductSubcategory;
 
+// 以下を追記↓
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\DB;
 
 

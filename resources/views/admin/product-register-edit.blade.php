@@ -8,11 +8,14 @@
             <p class="fw-bold">
                 {{-- old('id')は編集でしか持ち得ない --}}
                 @if (isset($product) || null !==old('id'))
-                商品編集  @else 商品登録 @endif</p>
+                商品編集 @else 商品登録 @endif</p>
             <div class="simple-wrap">
                 <a class="btn-simple" href="{{ $back_url }}">
                     一覧へ戻る
                 </a>
+                {{-- <a class="btn-simple" href="{{ route('admin.products') }}">
+                    一覧へ戻る
+                </a> --}}
             </div>
         </div>
     </div>
@@ -34,7 +37,7 @@
                 <label for="name">商品名</label>
                 <div class="content-wrap">
                     <input id="name" type="text" class="@error('name') is-invalid @enderror long" name="name"
-                        value="@if(is_null( old('name'))){{$product->name}}@else{{old('name')}}@endif">
+                        value="@if(old('name')){{old('name')}}@elseif(isset($product)) {{$product->name}}@endif">
                     @error('name')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -48,10 +51,15 @@
                     <label for="product_category" class="product_category"><label for="name">商品カテゴリ</label>
                         <div style="display: flex;
                     flex-direction: column">
-                            <select name="product_category_id" id="product_category_id">
+                            <select name="product_category_id" id="product_category_id"
+                                class="@error('product_category_id') is-invalid @enderror">
                                 <option value="0">選択してください</option>
                                 @foreach ($product_categories as $product_category)
-                                <option value="{{$product_category->id}}" @if (is_null(old('product_category_id')) && $product->product_category_id == $product_category->id)selected @elseif(old('product_category_id') == $product_category->id)selected @endif>{{$product_category->name}}</option>
+                                <option value="{{$product_category->id}}" @if(old('product_category_id') && old('product_category_id') == $product_category->id) selected @elseif(isset($product) && $product->product_category_id == $product_category->id) selected @endif>{{$product_category->name}}</option>
+                                {{-- <option value="{{$product_category->id}}" @if (is_null(old('product_category_id')) &&
+                                    $product->product_category_id == $product_category->id)selected
+                                    @elseif(old('product_category_id') == $product_category->id)selected
+                                    @endif>{{$product_category->name}}</option> --}}
                                 @endforeach
                             </select>
 
@@ -60,30 +68,19 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
+
                         </div>
 
                         <div style="display: flex;
                     flex-direction: column">
-                    {{-- hide --}}
-                            <select name="product_subcategory_id" id="product_subcategory_id">
+                            {{-- hide --}}
+                            <select name="product_subcategory_id" id="product_subcategory_id"
+                                class="@error('product_category_id') is-invalid @enderror">
                                 <option value="" class="op_aj" id="children">選択してください</option>
                             </select>
 
-                            {{-- 編集画面 --}}
-                            @if(is_null(old('product_subcategory_id')))
-                            <select name="product_subcategory_id" id="product_subcategory_id_edit">
-                                <option value="" class="op_aj" id="children">選択してください</option>
-
-                                @foreach ($product_subcategories_edit as $old_product_subcategory_edit_info)
-
-                                <option value="{{ $old_product_subcategory_edit_info->id }}" class="op_aj" id="children" @if(
-                                    $product->product_subcategory_id == ($old_product_subcategory_edit_info->id))selected @endif>{{ $old_product_subcategory_edit_info->name }}</option>
-
-                                @endforeach
-
-                            </select>
                             {{-- 確認画面から戻ってきた場合 --}}
-                            @elseif (null !== old('product_subcategory_id'))
+                            @if(old('product_subcategory_id'))
                             <select name="product_subcategory_id" id="product_subcategory_id_old">
                                 <option value="" class="op_aj" id="children">選択してください</option>
 
@@ -97,6 +94,22 @@
                                 @endforeach
 
                             </select>
+
+                            @elseif (isset($product))
+                            {{-- 編集画面 --}}
+                            <select name="product_subcategory_id" id="product_subcategory_id_edit"
+                                class="@error('product_category_id') is-invalid @enderror">
+                                <option value="" class="op_aj" id="children">選択してください</option>
+
+                                @foreach ($product_subcategories_edit as $old_product_subcategory_edit_info)
+
+                                <option value="{{ $old_product_subcategory_edit_info->id }}" class="op_aj" id="children"
+                                    @if( $product->product_subcategory_id ==
+                                    ($old_product_subcategory_edit_info->id))selected
+                                    @endif>{{ $old_product_subcategory_edit_info->name }}</option>
+                                @endforeach
+                            </select>
+
                             @endif
 
                             @error('product_subcategory_id')
@@ -121,7 +134,7 @@
                                 @if(isset($product->image_1) && is_null(old('path1')))
 
                                 <div class="img_view"><img alt="" class="img" width="150" height="150"
-                                    src="{{'/storage/' . $product->image_1}}"></div>
+                                        src="{{'/storage/' . $product->image_1}}"></div>
                                 <input type="hidden" value={{$product->image_1}} name="path1">
 
                                 @elseif(null != old('path1'))
@@ -153,7 +166,7 @@
                                 @if(isset($product->image_2) && is_null(old('path2')))
 
                                 <div class="img_view"><img alt="" class="img" width="150" height="150"
-                                    src="{{'/storage/' . $product->image_2}}"></div>
+                                        src="{{'/storage/' . $product->image_2}}"></div>
                                 <input type="hidden" value={{$product->image_2}} name="path2">
 
                                 @elseif(null != old('path2'))
@@ -182,7 +195,7 @@
                                 @if(isset($product->image_3) && is_null(old('path3')))
 
                                 <div class="img_view"><img alt="" class="img" width="150" height="150"
-                                    src="{{'/storage/' . $product->image_3}}"></div>
+                                        src="{{'/storage/' . $product->image_3}}"></div>
                                 <input type="hidden" value={{$product->image_3}} name="path3">
 
                                 @elseif(null != old('path3'))
@@ -210,7 +223,7 @@
                                 @if(isset($product->image_4) && is_null(old('path4')))
 
                                 <div class="img_view"><img alt="" class="img" width="150" height="150"
-                                    src="{{'/storage/' . $product->image_4}}"></div>
+                                        src="{{'/storage/' . $product->image_4}}"></div>
                                 <input type="hidden" value={{$product->image_4}} name="path4">
 
                                 @elseif(null != old('path4'))
@@ -239,8 +252,9 @@
             <div class="element_wrap">
                 <label for="product_content">商品説明</label>
                 <div class="content-wrap">
-                    <textarea id="product_content" type="text" class=" @error('product_content') is-invalid @enderror"
-                        name="product_content" style="height: 90px">@if (is_null( old('product_content'))){{$product->product_content}}@else{{old('product_content')}}@endif</textarea>
+                    <textarea id="product_content" type="text" class="@error('product_content') is-invalid @enderror"
+                        name="product_content"
+                        style="height: 90px">@if(old('product_content')){{old('product_content')}}@elseif(isset($product)) {{$product->product_content}}@endif</textarea>
 
                     @error('product_content')
                     <span class="invalid-feedback" role="alert">
@@ -277,12 +291,13 @@
                 </div>
             </div>
 
-            <div class="element_wrap ">
+            <div class="element_wrap">
                 <div class="content_wrap_v">
                     <label for="product_category" class="product_category"><label for="name">商品カテゴリ</label>
                         <div style="display: flex;
                     flex-direction: column">
-                            <select name="product_category_id" id="product_category_id">
+                            <select name="product_category_id" id="product_category_id"
+                                class="@error('product_category_id') is-invalid @enderror">
                                 <option value="0">選択してください</option>
                                 @foreach ($product_categories as $product_category)
                                 <option value="{{$product_category->id}}"
@@ -290,13 +305,14 @@
                                     selected @endif >{{$product_category->name}}</option>
                                 @endforeach
                             </select>
-
                             @error('product_category_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
+
+
 
                         <div style="display: flex;
                     flex-direction: column">
@@ -319,18 +335,17 @@
 
                             </select>
                             @endif
-
                             @error('product_subcategory_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                             @enderror
-
                         </div>
 
                     </label>
                 </div>
             </div>
+
 
 
             <div class="element_wrap_v">

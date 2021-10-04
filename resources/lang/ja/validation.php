@@ -113,6 +113,12 @@ return [
         'sub_name0' => [
             'required' => '※最低でも１つの商品小カテゴリを設定してください。'
         ],
+        'product_category_id' => [
+            'min' => '※商品カテゴリは必須です。',
+        ],
+        'product_subcategory_id' => [
+            'min' => '※商品サブカテゴリは必須です。',
+        ],
     ],
 
 
@@ -136,7 +142,7 @@ return [
         'nickname' => 'ニックネーム',
         'email' => 'メールアドレス',
         'gender' => '性別',
-        'name' => '商品大カテゴリ',
+        'name' => '商品名',
         'product_content' => '商品説明',
         'product_category_id'=> '商品カテゴリー',
         'product_subcategory_id'=> '商品サブカテゴリー',
