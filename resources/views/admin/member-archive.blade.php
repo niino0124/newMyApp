@@ -31,9 +31,9 @@
                         <th>性別</th>
                         <td>
                             <div class="table-gender">
-                                <li class="table-gender_list"><label for="muhRadio1"><input type="radio" name="gender"
+                                <li class="table-gender_list"><label for="muhRadio1"><input type="checkbox" name="gender"
                                             value="1" /> 男性</label></li>
-                                <li class="table-gender_list"><label for="muhRadio2"><input type="radio" name="gender"
+                                <li class="table-gender_list"><label for="muhRadio2"><input type="checkbox" name="gender"
                                             value="2" /> 女性</label></li>
                             </div>
                         </td>

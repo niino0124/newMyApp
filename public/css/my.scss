@@ -105,6 +105,8 @@ form {
     }
 }
 
+
+
 .blue {
     background: aliceblue;
 }
@@ -1180,7 +1182,7 @@ table {
     align-items: center;
     list-style: none;
 
-    input[type="radio"] {
+    input[type="checkbox"] {
         border: 1px solid black;
         padding: 0.8em;
         -webkit-appearance: none;
@@ -1190,11 +1192,11 @@ table {
         position: relative;
         top: 4px;
     }
-    input[type="radio"]:checked {
+    input[type="checkbox"]:checked {
         background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=) no-repeat center center;
         background-size: 5px 5px;
     }
-    input[type="radio"]:focus {
+    input[type="checkbox"]:focus {
         outline-color: transparent;
     }
     label {

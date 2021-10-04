@@ -1300,7 +1300,7 @@ table .td_title {
   list-style: none;
 }
 
-.table-gender input[type="radio"] {
+.table-gender input[type="checkbox"] {
   border: 1px solid black;
   padding: 0.8em;
   -webkit-appearance: none;
@@ -1311,12 +1311,12 @@ table .td_title {
   top: 4px;
 }
 
-.table-gender input[type="radio"]:checked {
+.table-gender input[type="checkbox"]:checked {
   background: url(data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=) no-repeat center center;
   background-size: 5px 5px;
 }
 
-.table-gender input[type="radio"]:focus {
+.table-gender input[type="checkbox"]:focus {
   outline-color: transparent;
 }
 
