@@ -113,7 +113,7 @@ form h1 {
 }
 
 .blue-board_admin {
-  min-width: 550px;
+  width: 608px;
   max-width: 610px;
 }
 
@@ -384,6 +384,8 @@ form h1 {
   padding: 10px 0;
   border-top: solid 2px;
   border-bottom: solid 2px;
+  border-right: solid 1px;
+  border-left: solid 1px;
   margin-left: calc(((608px - 100%) / 2) * -1);
   margin-right: calc(((608px - 100%) / 2) * -1);
   text-align: center;
