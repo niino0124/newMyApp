@@ -31,14 +31,12 @@ class HomeController extends Controller
         $id = $request->input('id');
         $gender1 = $request->input('gender1');
         $gender2 = $request->input('gender2');
-        // $gender = $request->input('gender');
         $search = $request->input('search');
 
         $query = Member::query();
 
         if($id == null && $gender1 == null && $gender2 == null && $search == null){
             // dump('全件表示');
-                // $query->get();
         }else{
             // dump('検索表示');
             if($id != 0){
@@ -83,7 +81,7 @@ class HomeController extends Controller
         session(['now_route' => $now_route]);
         $back_url = session('now_route');
 
-        dump($query->toSql(), $query->getBindings());
+        // dump($query->toSql(), $query->getBindings());
 
         return view('admin.member-archive',compact('members'));
     }
