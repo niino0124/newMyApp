@@ -53,7 +53,7 @@
                 <td>{{$review->id}}</td>
                 <td>{{$review->product_id}}</td>
                 <td>{{$review->evaluation}}</td>
-                <td>{{$review->comment}}</td>
+                <td><a href="{{route('admin.review-show',['id' => $review->id])}}">{{$review->comment}}</a></td>
                 <td>{{$review->created_at->format('Y/n/j')}}</td>
                 <td><a href="{{route('admin.review-edit',['id' => $review->id])}}">編集</a></td>
                 <td><a href="{{route('admin.review-show',['id' => $review->id])}}">詳細</a></td>

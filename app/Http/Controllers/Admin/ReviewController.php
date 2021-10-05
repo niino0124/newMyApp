@@ -146,13 +146,14 @@ class ReviewController extends Controller
     // 詳細ページ
     public function reviewShow(Request $request,$id){
         $review = Review::with('product')->find($id);
+        // dd($review->product->getAvgStarAttribute);
         $back_url = $request->session()->get("now_route");
         return view('admin.review-show', compact('review','back_url') );
     }
 
     // 削除
     public function reviewDelete($id){
-        ProductReview::find($id)->delete();
+        Review::find($id)->delete();
         return redirect()->route('admin.reviews');
     }
 

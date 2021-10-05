@@ -23,7 +23,7 @@
                     <div class="left-block">
                         <p class="product_star">商品ID　{{$review->product->id }}</p>
                         <p class="product_star">{{ $review->product->name }}</p>
-                        <p class="product_star">@if( $review->product->avg_evaluation == 0 )評価なし@else 総合評価　 @for($i= 0; $i < $review->avg_evaluation; $i++)★@endfor　{{ $review->product->avg_evaluation }} @endif </p>
+                        <p class="product_star">@if( $review->product->getAvgStarAttribute() == 0 )評価なし@else 総合評価　 @for($i= 0; $i < $review->product->getAvgStarAttribute(); $i++)★@endfor　{{ $review->product->getAvgStarAttribute() }} @endif </p>
                     </div>
                 </div>
             </li>
@@ -48,9 +48,6 @@
                         <p style="width:200px;" class="tal">{{$review->comment}}</p>
                     </div>
                 </div>
-                {{-- <input hidden value="{{$review->id']}}" name="id">
-                <input hidden value="{{$review->evaluation']}}" name="evaluation">
-                <input hidden value="{{$review->comment']}}" name="comment"> --}}
 
                 <div class="">
                     <a href="{{route('admin.review-edit',['id' => $review->id])}}" class="btn-back_b">編集</a>
