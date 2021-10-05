@@ -45,7 +45,7 @@
                 <div class="element_wrap_str_review">
                     <label for="comment" class="long_label">商品コメント</label>
                     <div class="content-wrap">
-                        <p>{{$input['comment']}}</p>
+                        <p class="tal" style="width:200px;">{{$input['comment']}}</p>
                     </div>
                 </div>
                 <input hidden value="{{$input['id']}}" name="id">
