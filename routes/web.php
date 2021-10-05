@@ -148,13 +148,30 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
     Route::get('product/edit/{id}','Admin\ProductController@productEditShowForm')->name('admin.product-edit');
     Route::post('product/edit','Admin\ProductController@productEditConfirm')->name('admin.product-edit-confirm');
     Route::post('product/edit/complete','Admin\ProductController@productEditComplete')->name('admin.product-edit-complete');
-
-
+    // 個別・削除
     Route::get('product/{id}','Admin\ProductController@productShow')->name('admin.product-show');
     Route::get('product/delete/{id}','Admin\ProductController@productDelete')->name('admin.product-delete');
 
 
 
+
+
+
+    // レビュー一覧
+    Route::get('reviews','Admin\ReviewController@showReviewArchive')->name('admin.reviews');
+    Route::get('review/index/{id}', 'Admin\ReviewController@ajax');
+    // 登録
+    Route::get('review/register','Admin\ReviewController@reviewRegisterShowForm')->name('admin.review-register');
+    Route::post('review/register/confirm','Admin\ReviewController@reviewRegisterConfirm')->name('admin.review-register-confirm');
+    Route::post('review/complete','Admin\ReviewController@reviewRegisterComplete')->name('admin.review-register-complete');
+
+    // 編集
+    Route::get('review/edit/{id}','Admin\ReviewController@reviewEditShowForm')->name('admin.review-edit');
+    Route::post('review/edit','Admin\ReviewController@reviewEditConfirm')->name('admin.review-edit-confirm');
+    Route::post('review/edit/complete','Admin\ReviewController@reviewEditComplete')->name('admin.review-edit-complete');
+    // 個別・削除
+    Route::get('review/{id}','Admin\ReviewController@reviewShow')->name('admin.review-show');
+    Route::get('review/delete/{id}','Admin\ReviewController@reviewDelete')->name('admin.review-delete');
 
 
 });

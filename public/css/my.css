@@ -132,7 +132,7 @@ form h1 {
   }
 }
 
-.man-body, .man-body_b {
+.man-body, .man-body_b, .mab-body_review {
   min-height: 250px;
   height: inherit;
   background: #ffebc8;
@@ -141,6 +141,15 @@ form h1 {
 
 .man-body_b {
   background: aliceblue;
+}
+
+.mab-body_review {
+  background: #d7f7ff;
+  padding: 10px 70px 25px;
+}
+
+.add_pd {
+  padding: 0px 70px 25px;
 }
 
 .man-body-tables {
@@ -322,7 +331,7 @@ form h1 {
 }
 
 .product_lists .product, .product_top .product {
-  border-bottom: 1px solid;
+  border-bottom: 2px solid;
   padding: 15px 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -339,7 +348,7 @@ form h1 {
 }
 
 .product_lists .product .product_body p, .product_top .product .product_body p {
-  font-size: 1.2rem !important;
+  font-size: 1.4rem !important;
 }
 
 .product_lists .product .product_body .left-block, .product_top .product .product_body .left-block {
@@ -712,7 +721,7 @@ select {
      object-fit: cover;
 }
 
-.element_wrap_str, .element_wrap_str_review {
+.element_wrap_str {
   margin-bottom: 20px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -722,7 +731,7 @@ select {
           justify-content: flex-start;
 }
 
-.element_wrap_str label, .element_wrap_str_review label {
+.element_wrap_str label {
   display: inline-block;
   width: auto;
   text-align: left;
@@ -730,37 +739,40 @@ select {
 }
 
 @media screen and (max-width: 767px) {
-  .element_wrap_str label, .element_wrap_str_review label {
+  .element_wrap_str label {
     margin-right: 20px;
   }
 }
 
-.element_wrap_str .content-wrap, .element_wrap_str_review .content-wrap {
+.element_wrap_str .content-wrap {
   font-size: 1.4rem;
 }
 
-.element_wrap_str p, .element_wrap_str_review p {
+.element_wrap_str p {
   font-size: 1.4rem;
   margin: 0;
 }
 
-.element_wrap_str .str_l, .element_wrap_str_review .str_l {
+.element_wrap_str .str_l {
   width: 120px;
   text-align: left;
 }
 
-.element_wrap_str_review label {
-  margin-right: 0px;
+.element_wrap_str_review {
+  margin-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
 }
 
-@media screen and (max-width: 767px) {
-  .element_wrap_str_review label {
-    margin-right: 0px;
-  }
-}
-
-.element_wrap_str_review select {
-  width: 100px;
+.long_label {
+  width: 120px;
+  font-weight: bold !important;
+  text-align: left;
+  margin: 0;
 }
 
 .long {
@@ -1071,7 +1083,7 @@ ul {
 }
 
 textarea {
-  width: 290px;
+  width: 200px;
   border: 1px solid black;
   height: 150px;
 }
@@ -1456,7 +1468,7 @@ a.page_number:visited {
        appearance: none;
   position: relative;
   top: 2px;
-  left: 2px;
+  left: 4px;
 }
 
 .cp_ipselect select::-ms-expand {
@@ -1472,8 +1484,8 @@ a.page_number:visited {
 
 .cp_ipselect.cp_sl02::before {
   position: absolute;
-  top: 0.5em;
-  right: 0.3em;
+  top: 0.9em;
+  right: 0.1em;
   content: "";
   pointer-events: none;
   width: 0;
