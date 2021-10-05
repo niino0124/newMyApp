@@ -23,9 +23,7 @@ class ReviewController extends Controller
         $query = Review::query();
 
         if($id == null && $search == null){
-            // dump('全件表示');
         }else{
-            // dump('検索表示');
             if($id != 0){
                 $query->where('id',$id);
             };
@@ -52,54 +50,56 @@ class ReviewController extends Controller
 
 
     // フォーム出力
-    public function reviewRegisterShowForm(Request $request){
-        $back_url = $request->session()->get("now_route");
-        return view('admin.review-register-edit',compact('back_url'));
-    }
+    // public function reviewRegisterShowForm(Request $request){
+    //     $back_url = $request->session()->get("now_route");
+    //     return view('admin.review-register-edit',compact('back_url'));
+    // }
 
     public function reviewEditShowForm(Request $request, $id){
-
         $review = Review::with('product')->find($id);
         $back_url = $request->session()->get("now_route");
-
         return view('admin.review-register-edit',compact('review','back_url'));
     }
 
 
-
-
-
-
     public function reviewEditConfirm(StoreReviewForm $request){
 
-            // 取り出し
             $id = $request->id;
-            $name = $request->name;
-            $sub_name0 = $request->sub_name0;
+            $product_id = $request->product_id;
+            $name = $request->product_name;
+            $image_1 = $request->product_image_1;
+            $avg_evaluation = $request->product_avg_evaluation;
+
+            $evaluation = $request->evaluation;
+            $comment = $request->comment;
 
             // 確認画面に表示する値を格納
             $input = [
                 'id' => $id,
+                'product_id' => $product_id,
                 'name' => $name,
-                'sub_name0' => $sub_name0,
-
+                'image_1' => $image_1,
+                'avg_evaluation' => $avg_evaluation,
+                'evaluation' => $evaluation,
+                'comment' => $comment,
             ];
 
-        return view('admin.review-register-edit-confirm', compact('input') );
+            $back_url = $request->session()->get("now_route");
+        return view('admin.review-register-edit-confirm', compact('input','back_url') );
     }
 
-        public function reviewRegisterConfirm(StoreReviewForm $request){
-            // 取り出し
-            $name = $request->name;
-            $sub_name0 = $request->sub_name0;
-            // 確認画面に表示する値を格納
-            $input = [
-                'name' => $name,
-                'sub_name0' => $sub_name0,
-            ];
+        // public function reviewRegisterConfirm(StoreReviewForm $request){
+        //     // 取り出し
+        //     $name = $request->name;
+        //     $sub_name0 = $request->sub_name0;
+        //     // 確認画面に表示する値を格納
+        //     $input = [
+        //         'name' => $name,
+        //         'sub_name0' => $sub_name0,
+        //     ];
 
-            return view('admin.review-register-edit-confirm', compact('input') );
-        }
+        //     return view('admin.review-register-edit-confirm', compact('input') );
+        // }
 
 
     public function reviewEditComplete(Request $request){
@@ -110,44 +110,36 @@ class ReviewController extends Controller
             ->withInput();
         }
 
-        // 商品大カテゴリのnameを更新
-        $new_review = ProductReview::find($id);
-        $new_review->name = $request->name;
-        $new_review->save();
-
-        $subreview = ProductSubreview::where('product_review_id',$id);
-        // 物理削除
-        $subreview->delete();
-
-        $new_subreview0 = new ProductSubreview;
-        $new_subreview0->product_review_id = $id;
-        $new_subreview0->name = $request->sub_name0;
-        $new_subreview0->save();
+        // 当該のレビューを更新
+        $review = Review::find($id);
+        $review->evaluation = $request->evaluation;
+        $review->comment = $request->comment;
+        $review->save();
 
         return redirect()->route('admin.reviews');
     }
 
-    public function reviewRegisterComplete(Request $request){
-        if ($request->get('back')) {
-            return redirect()->route('admin.review-register')
-            ->withInput();
-        }
+    // public function reviewRegisterComplete(Request $request){
+    //     if ($request->get('back')) {
+    //         return redirect()->route('admin.review-register')
+    //         ->withInput();
+    //     }
 
-        // 商品大カテゴリのnameを更新
-        $new_review = new ProductReview;
-        $new_review->name = $request->name;
-        $new_review->save();
+    //     // 商品大カテゴリのnameを更新
+    //     $new_review = new ProductReview;
+    //     $new_review->name = $request->name;
+    //     $new_review->save();
 
-        $id = ProductReview::pluck('id')->last();
+    //     $id = ProductReview::pluck('id')->last();
 
-        $new_subreview0 = new ProductSubreview;
-        $new_subreview0->product_review_id = $id;
-        $new_subreview0->name = $request->sub_name0;
-        $new_subreview0->save();
+    //     $new_subreview0 = new ProductSubreview;
+    //     $new_subreview0->product_review_id = $id;
+    //     $new_subreview0->name = $request->sub_name0;
+    //     $new_subreview0->save();
 
 
-        return redirect()->route('admin.reviews');
-    }
+    //     return redirect()->route('admin.reviews');
+    // }
 
 
 

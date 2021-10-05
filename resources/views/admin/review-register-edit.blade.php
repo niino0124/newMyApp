@@ -30,7 +30,7 @@
                 </div>
             </li>
         </ul>
-        <form method="POST" action="{{ route('product.review-confirm') }}" style="margin-top: 35px;">
+        <form method="POST" action="{{ route('admin.review-edit-confirm') }}" style="margin-top: 35px;">
             @csrf
 
             <div class="element_wrap_str_review">
@@ -51,10 +51,6 @@
                             <option value="3" @if(old('evaluation')=='3' ) selected @elseif(isset($review) && $review->evaluation == '3')selected @endif>3</option>
                             <option value="2" @if(old('evaluation')=='2' ) selected @elseif(isset($review) && $review->evaluation == '2')selected @endif>2</option>
                             <option value="1" @if(old('evaluation')=='1' ) selected @elseif(isset($review) && $review->evaluation == '1')selected @endif>1</option>
-                            {{-- <option value="4" @if(old('evaluation')=='4' ) selected @endif>4</option>
-                            <option value="3" @if(old('evaluation')=='3' ) selected @endif>3</option>
-                            <option value="2" @if(old('evaluation')=='2' ) selected @endif>2</option>
-                            <option value="1" @if(old('evaluation')=='1' ) selected @endif>1</option> --}}
                         </select>
                     </div>
                     @error('evaluation')
@@ -80,10 +76,11 @@
                 </div>
             </div>
 
-            <input hidden value="{{$review->image_1}}" name="image_1">
-            <input hidden value="{{$review->name}}" name="name">
-            <input hidden value="{{$review->id}}" name="product_id">
-            <input hidden value="{{$review->product->getAvgStarAttribute()}}" name="avg_evaluation">
+            <input hidden value="{{$review->id}}" name="id">
+            <input hidden value="{{$review->product->id}}" name="product_id">
+            <input hidden value="{{$review->product->name}}" name="product_name">
+            <input hidden value="{{$review->product->image_1}}" name="product_image_1">
+            <input hidden value="{{$review->product->getAvgStarAttribute()}}" name="product_avg_evaluation">
 
             <div class="btn-wrap">
                 <input class="btn_b" type="submit" value="確認画面へ">

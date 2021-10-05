@@ -26,9 +26,6 @@ class StoreReviewForm extends FormRequest
         return [
             'evaluation' =>'required|in:1,2,3,4,5',
             'comment' =>'required|max:500|string',
-            'product_id' =>'required',
-            'name' =>'required',
-            'image_1' =>'required',
         ];
     }
 }
