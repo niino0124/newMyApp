@@ -54,7 +54,13 @@ class ReviewController extends Controller
     // フォーム出力
     public function reviewRegisterShowForm(Request $request){
 
-        $product =  Product::inRandomOrder()->first();
+        $product = $request->session()->get('product');
+
+        if(!isset($product)){
+            $product =  Product::inRandomOrder()->first();
+            session(['product' => $product]);
+            $product = session('product');
+        }
 
         $back_url = $request->session()->get("now_route");
         return view('admin.review-register-edit',compact('product','back_url'));
@@ -141,10 +147,13 @@ class ReviewController extends Controller
     }
 
     public function reviewRegisterComplete(Request $request){
+        $product_id = $request->product_id;
+        $product = Product::find($product_id);
 
         // 戻る際に商品情報はいらないだろうか？
         if ($request->get('back')) {
             return redirect()->route('admin.review-register')
+            ->with(['product' => $product])
             ->withInput();
         }
 
@@ -155,8 +164,8 @@ class ReviewController extends Controller
         $review = new Review;
 
         $review->member_id = $member_id;
-        
-        $review->product_id = $request->product_id;
+
+        $review->product_id = $product_id;
         $review->evaluation = $request->evaluation;
         $review->comment = $request->comment;
 
