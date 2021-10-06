@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreReviewForm;
 use Illuminate\Http\Request;
 use App\Review;
+use App\Product;
 
 class ReviewController extends Controller
 {
@@ -50,10 +51,13 @@ class ReviewController extends Controller
 
 
     // フォーム出力
-    // public function reviewRegisterShowForm(Request $request){
-    //     $back_url = $request->session()->get("now_route");
-    //     return view('admin.review-register-edit',compact('back_url'));
-    // }
+    public function reviewRegisterShowForm(Request $request){
+
+        $product =  Product::inRandomOrder()->first();
+
+        $back_url = $request->session()->get("now_route");
+        return view('admin.review-register-edit',compact('product','back_url'));
+    }
 
     public function reviewEditShowForm(Request $request, $id){
         $review = Review::with('product')->find($id);

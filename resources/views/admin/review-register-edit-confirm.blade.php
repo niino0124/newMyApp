@@ -5,7 +5,7 @@
 <div class="blue-board_admin ">
     <div class="header_b">
         <div class="simple-wrap_sb">
-            <p class="fw-bold">商品レビュー編集確認</p>
+            <p class="fw-bold"> 商品レビュー編集確認 </p>
             <div class="simple-wrap">
                 <a class="btn-simple" href="{{ $back_url }}">
                     トップへ戻る
