@@ -7,6 +7,7 @@ use App\Http\Requests\StoreReviewForm;
 use Illuminate\Http\Request;
 use App\Review;
 use App\Product;
+use App\Member;
 
 class ReviewController extends Controller
 {
@@ -70,6 +71,8 @@ class ReviewController extends Controller
 
             $id = $request->id;
             $product_id = $request->product_id;
+
+            // 表示のため使いまわしたいから
             $name = $request->product_name;
             $image_1 = $request->product_image_1;
             $avg_evaluation = $request->product_avg_evaluation;
@@ -92,18 +95,32 @@ class ReviewController extends Controller
         return view('admin.review-register-edit-confirm', compact('input','back_url') );
     }
 
-        // public function reviewRegisterConfirm(StoreReviewForm $request){
-        //     // 取り出し
-        //     $name = $request->name;
-        //     $sub_name0 = $request->sub_name0;
-        //     // 確認画面に表示する値を格納
-        //     $input = [
-        //         'name' => $name,
-        //         'sub_name0' => $sub_name0,
-        //     ];
+        public function reviewRegisterConfirm(StoreReviewForm $request){
 
-        //     return view('admin.review-register-edit-confirm', compact('input') );
-        // }
+            $product_id = $request->product_id;
+
+            // 表示のため使いまわしたいから
+            $name = $request->product_name;
+            $image_1 = $request->product_image_1;
+            $avg_evaluation = $request->product_avg_evaluation;
+
+            $evaluation = $request->evaluation;
+            $comment = $request->comment;
+
+
+            $input = [
+                'product_id' => $product_id,
+                'name' => $name,
+                'image_1' => $image_1,
+                'avg_evaluation' => $avg_evaluation,
+                'evaluation' => $evaluation,
+                'comment' => $comment,
+            ];
+            // 編集との違いは$input['id']があるかないか
+
+            $back_url = $request->session()->get("now_route");
+            return view('admin.review-register-edit-confirm', compact('input','back_url') );
+        }
 
 
     public function reviewEditComplete(Request $request){
@@ -123,27 +140,30 @@ class ReviewController extends Controller
         return redirect()->route('admin.reviews');
     }
 
-    // public function reviewRegisterComplete(Request $request){
-    //     if ($request->get('back')) {
-    //         return redirect()->route('admin.review-register')
-    //         ->withInput();
-    //     }
+    public function reviewRegisterComplete(Request $request){
 
-    //     // 商品大カテゴリのnameを更新
-    //     $new_review = new ProductReview;
-    //     $new_review->name = $request->name;
-    //     $new_review->save();
+        // 戻る際に商品情報はいらないだろうか？
+        if ($request->get('back')) {
+            return redirect()->route('admin.review-register')
+            ->withInput();
+        }
 
-    //     $id = ProductReview::pluck('id')->last();
+        // レビューを登録したメンバーをランダムで選出
+        $member_id =  Member::inRandomOrder()->first()->id;
 
-    //     $new_subreview0 = new ProductSubreview;
-    //     $new_subreview0->product_review_id = $id;
-    //     $new_subreview0->name = $request->sub_name0;
-    //     $new_subreview0->save();
+        // 当該のレビューを更新
+        $review = new Review;
 
+        $review->member_id = $member_id;
+        
+        $review->product_id = $request->product_id;
+        $review->evaluation = $request->evaluation;
+        $review->comment = $request->comment;
 
-    //     return redirect()->route('admin.reviews');
-    // }
+        $review->save();
+
+        return redirect()->route('admin.reviews');
+    }
 
 
 
