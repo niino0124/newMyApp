@@ -58,52 +58,51 @@
                         <img src="{{ '/storage/' . $product->image_4}}" class=''  width="150" height="150"/>
                     </div>
                     @endif
+
                 </div>
             </div>
+            @endif
             <div class="element_wrap_str">
                 <label>商品説明</label>
                 <p>{{ $product->product_content }}</p>
             </div>
 
-@if ($product->getAvgStarAttribute() == 0)
-<div class="product_body_b">
-    <p class="product_star_b fw-bold" >レビューはありません</p>
-</div>
-@else
-<div class="product_body_b">
-    {{-- <p class="fw-bold">{{ $product['name'] }}</p> --}}
-    <p class="product_star_b fw-bold" >総合評価　@for($i = 0; $i < $product->getAvgStarAttribute(); $i++)★@endfor {{$product->getAvgStarAttribute()}}</p>
-</div>
-
-<ul class="product_lists" style="border-top:none;">
-    @foreach ($reviews as $review)
-    <li class="product">
-        <div class="product_header comment_header">
-            <p class="comment_content fw-bold">商品レビューID</p>
-            <p class="who "><a class="edit fw-light"  href="{{route('admin.member-show',['id' => $review->member->id])}}">{{$review->member->nickname}}さん</a></p>
-            <p class="comment_content">商品コメント</p>
-        </div>
-
-        <div class="product_body" style="margin-left: 25px;width:300px;margin-right:20px;">
-            <div class="left-block">
-                <p class="fw-bold">{{$review->id}}</p>
-                <p style="margin-top: 10px;">@for($i = 0; $i < $review->evaluation; $i++)★@endfor　{{$review->evaluation}}</p>
-                <p style="margin-top: 10px;">{{$review->comment}}</p>
+            @if ($product->getAvgStarAttribute() == 0)
+            <div class="product_body_b">
+                <p class="product_star_b fw-bold" >レビューはありません</p>
             </div>
-        </div>
-        <div class="product_foot">
-            <a class="btn-simple_sm" >商品レビュー詳細</a>
-        </div>
-    </li>
-    @endforeach
-</ul>
+            @else
+            <div class="product_body_b">
+                <p class="product_star_b fw-bold" >総合評価　@for($i = 0; $i < $product->getAvgStarAttribute(); $i++)★@endfor {{$product->getAvgStarAttribute()}}</p>
+            </div>
+            @endif
+            <ul class="product_lists" style="border-top:none;">
+                @foreach ($reviews as $review)
+                <li class="product">
+                    <div class="product_header comment_header">
+                        <p class="comment_content fw-bold">商品レビューID</p>
+                        <p class="who "><a class="edit fw-light"  href="{{route('admin.member-show',['id' => $review->member->id])}}">{{$review->member->nickname}}さん</a></p>
+                        <p class="comment_content">商品コメント</p>
+                    </div>
 
-<div class="wrap" style="width: 130px;  margin-left:auto; ">
-    {{ $reviews->appends(request()->input())->links() }}
-</div>
+                    <div class="product_body" style="margin-left: 25px;width:300px;margin-right:20px;">
+                        <div class="left-block">
+                            <p class="fw-bold">{{$review->id}}</p>
+                            <p style="margin-top: 10px;">@for($i = 0; $i < $review->evaluation; $i++)★@endfor　{{$review->evaluation}}</p>
+                            <p style="margin-top: 10px;">{{$review->comment}}</p>
+                        </div>
+                    </div>
+                    <div class="product_foot">
+                        <a class="btn-simple_sm" >商品レビュー詳細</a>
+                    </div>
+                </li>
+                @endforeach
+            </ul>
 
-@endif
-@endif
+            <div class="wrap" style="width: 130px;  margin-left:auto; ">
+                {{ $reviews->appends(request()->input())->links() }}
+            </div>
+
             <div class="">
                 <a href="{{route('admin.product-edit',['id' => $product->id])}}" class="btn-back_b">編集</a>
                 <a href="{{route('admin.product-delete',['id' => $product->id])}}" class="btn-back_b" >削除</a>
