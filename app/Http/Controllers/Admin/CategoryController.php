@@ -9,12 +9,7 @@ use Illuminate\Http\Request;
 use App\ProductCategory;
 use App\ProductSubcategory;
 
-use App\Http\Requests\StoreMemberForm;
-use App\Rules\Hankaku;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Validator;
 
-use Illuminate\Database\Eloquent\Builder;
 
 
 

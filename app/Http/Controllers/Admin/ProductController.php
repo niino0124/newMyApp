@@ -11,11 +11,7 @@ use App\ProductCategory;
 use App\ProductSubcategory;
 
 // 以下を追記↓
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\DB;
-
-
 use App\Http\Requests\StoreProductForm;
 
 
@@ -43,7 +39,9 @@ class ProductController extends Controller
             };
 
             if($search != null){
+                // 「全角」スペースを「半角」に変換
                 $search_split = mb_convert_kana($search,'s');
+                
                 $search_split2 = preg_split('/[\s]+/', $search_split,-1,PREG_SPLIT_NO_EMPTY);
 
                 foreach($search_split2 as $value)
@@ -53,8 +51,7 @@ class ProductController extends Controller
                 }
             };
         }
-        // dump($query->toSql());
-        // dump($query->toSql(), $query->getBindings());
+
         $products = $query->sortable()->orderBy('id', 'desc')->paginate(10);
         $back_url = null;
         $now_route = url()->full();

@@ -174,12 +174,9 @@ class ReviewController extends Controller
         return redirect()->route('admin.reviews');
     }
 
-
-
     // 詳細ページ
     public function reviewShow(Request $request,$id){
         $review = Review::with('product')->find($id);
-        // dd($review->product->getAvgStarAttribute);
         $back_url = $request->session()->get("now_route");
         return view('admin.review-show', compact('review','back_url') );
     }

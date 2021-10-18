@@ -175,3 +175,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function() {
 
 
 });
+
+// テスト
+Route::group(['prefix' => 'test'], function() {
+    Route::get('/','TestController@index')->name('test.list');
+
+});
